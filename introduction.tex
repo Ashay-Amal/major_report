@@ -1,0 +1,232 @@
+\chapter{Introduction}
+
+The intersection of artificial intelligence and creative arts has opened unprecedented possibilities for digital content creation. Neural Style Transfer (NST) represents one of the most fascinating applications of deep learning, enabling the transformation of ordinary photographs into stunning artistic renditions by learning and applying the visual characteristics of various art styles. This project focuses on developing a comprehensive style transfer system using CycleGAN (Cycle-Consistent Generative Adversarial Networks) to transform images into four distinctive artistic styles: One Piece anime, Disney animation, Studio Ghibli animation, and Van Gogh painting style.\\
+
+The emergence of Generative Adversarial Networks (GANs) in 2014 by Goodfellow et al. \cite{bib:goodfellow2014} marked a paradigm shift in generative modeling. Subsequently, the introduction of CycleGAN by Zhu et al. \cite{bib:cyclegan} revolutionized image-to-image translation by eliminating the requirement for paired training data. This advancement is particularly significant for artistic style transfer, where obtaining perfectly aligned pairs of content and stylized images is impractical.\\
+
+Our project leverages these advances to create a system capable of transforming human faces into animated character styles and landscapes into painterly renditions. The animation styles (One Piece, Disney, and Studio Ghibli) each possess unique visual characteristics that make them instantly recognizable, while Van Gogh's post-impressionist style is renowned for its distinctive brushwork and vibrant color palette.
+
+\section{Background}
+
+\subsection{Evolution of Computer Vision}
+
+Computer vision has transformed dramatically with deep learning. Key milestones include: traditional hand-crafted features (pre-2012), the AlexNet breakthrough (2012) demonstrating CNN superiority, deeper architectures like VGGNet and ResNet (2014-2016), and generative models including GANs (2014-present) enabling image synthesis.
+
+\subsection{Convolutional Neural Networks}
+
+CNNs learn hierarchical features: early layers detect edges and textures, middle layers combine patterns, and deep layers encode semantic content. This hierarchy enables separation of content from style for neural style transfer. VGG-19 has become the standard feature extractor due to its uniform 3$\times$3 architecture and proven effectiveness for perceptual similarity.
+
+\subsection{Generative Adversarial Networks}
+
+GANs consist of a generator (produces synthetic samples) and discriminator (distinguishes real from fake). Through adversarial training, both improve until the generator produces realistic outputs. Key variants include Conditional GAN, Pix2Pix (paired translation), CycleGAN (unpaired translation), and StyleGAN.
+
+\subsection{Style Transfer Approaches}
+
+Style transfer separates content (objects, semantics) from style (colors, textures, brushstrokes). Three approaches exist: optimization-based (slow, flexible), feed-forward (fast, style-specific), and GAN-based (versatile, high quality). Our project uses CycleGAN for unpaired training capability
+
+\section{Motivation}
+
+The motivation for this project stems from several converging factors in technology, art, and social media culture:\\
+
+\textbf{1. Growing Demand for Personalized Digital Art:}\\
+Social media platforms have created an unprecedented demand for unique, personalized visual content. Users seek creative ways to transform their photographs into artistic representations, driving the popularity of photo filter applications and artistic transformation tools. A system capable of producing high-quality anime-style or painterly transformations addresses this growing market need.\\
+
+\textbf{2. Bridging Art and Technology:}\\
+Traditional artistic transformation requires years of training and innate artistic ability. Neural style transfer democratizes art creation by allowing anyone to generate stylized images that capture the essence of renowned artists or animation studios. This bridges the gap between artistic appreciation and creation.\\
+
+\textbf{3. Advances in Deep Learning:}\\
+Recent advances in deep learning, particularly in GANs and image-to-image translation, have made it possible to generate photorealistic images and perform complex style transformations. The availability of powerful GPU computing and open-source frameworks like PyTorch makes implementing such systems accessible.\\
+
+\textbf{4. Cultural Significance of Animation Styles:}\\
+Japanese anime (One Piece), Western animation (Disney), and Studio Ghibli films represent distinct visual languages with massive global followings. Creating tools that can transform photographs into these styles has significant appeal for fans and content creators worldwide.\\
+
+\textbf{5. Preservation and Appreciation of Artistic Heritage:}\\
+Van Gogh's unique artistic style, characterized by swirling brushstrokes and vibrant colors, represents a pinnacle of post-impressionist art. A neural network capable of applying this style to modern photographs serves both as an educational tool and a means of appreciating artistic heritage.\\
+
+\textbf{6. Research and Educational Value:}\\
+Implementing a complete CycleGAN-based style transfer system provides valuable insights into deep learning architectures, loss function design, dataset creation, and the challenges of generative modeling. This project serves as a comprehensive case study in applied deep learning.
+
+\section{Problem Statement}
+
+The problem addressed by this project can be formally stated as follows:\\
+
+Given an input image $x$ from domain $X$ (real photographs), the goal is to learn a mapping function $G: X \rightarrow Y$ that transforms $x$ into an output image $G(x)$ in domain $Y$ (stylized images), such that:
+\begin{enumerate}
+    \item The output $G(x)$ exhibits the visual characteristics of the target artistic style
+    \item The semantic content and structure of the input image are preserved
+    \item The transformation is realistic and free from artifacts
+    \item The system operates efficiently for real-time applications
+\end{enumerate}
+
+The specific style domains addressed are:
+\begin{itemize}
+    \item \textbf{One Piece Style:} Bold outlines, exaggerated expressions, vibrant colors characteristic of Eiichiro Oda's artwork
+    \item \textbf{Disney Style:} Smooth gradients, large expressive eyes, soft color palettes of modern Disney animation
+    \item \textbf{Studio Ghibli Style:} Watercolor textures, naturalistic expressions, warm earthy tones of Hayao Miyazaki's films
+    \item \textbf{Van Gogh Style:} Swirling brushstrokes, impasto technique, vibrant post-impressionist colors
+\end{itemize}
+
+\section{Objective of the Project}
+
+The primary objectives of this project are:\\
+
+\textbf{1. Develop Style-Specific Neural Style Transfer Models:}\\
+Design and implement four separate CycleGAN models, each trained to transform images into a specific artistic style. Each model should capture the unique visual characteristics of its target style while maintaining content fidelity.\\
+
+\textbf{2. Create Custom Datasets through Frame Extraction:}\\
+Develop an automated pipeline for extracting character frames from animation sources (One Piece episodes, Disney movies, Studio Ghibli films) using computer vision techniques including face detection and quality filtering.\\
+
+\textbf{3. Implement and Optimize Core Algorithms:}\\
+Implement the following key algorithms with improvements tailored to our application:
+\begin{itemize}
+    \item CycleGAN architecture with ResNet-based generators
+    \item PatchGAN discriminators for local style assessment
+    \item Cycle-consistency loss for bidirectional mapping
+    \item Identity loss for color preservation
+    \item Perceptual loss using VGG-19 features
+    \item Custom frame extraction algorithm
+\end{itemize}
+
+\textbf{4. Optimize for Real-Time Performance:}\\
+Achieve inference times of under 3 seconds per image through model optimization, efficient data pipelines, and GPU acceleration.\\
+
+\textbf{5. Build a Modular and Extensible System:}\\
+Design the system architecture to allow easy addition of new styles and modification of existing models.\\
+
+\textbf{6. Evaluate and Validate Results:}\\
+Implement both quantitative metrics (FID score, cycle-consistency error) and qualitative evaluation methods to assess the quality of style transfer.
+
+\section{Scope of the Project}
+
+The scope of this project encompasses the following:\\
+
+\textbf{Included in Scope:}
+\begin{itemize}
+    \item Implementation of CycleGAN-based style transfer for four artistic styles
+    \item Custom dataset creation through frame extraction from video sources
+    \item Training pipeline with configurable hyperparameters
+    \item Inference system for single image transformation
+    \item Documentation and analysis of results
+    \item Comparison with existing methods
+\end{itemize}
+
+\textbf{Excluded from Scope:}
+\begin{itemize}
+    \item Real-time video style transfer (only single image processing)
+    \item Mobile deployment optimization
+    \item Commercial deployment and scaling
+    \item User interface development beyond basic functionality
+\end{itemize}
+
+\section{Methodology Overview}
+
+The methodology employed in this project follows a systematic approach:\\
+
+% in preamble
+\usetikzlibrary{positioning}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=1.2cm, % more vertical spacing
+    block/.style={
+        rectangle,
+        draw,
+        fill=blue!20,
+        text width=10em,
+        align=center,
+        rounded corners,
+        minimum height=3em
+    },
+    line/.style={->, thick, >=stealth', shorten >=3pt, shorten <=3pt}
+ % arrow style
+]
+
+    \node[block] (dataset) {Dataset Collection\\\& Frame Extraction};
+    \node[block, below=of dataset] (preprocess) {Data Preprocessing\\\& Augmentation};
+    \node[block, below=of preprocess] (model) {CycleGAN\\Model Design};
+    \node[block, below=of model] (train) {Model Training\\with Multiple Loss Functions};
+    \node[block, below=of train] (eval) {Evaluation\\\& Optimization};
+    \node[block, below=of eval] (deploy) {Inference System\\Deployment};
+
+    % arrows from edge to edge
+    \draw[line] (dataset.south) -- (preprocess.north);
+    \draw[line] (preprocess.south) -- (model.north);
+    \draw[line] (model.south) -- (train.north);
+    \draw[line] (train.south) -- (eval.north);
+    \draw[line] (eval.south) -- (deploy.north);
+
+\end{tikzpicture}
+\caption{Project Methodology Overview}
+\label{fig:methodology}
+\end{figure}
+
+
+\textbf{Phase 1: Dataset Collection and Preparation}
+\begin{itemize}
+    \item Extract character frames from One Piece episodes using face detection
+    \item Extract character frames from Disney animated movies
+    \item Extract character frames from Studio Ghibli films
+    \item Collect Van Gogh paintings and landscape photographs from Kaggle
+    \item Collect human face photographs from Kaggle datasets
+\end{itemize}
+
+\textbf{Phase 2: Data Preprocessing}
+\begin{itemize}
+    \item Resize all images to 256$\times$256 pixels
+    \item Apply data augmentation (horizontal flip, rotation)
+    \item Normalize pixel values to [-1, 1] range
+    \item Create training and validation splits
+\end{itemize}
+
+\textbf{Phase 3: Model Implementation}
+\begin{itemize}
+    \item Implement generator networks with ResNet architecture
+    \item Implement PatchGAN discriminator networks
+    \item Define loss functions (adversarial, cycle-consistency, identity, perceptual)
+    \item Set up training loops with Adam optimizer
+\end{itemize}
+
+\textbf{Phase 4: Training and Optimization}
+\begin{itemize}
+    \item Train separate models for each style
+    \item Monitor training progress with validation metrics
+    \item Apply learning rate scheduling
+    \item Save best model checkpoints
+\end{itemize}
+
+\textbf{Phase 5: Evaluation and Deployment}
+\begin{itemize}
+    \item Evaluate models using FID scores and visual inspection
+    \item Optimize inference pipeline for speed
+    \item Document results and create demonstration system
+\end{itemize}
+
+\section{Organisation of the Report}
+
+This project report is organized into the following chapters:\\
+
+\textbf{Chapter 1: Introduction}\\
+Provides an overview of the project, including motivation, problem statement, objectives, scope, and methodology. This chapter establishes the context and significance of neural style transfer in the broader landscape of deep learning applications.\\
+
+\textbf{Chapter 2: Literature Survey}\\
+Reviews the existing research in neural style transfer, generative adversarial networks, and image-to-image translation. This chapter discusses the foundational algorithms including the original NST by Gatys et al., various GAN architectures, and the evolution leading to CycleGAN. A detailed analysis of six key algorithms and their improvements is presented.\\
+
+\textbf{Chapter 3: System Overview}\\
+Describes the overall system architecture, including the style transfer pipeline, dataset creation methodology, and the four style models. This chapter provides a high-level understanding of how different components interact.\\
+
+\textbf{Chapter 4: System Architecture and High-Level Design}\\
+Presents the detailed architecture of the CycleGAN system, including generator and discriminator networks, loss function formulations, and training procedures. UML diagrams, flowcharts, and architectural diagrams illustrate the design.\\
+
+\textbf{Chapter 5: Software Architecture and Low-Level Design}\\
+Provides detailed algorithm descriptions, pseudocode, and implementation specifics. This chapter covers the frame extraction algorithm, network architectures, and training procedures at a granular level.\\
+
+\textbf{Chapter 6: Results}\\
+Presents the experimental setup, test procedures, and results obtained from training and evaluating the four style transfer models. Includes sample outputs, quantitative metrics, and comparative analysis.\\
+
+\textbf{Chapter 7: Conclusion}\\
+Summarizes the project achievements, discusses limitations, and suggests directions for future work.\\
+
+\textbf{Appendices}\\
+Contains supplementary material including project timeline, budget estimation, dataset details, SDG alignment, and configuration information.
+

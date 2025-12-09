@@ -1,0 +1,47 @@
+\babel@toc {english}{}\relax 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Project Methodology Overview}}{7}{}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces High-Level System Architecture}}{20}{}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Frame Extraction Pipeline}}{22}{}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Complete CycleGAN Architecture for Style Transfer}}{23}{}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Generator Network Architecture}}{24}{}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Residual Block Structure}}{24}{}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces PatchGAN Discriminator Architecture}}{24}{}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces System Component Diagram}}{32}{}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Detailed Generator Architecture with Layer Specifications}}{35}{}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Internal Structure of Residual Block}}{36}{}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces PatchGAN Discriminator with Spatial Dimensions}}{36}{}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Training Process Flowchart}}{37}{}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Inference Pipeline Flowchart}}{38}{}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Loss Computation Flow in CycleGAN}}{38}{}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Training Loss Curves - One Piece Style Model}}{48}{}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Training Loss Curves - Disney Style Model}}{48}{}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Training Loss Curves - Studio Ghibli Style Model}}{49}{}%
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Training Loss Curves - Van Gogh Style Model}}{49}{}%
+\contentsline {figure}{\numberline {6.5}{\ignorespaces One Piece Style Transfer Results - Sample 1}}{52}{}%
+\contentsline {figure}{\numberline {6.6}{\ignorespaces One Piece Style Transfer Results - Sample 2}}{52}{}%
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Disney Style Transfer Results - Sample 1}}{53}{}%
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Disney Style Transfer Results - Sample 2}}{53}{}%
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Studio Ghibli Style Transfer Results - Sample 1}}{54}{}%
+\contentsline {figure}{\numberline {6.10}{\ignorespaces Studio Ghibli Style Transfer Results - Sample 2}}{54}{}%
+\contentsline {figure}{\numberline {6.11}{\ignorespaces Van Gogh Style Transfer Results - Sample 1}}{55}{}%
+\contentsline {figure}{\numberline {6.12}{\ignorespaces Van Gogh Style Transfer Results - Sample 2}}{55}{}%
+\contentsline {figure}{\numberline {6.13}{\ignorespaces Comparison of All Style Transfers on Same Input - Set 1}}{56}{}%
+\contentsline {figure}{\numberline {6.14}{\ignorespaces Comparison of All Style Transfers on Same Input - Set 2}}{56}{}%
+\contentsline {figure}{\numberline {6.15}{\ignorespaces Examples of Failure Cases - Set 1}}{57}{}%
+\contentsline {figure}{\numberline {6.16}{\ignorespaces Examples of Failure Cases - Set 2}}{58}{}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Project Timeline}}{71}{}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

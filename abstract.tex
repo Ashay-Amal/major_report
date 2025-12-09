@@ -1,0 +1,12 @@
+\chapter*{Abstract}
+\thispagestyle{plain}
+\addcontentsline{toc}{chapter}{\numberline{}Abstract}
+
+This project presents a Neural Style Transfer system using CycleGAN (Cycle-Consistent Generative Adversarial Networks) to transform photographs into four artistic styles: One Piece anime, Disney animation, Studio Ghibli animation, and Van Gogh painting. The system transforms human faces into animated characters and landscapes into post-impressionist paintings using unpaired datasets with bidirectional mappings through cycle-consistency constraints.\\
+
+The implementation includes dual generators and discriminators, adversarial loss for realistic generation, cycle-consistency loss for content preservation, identity loss for color preservation, and perceptual loss using VGG-19. A custom frame extraction algorithm using OpenCV creates animation datasets from video sources, while Van Gogh data combines landscapes and paintings from Kaggle.\\
+
+Built with PyTorch 2.0 and CUDA acceleration, the system achieves inference times under 3 seconds per image on NVIDIA GPUs. The modular architecture enables extension to additional styles, and results demonstrate successful style capture while preserving semantic content.\\
+
+\textbf{Keywords:} Neural Style Transfer, CycleGAN, Generative Adversarial Networks, Deep Learning, Image-to-Image Translation, Computer Vision, Animation Style Transfer, Van Gogh Style
+

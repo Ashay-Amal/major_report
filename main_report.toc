@@ -1,0 +1,157 @@
+\babel@toc {english}{}\relax 
+\thispagestyle {empty}
+\contentsline {chapter}{\hbox to\@tempdima {\hfil }Abstract}{i}{}%
+\contentsline {chapter}{\hbox to\@tempdima {\hfil }List of Figures}{iii}{}%
+\contentsline {chapter}{\hbox to\@tempdima {\hfil }List of Tables}{iv}{}%
+\contentsline {chapter}{\numberline {1}Introduction}{1}{}%
+\contentsline {section}{\numberline {1.1}Background}{1}{}%
+\contentsline {subsection}{\numberline {1.1.1}Evolution of Computer Vision}{1}{}%
+\contentsline {subsection}{\numberline {1.1.2}Convolutional Neural Networks}{2}{}%
+\contentsline {subsection}{\numberline {1.1.3}Generative Adversarial Networks}{2}{}%
+\contentsline {subsection}{\numberline {1.1.4}Style Transfer Approaches}{2}{}%
+\contentsline {section}{\numberline {1.2}Motivation}{2}{}%
+\contentsline {section}{\numberline {1.3}Problem Statement}{3}{}%
+\contentsline {section}{\numberline {1.4}Objective of the Project}{4}{}%
+\contentsline {section}{\numberline {1.5}Scope of the Project}{5}{}%
+\contentsline {section}{\numberline {1.6}Methodology Overview}{6}{}%
+\contentsline {section}{\numberline {1.7}Organisation of the Report}{8}{}%
+\contentsline {chapter}{\numberline {2}Literature Survey}{11}{}%
+\contentsline {section}{\numberline {2.1}Introduction to Neural Style Transfer}{11}{}%
+\contentsline {section}{\numberline {2.2}Foundational Neural Style Transfer Methods}{12}{}%
+\contentsline {subsection}{\numberline {2.2.1}Image Style Transfer Using Convolutional Neural Networks}{12}{}%
+\contentsline {subsection}{\numberline {2.2.2}Perceptual Losses for Real-Time Style Transfer}{12}{}%
+\contentsline {section}{\numberline {2.3}Normalization Techniques for Style Transfer}{13}{}%
+\contentsline {subsection}{\numberline {2.3.1}Instance Normalization}{13}{}%
+\contentsline {subsection}{\numberline {2.3.2}Adaptive Instance Normalization}{14}{}%
+\contentsline {section}{\numberline {2.4}Universal and Arbitrary Style Transfer}{15}{}%
+\contentsline {section}{\numberline {2.5}Generative Adversarial Networks}{15}{}%
+\contentsline {subsection}{\numberline {2.5.1}Generative Adversarial Networks Foundation}{15}{}%
+\contentsline {subsection}{\numberline {2.5.2}Least Squares GAN}{16}{}%
+\contentsline {section}{\numberline {2.6}Image-to-Image Translation}{16}{}%
+\contentsline {subsection}{\numberline {2.6.1}Paired Image-to-Image Translation (Pix2Pix)}{16}{}%
+\contentsline {subsection}{\numberline {2.6.2}Unpaired Image-to-Image Translation (CycleGAN)}{17}{}%
+\contentsline {section}{\numberline {2.7}Photorealistic and Domain-Specific Style Transfer}{18}{}%
+\contentsline {section}{\numberline {2.8}Recent Advances in Style Transfer}{18}{}%
+\contentsline {section}{\numberline {2.9}Summary and Research Gaps}{18}{}%
+\contentsline {subsection}{\numberline {2.9.1}Identified Research Gaps}{19}{}%
+\contentsline {chapter}{\numberline {3}System Overview}{20}{}%
+\contentsline {section}{\numberline {3.1}System Architecture Overview}{20}{}%
+\contentsline {section}{\numberline {3.2}Style Transfer Modes}{20}{}%
+\contentsline {subsection}{\numberline {3.2.1}One Piece Style Transfer}{20}{}%
+\contentsline {subsection}{\numberline {3.2.2}Disney Style Transfer}{21}{}%
+\contentsline {subsection}{\numberline {3.2.3}Studio Ghibli Style Transfer}{21}{}%
+\contentsline {subsection}{\numberline {3.2.4}Van Gogh Style Transfer}{21}{}%
+\contentsline {section}{\numberline {3.3}Dataset Creation Methodology}{21}{}%
+\contentsline {subsection}{\numberline {3.3.1}Animation Frame Extraction Pipeline}{22}{}%
+\contentsline {subsection}{\numberline {3.3.2}Dataset Details}{23}{}%
+\contentsline {subsection}{\numberline {3.3.3}Dataset Summary}{23}{}%
+\contentsline {section}{\numberline {3.4}CycleGAN Architecture Details}{23}{}%
+\contentsline {subsection}{\numberline {3.4.1}Overall Architecture}{23}{}%
+\contentsline {subsection}{\numberline {3.4.2}Generator Network Architecture}{24}{}%
+\contentsline {subsection}{\numberline {3.4.3}Residual Block Architecture}{24}{}%
+\contentsline {subsection}{\numberline {3.4.4}Discriminator Network Architecture (PatchGAN)}{24}{}%
+\contentsline {section}{\numberline {3.5}Loss Functions}{25}{}%
+\contentsline {subsection}{\numberline {3.5.1}Adversarial Loss (LSGAN)}{25}{}%
+\contentsline {subsection}{\numberline {3.5.2}Cycle-Consistency Loss}{26}{}%
+\contentsline {subsection}{\numberline {3.5.3}Identity Loss}{26}{}%
+\contentsline {subsection}{\numberline {3.5.4}Perceptual Loss}{27}{}%
+\contentsline {subsection}{\numberline {3.5.5}Total Generator Loss}{27}{}%
+\contentsline {subsection}{\numberline {3.5.6}Discriminator Loss}{28}{}%
+\contentsline {section}{\numberline {3.6}Training Configuration}{28}{}%
+\contentsline {subsection}{\numberline {3.6.1}Hyperparameter Selection}{28}{}%
+\contentsline {subsection}{\numberline {3.6.2}Training Procedure}{29}{}%
+\contentsline {subsection}{\numberline {3.6.3}Training Stabilization Techniques}{29}{}%
+\contentsline {subsection}{\numberline {3.6.4}Training Resources}{29}{}%
+\contentsline {chapter}{\numberline {4}System Architecture and High Level Design}{31}{}%
+\contentsline {section}{\numberline {4.1}Terminology}{31}{}%
+\contentsline {section}{\numberline {4.2}System Components}{32}{}%
+\contentsline {subsection}{\numberline {4.2.1}Component Descriptions}{32}{}%
+\contentsline {section}{\numberline {4.3}Class Structure}{33}{}%
+\contentsline {section}{\numberline {4.4}Inference Sequence}{33}{}%
+\contentsline {section}{\numberline {4.5}Software Requirements}{33}{}%
+\contentsline {section}{\numberline {4.6}Use Cases}{34}{}%
+\contentsline {section}{\numberline {4.7}Deployment Architecture}{34}{}%
+\contentsline {chapter}{\numberline {5}Software Architecture and Low Level Design}{35}{}%
+\contentsline {section}{\numberline {5.1}Detailed Generator Architecture}{35}{}%
+\contentsline {section}{\numberline {5.2}Residual Block Internal Structure}{36}{}%
+\contentsline {section}{\numberline {5.3}PatchGAN Discriminator Architecture}{36}{}%
+\contentsline {section}{\numberline {5.4}Training Process Flowchart}{37}{}%
+\contentsline {section}{\numberline {5.5}Inference Pipeline Flowchart}{38}{}%
+\contentsline {section}{\numberline {5.6}Loss Computation Diagram}{38}{}%
+\contentsline {section}{\numberline {5.7}Training Algorithm}{39}{}%
+\contentsline {section}{\numberline {5.8}Inference Algorithm}{40}{}%
+\contentsline {section}{\numberline {5.9}Generator Forward Pass Algorithm}{40}{}%
+\contentsline {section}{\numberline {5.10}Residual Block Algorithm}{41}{}%
+\contentsline {section}{\numberline {5.11}Discriminator Forward Pass Algorithm}{42}{}%
+\contentsline {section}{\numberline {5.12}Image History Buffer Algorithm}{42}{}%
+\contentsline {section}{\numberline {5.13}Data Preprocessing Algorithm}{43}{}%
+\contentsline {section}{\numberline {5.14}Frame Extraction Algorithm}{44}{}%
+\contentsline {section}{\numberline {5.15}Data Preprocessing}{45}{}%
+\contentsline {subsection}{\numberline {5.15.1}Preprocessing Pipeline}{45}{}%
+\contentsline {subsection}{\numberline {5.15.2}Postprocessing Pipeline}{45}{}%
+\contentsline {section}{\numberline {5.16}System Flow}{45}{}%
+\contentsline {section}{\numberline {5.17}Data Flow}{45}{}%
+\contentsline {section}{\numberline {5.18}Hardware and Software Specifications}{46}{}%
+\contentsline {chapter}{\numberline {6}Results}{47}{}%
+\contentsline {section}{\numberline {6.1}Test Setup Environment}{47}{}%
+\contentsline {subsection}{\numberline {6.1.1}Hardware Configuration}{47}{}%
+\contentsline {subsection}{\numberline {6.1.2}Software Environment}{47}{}%
+\contentsline {section}{\numberline {6.2}Training Results}{48}{}%
+\contentsline {subsection}{\numberline {6.2.1}Training Loss Curves}{48}{}%
+\contentsline {subsection}{\numberline {6.2.2}Training Statistics}{50}{}%
+\contentsline {section}{\numberline {6.3}Test Procedures and Test Cases}{50}{}%
+\contentsline {subsection}{\numberline {6.3.1}Test Case Design}{50}{}%
+\contentsline {subsection}{\numberline {6.3.2}Test Procedure}{51}{}%
+\contentsline {section}{\numberline {6.4}Style Transfer Results}{52}{}%
+\contentsline {subsection}{\numberline {6.4.1}One Piece Style Results}{52}{}%
+\contentsline {subsection}{\numberline {6.4.2}Disney Style Results}{53}{}%
+\contentsline {subsection}{\numberline {6.4.3}Studio Ghibli Style Results}{54}{}%
+\contentsline {subsection}{\numberline {6.4.4}Van Gogh Style Results}{55}{}%
+\contentsline {section}{\numberline {6.5}Comparative Analysis}{56}{}%
+\contentsline {subsection}{\numberline {6.5.1}Style Comparison Grid}{56}{}%
+\contentsline {subsection}{\numberline {6.5.2}Quantitative Metrics}{56}{}%
+\contentsline {section}{\numberline {6.6}Failure Cases and Limitations}{57}{}%
+\contentsline {subsection}{\numberline {6.6.1}Identified Failure Cases}{57}{}%
+\contentsline {section}{\numberline {6.7}Inference Performance}{58}{}%
+\contentsline {subsection}{\numberline {6.7.1}Speed Benchmarks}{58}{}%
+\contentsline {subsection}{\numberline {6.7.2}Memory Usage}{59}{}%
+\contentsline {section}{\numberline {6.8}Analysis and Discussion}{59}{}%
+\contentsline {subsection}{\numberline {6.8.1}Training Observations}{59}{}%
+\contentsline {subsection}{\numberline {6.8.2}Qualitative Analysis}{59}{}%
+\contentsline {subsection}{\numberline {6.8.3}Key Findings}{60}{}%
+\contentsline {subsection}{\numberline {6.8.4}Comparison with Existing Methods}{61}{}%
+\contentsline {subsection}{\numberline {6.8.5}Error Analysis}{61}{}%
+\contentsline {section}{\numberline {6.9}Summary of Results}{61}{}%
+\contentsline {chapter}{\numberline {7}Conclusion}{62}{}%
+\contentsline {section}{\numberline {7.1}Summary of the Project Work}{62}{}%
+\contentsline {subsection}{\numberline {7.1.1}Achievements}{62}{}%
+\contentsline {subsection}{\numberline {7.1.2}Technical Contributions}{63}{}%
+\contentsline {subsection}{\numberline {7.1.3}Meeting Project Objectives}{64}{}%
+\contentsline {section}{\numberline {7.2}Limitations}{64}{}%
+\contentsline {section}{\numberline {7.3}Scope for Future Work}{65}{}%
+\contentsline {section}{\numberline {7.4}Conclusion}{65}{}%
+\contentsline {chapter}{Bibliography}{66}{}%
+\contentsline {chapter}{Appendices}{70}{}%
+\contentsline {chapter}{\numberline {A}Project Planning}{71}{}%
+\contentsline {section}{\numberline {A.1}Project Timeline}{71}{}%
+\contentsline {section}{\numberline {A.2}Budget Estimation}{72}{}%
+\contentsline {chapter}{\numberline {B}Sustainable Development Goals (SDGs) Addressed}{73}{}%
+\contentsline {chapter}{\numberline {C}Self-Assessment of the Project}{75}{}%
+\contentsline {chapter}{\numberline {D}Dataset Details}{77}{}%
+\contentsline {chapter}{\numberline {E}Configuration and Usage}{78}{}%
+\contentsline {section}{\numberline {E.1}Repository Structure}{78}{}%
+\contentsline {section}{\numberline {E.2}Installation Guide}{79}{}%
+\contentsline {subsection}{\numberline {E.2.1}System Requirements}{79}{}%
+\contentsline {subsection}{\numberline {E.2.2}Installation Steps}{79}{}%
+\contentsline {subsection}{\numberline {E.2.3}Dependencies}{80}{}%
+\contentsline {section}{\numberline {E.3}Usage Instructions}{80}{}%
+\contentsline {subsection}{\numberline {E.3.1}Inference (Style Transfer)}{80}{}%
+\contentsline {subsection}{\numberline {E.3.2}Training a New Model}{81}{}%
+\contentsline {subsection}{\numberline {E.3.3}Dataset Preparation}{81}{}%
+\contentsline {chapter}{\numberline {F}Key Code Snippets}{83}{}%
+\contentsline {section}{\numberline {F.1}Generator Network (Condensed)}{83}{}%
+\contentsline {section}{\numberline {F.2}PatchGAN Discriminator (Condensed)}{83}{}%
+\contentsline {section}{\numberline {F.3}Loss Functions}{83}{}%
+\contentsline {chapter}{\numberline {G}Mathematical Summary}{85}{}%
+\contentsline {section}{\numberline {G.1}Key Equations}{85}{}%
+\contentsline {chapter}{\numberline {H}Glossary}{86}{}%

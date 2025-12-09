@@ -1,0 +1,1279 @@
+%%  Technical Chapters
+
+\restylefloat{algorithm}
+
+\chapter{System Overview}
+
+This chapter provides a comprehensive overview of the AI-Based Neural Style Transfer system, including the overall architecture, dataset creation methodology, and the four distinct style transfer models implemented: One Piece, Disney, Studio Ghibli, and Van Gogh.
+
+\section{System Architecture Overview}
+
+The system is designed as a modular pipeline that transforms user-provided content images into artistic stylizations using CycleGAN-based neural networks. The architecture supports four distinct style transfer modes, each trained on custom-curated datasets.
+
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tikzpicture}[
+    node distance=0.4cm,
+    block/.style={rectangle, draw, fill=blue!20, text width=7em, text centered, rounded corners, minimum height=3em},
+    arrow/.style={-latex', thick}
+]
+
+    \node [block] (input) {Input Image\\(Photo/Landscape)};
+    \node [block, right=1.6cm of input] (select) {Style Selection\\Module};
+
+    % Style Models (Closer + Smaller Text Width)
+    \node [block, above right=0.2cm and 1.5cm of select] (onepiece) {One Piece\\Model};
+    \node [block, below=0.2cm of onepiece] (disney) {Disney\\Model};
+    \node [block, below=0.2cm of disney] (ghibli) {Ghibli\\Model};
+    \node [block, below=0.2cm of ghibli] (vangogh) {Van Gogh\\Model};
+
+    \node [block, right=1.6cm of disney] (output) {Stylized\\Output};
+
+    % Arrows
+    \draw [arrow] (input) -- (select);
+    \draw [arrow] (select) -- (onepiece);
+    \draw [arrow] (select) -- (disney);
+    \draw [arrow] (select) -- (ghibli);
+    \draw [arrow] (select) -- (vangogh);
+    \draw [arrow] (onepiece) -- (output);
+    \draw [arrow] (disney) -- (output);
+    \draw [arrow] (ghibli) -- (output);
+    \draw [arrow] (vangogh) -- (output);
+
+\end{tikzpicture}}
+\caption{High-Level System Architecture}
+\label{fig:system_arch}
+\end{figure}
+
+
+\section{Style Transfer Modes}
+
+The system implements four distinct style transfer modes:\\
+
+\subsection{One Piece Style Transfer}
+\begin{itemize}
+    \item \textbf{Input:} Human face photographs
+    \item \textbf{Output:} One Piece anime-style character faces
+    \item \textbf{Characteristics:} Bold black outlines, exaggerated expressions, vibrant saturated colors, distinctive large eyes
+    \item \textbf{Dataset Source:} Frames extracted from One Piece anime episodes and movies
+\end{itemize}
+
+\subsection{Disney Style Transfer}
+\begin{itemize}
+    \item \textbf{Input:} Human face photographs
+    \item \textbf{Output:} Disney animation-style character faces
+    \item \textbf{Characteristics:} Smooth color gradients, large expressive eyes with reflections, soft pastel color palettes, polished clean lines
+    \item \textbf{Dataset Source:} Frames extracted from Disney animated feature films
+\end{itemize}
+
+\subsection{Studio Ghibli Style Transfer}
+\begin{itemize}
+    \item \textbf{Input:} Human face photographs
+    \item \textbf{Output:} Studio Ghibli animation-style character faces
+    \item \textbf{Characteristics:} Soft watercolor-like textures, naturalistic expressions, warm earthy tones, hand-drawn aesthetic
+    \item \textbf{Dataset Source:} Frames extracted from Studio Ghibli films (Spirited Away, Howl's Moving Castle, etc.)
+\end{itemize}
+
+\subsection{Van Gogh Style Transfer}
+\begin{itemize}
+    \item \textbf{Input:} Landscape photographs
+    \item \textbf{Output:} Van Gogh painting-style landscapes
+    \item \textbf{Characteristics:} Swirling brushstrokes, vibrant colors (yellows, blues), impasto technique, post-impressionist aesthetic
+    \item \textbf{Dataset Source:} Van Gogh paintings from Kaggle dataset
+\end{itemize}
+
+\section{Dataset Creation Methodology}
+
+Since CycleGAN requires unpaired datasets from two domains (Domain X: real-world images, Domain Y: stylized images), we developed a comprehensive dataset creation pipeline.
+
+\subsection{Animation Frame Extraction Pipeline}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=1cm,
+    block/.style={rectangle, draw, fill=green!20, text width=7em, text centered, minimum height=2.5em},
+    decision/.style={diamond, draw, fill=orange!20, text width=5em, text centered, aspect=2},
+    arrow/.style={-latex', thick}
+]
+    \node [block] (video) {Video File\\(Episode/Movie)};
+    \node [block, below=of video] (extract) {Frame\\Extraction};
+    \node [block, below=of extract] (detect) {Face/Character\\Detection};
+    \node [decision, below=of detect] (conf) {Confidence\\$> \tau$?};
+    \node [block, below left=1cm and 0.5cm of conf] (discard) {Discard\\Frame};
+    \node [block, below right=1cm and 0.5cm of conf] (crop) {Crop \&\\Resize};
+    \node [decision, below=of crop] (sim) {Similar to\\existing?};
+    \node [block, below right=1cm and 0.5cm of sim] (skip) {Skip\\Frame};
+    \node [block, below left=1cm and 0.5cm of sim] (quality) {Quality\\Check};
+    \node [decision, below=of quality] (pass) {Pass?};
+    \node [block, below=of pass] (save) {Save to\\Dataset};
+
+    \draw [arrow] (video) -- (extract);
+    \draw [arrow] (extract) -- (detect);
+    \draw [arrow] (detect) -- (conf);
+    \draw [arrow] (conf) -- node[left] {No} (discard);
+    \draw [arrow] (conf) -- node[right] {Yes} (crop);
+    \draw [arrow] (crop) -- (sim);
+    \draw [arrow] (sim) -- node[right] {Yes} (skip);
+    \draw [arrow] (sim) -- node[left] {No} (quality);
+    \draw [arrow] (quality) -- (pass);
+    \draw [arrow] (pass) -- node[left] {Yes} (save);
+\end{tikzpicture}
+\caption{Frame Extraction Pipeline}
+\label{fig:frame_extraction_pipeline}
+\end{figure}
+
+\subsection{Dataset Details}
+
+All datasets use 256$\times$256 resolution images in JPG/PNG format. Domain X uses human faces from Kaggle (3,000+ images each for face-based styles) or landscapes (2,500+ for Van Gogh). Domain Y contains style-specific frames extracted using our pipeline.
+
+\subsection{Dataset Summary}
+
+\begin{table}[H]
+\centering
+\caption{Complete Dataset Summary}
+\label{tab:dataset_summary}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Style} & \textbf{Domain X} & \textbf{Domain X Size} & \textbf{Domain Y} & \textbf{Domain Y Size} \\ \hline
+One Piece & Human Faces & 3,000+ & Anime Frames & 2,500+ \\ \hline
+Disney & Human Faces & 3,000+ & Disney Frames & 2,000+ \\ \hline
+Ghibli & Human Faces & 3,000+ & Ghibli Frames & 2,000+ \\ \hline
+Van Gogh & Landscapes & 2,500+ & Paintings & 400+ \\ \hline
+\end{tabular}
+\end{table}
+
+\section{CycleGAN Architecture Details}
+
+\subsection{Overall Architecture}
+
+The CycleGAN architecture consists of two generator-discriminator pairs that learn bidirectional mappings between domains.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    scale=0.9,
+    transform shape,
+    domainbox/.style={ellipse, draw, minimum width=3cm, minimum height=2cm, fill=yellow!30, align=center},
+    gen/.style={rectangle, draw, minimum width=2cm, minimum height=1.2cm, fill=blue!30},
+    disc/.style={rectangle, draw, minimum width=2cm, minimum height=1.2cm, fill=red!30},
+    arrow/.style={-latex', thick},
+    label/.style={font=\small}
+]
+    % Domain X
+    \node [domainbox] (X) at (0, 0) {Domain $X$\\Human Faces};
+
+    % Domain Y
+    \node [domainbox] (Y) at (10, 0) {Domain $Y$\\Animation Style};
+
+    % Generator G (X -> Y)
+    \node [gen] (G) at (5, 2) {Generator $G$};
+
+    % Generator F (Y -> X)
+    \node [gen] (F) at (5, -2) {Generator $F$};
+
+    % Discriminator DY
+    \node [disc] (DY) at (10, 3) {Discriminator $D_Y$};
+
+    % Discriminator DX
+    \node [disc] (DX) at (0, -3) {Discriminator $D_X$};
+
+    % Forward mapping
+    \draw [arrow, blue, thick] (X.north) -- (G.west) node[midway, above, label] {$x$};
+    \draw [arrow, blue, thick] (G.east) -- (Y.north) node[midway, above, label] {$\hat{y} = G(x)$};
+
+    % Backward mapping
+    \draw [arrow, red, thick] (Y.south) -- (F.east) node[midway, below, label] {$y$};
+    \draw [arrow, red, thick] (F.west) -- (X.south) node[midway, below, label] {$\hat{x} = F(y)$};
+
+    % Cycle consistency
+    \draw [arrow, green, dashed, thick] (Y.north) to[bend left=30] node[right, label] {$F(G(x)) \approx x$} (F.north east);
+    \draw [arrow, green, dashed, thick] (F.south west) to[bend left=30] (X.south);
+
+    % Discriminator connections
+    \draw [arrow, orange] (Y.north east) -- (DY.south);
+    \draw [arrow, orange] (G.north east) -- (DY.west);
+    \draw [arrow, purple] (X.south west) -- (DX.north);
+    \draw [arrow, purple] (F.south west) -- (DX.east);
+
+\end{tikzpicture}
+\caption{Complete CycleGAN Architecture for Style Transfer}
+\label{fig:cyclegan_complete}
+\end{figure}
+
+\subsection{Generator Network Architecture}
+
+The generator follows a ResNet-based encoder-decoder architecture with 9 residual blocks for 256$\times$256 images.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    scale=0.8,
+    transform shape,
+    block/.style={rectangle, draw, minimum width=1.5cm, minimum height=0.8cm, font=\scriptsize, align=center},
+    arrow/.style={-latex'}
+]
+    % Input
+    \node [block, fill=gray!30] (input) at (0, 0) {Input\\3$\times$256$\times$256};
+
+    % Encoder
+    \node [block, fill=blue!30] (c1) at (2.5, 0) {Conv\\64};
+    \node [block, fill=blue!30] (c2) at (4.5, 0) {Conv\\128};
+    \node [block, fill=blue!30] (c3) at (6.5, 0) {Conv\\256};
+
+    % Residual Blocks
+    \node [block, fill=green!30] (r1) at (8.5, 0) {Res1};
+    \node [block, fill=green!30] (r2) at (9.5, 0) {Res2};
+    \node [block, fill=green!30] (r3) at (10.5, 0) {...};
+    \node [block, fill=green!30] (r9) at (11.5, 0) {Res9};
+
+    % Decoder
+    \node [block, fill=red!30] (d1) at (13.5, 0) {DeConv\\128};
+    \node [block, fill=red!30] (d2) at (15.5, 0) {DeConv\\64};
+    \node [block, fill=red!30] (d3) at (17.5, 0) {Conv\\3};
+
+    % Output
+    \node [block, fill=gray!30] (output) at (20, 0) {Output\\3$\times$256$\times$256};
+
+    % Arrows
+    \draw [arrow] (input) -- (c1);
+    \draw [arrow] (c1) -- (c2);
+    \draw [arrow] (c2) -- (c3);
+    \draw [arrow] (c3) -- (r1);
+    \draw [arrow] (r1) -- (r2);
+    \draw [arrow] (r2) -- (r3);
+    \draw [arrow] (r3) -- (r9);
+    \draw [arrow] (r9) -- (d1);
+    \draw [arrow] (d1) -- (d2);
+    \draw [arrow] (d2) -- (d3);
+    \draw [arrow] (d3) -- (output);
+
+    % Labels
+    \node [above=0.5cm of c2] {\small Encoder};
+    \node [above=0.5cm of r2] {\small 9 Residual Blocks};
+    \node [above=0.5cm of d2] {\small Decoder};
+\end{tikzpicture}
+\caption{Generator Network Architecture}
+\label{fig:generator_detailed}
+\end{figure}
+
+\textbf{Generator Layer Specifications:}
+\begin{table}[H]
+\centering
+\caption{Generator Network Layers}
+\label{tab:generator_layers}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Layer} & \textbf{Type} & \textbf{Filters} & \textbf{Kernel} & \textbf{Stride} \\ \hline
+c7s1-64 & Conv + IN + ReLU & 64 & 7$\times$7 & 1 \\ \hline
+d128 & Conv + IN + ReLU & 128 & 3$\times$3 & 2 \\ \hline
+d256 & Conv + IN + ReLU & 256 & 3$\times$3 & 2 \\ \hline
+R256 $\times$9 & Residual Block & 256 & 3$\times$3 & 1 \\ \hline
+u128 & DeConv + IN + ReLU & 128 & 3$\times$3 & 2 \\ \hline
+u64 & DeConv + IN + ReLU & 64 & 3$\times$3 & 2 \\ \hline
+c7s1-3 & Conv + Tanh & 3 & 7$\times$7 & 1 \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Residual Block Architecture}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    block/.style={rectangle, draw, minimum width=2.5cm, minimum height=0.8cm, fill=green!20, align=center},
+    arrow/.style={-latex', thick}
+]
+    \node [block] (input) {Input};
+    \node [block, right=1.5cm of input] (conv1) {Conv 3$\times$3 + IN + ReLU};
+    \node [block, right=1.5cm of conv1] (conv2) {Conv 3$\times$3 + IN};
+    \node [circle, draw, right=1.5cm of conv2] (add) {$+$};
+    \node [block, right=1cm of add] (output) {Output};
+
+    \draw [arrow] (input) -- (conv1);
+    \draw [arrow] (conv1) -- (conv2);
+    \draw [arrow] (conv2) -- (add);
+    \draw [arrow] (add) -- (output);
+    \draw [arrow] (input.north) -- ++(0, 1) -| (add.north);
+\end{tikzpicture}
+\caption{Residual Block Structure}
+\label{fig:resblock}
+\end{figure}
+
+\subsection{Discriminator Network Architecture (PatchGAN)}
+
+The discriminator uses a PatchGAN architecture that classifies 70$\times$70 overlapping patches.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    scale=0.85,
+    transform shape,
+    block/.style={rectangle, draw, minimum width=1.8cm, minimum height=0.8cm, font=\scriptsize, fill=red!20, align=center},
+    arrow/.style={-latex'}
+]
+    \node [block, fill=gray!30] (input) at (0, 0) {Input\\3$\times$256$\times$256};
+    \node [block] (c1) at (3, 0) {Conv 64\\LReLU};
+    \node [block] (c2) at (6, 0) {Conv 128\\IN + LReLU};
+    \node [block] (c3) at (9, 0) {Conv 256\\IN + LReLU};
+    \node [block] (c4) at (12, 0) {Conv 512\\IN + LReLU};
+    \node [block, fill=gray!30] (output) at (15, 0) {Output\\1$\times$30$\times$30};
+
+    \draw [arrow] (input) -- (c1);
+    \draw [arrow] (c1) -- (c2);
+    \draw [arrow] (c2) -- (c3);
+    \draw [arrow] (c3) -- (c4);
+    \draw [arrow] (c4) -- (output);
+\end{tikzpicture}
+\caption{PatchGAN Discriminator Architecture}
+\label{fig:discriminator}
+\end{figure}
+
+\textbf{Discriminator Layer Specifications:}
+\begin{table}[H]
+\centering
+\caption{Discriminator Network Layers}
+\label{tab:discriminator_layers}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Layer} & \textbf{Type} & \textbf{Filters} & \textbf{Kernel} & \textbf{Stride} \\ \hline
+C64 & Conv + LeakyReLU & 64 & 4$\times$4 & 2 \\ \hline
+C128 & Conv + IN + LeakyReLU & 128 & 4$\times$4 & 2 \\ \hline
+C256 & Conv + IN + LeakyReLU & 256 & 4$\times$4 & 2 \\ \hline
+C512 & Conv + IN + LeakyReLU & 512 & 4$\times$4 & 1 \\ \hline
+Output & Conv & 1 & 4$\times$4 & 1 \\ \hline
+\end{tabular}
+\end{table}
+
+\section{Loss Functions}
+
+The training combines multiple loss functions, each serving a specific purpose in achieving high-quality style transfer. The careful balance of these losses is crucial for producing visually appealing results while maintaining content fidelity.
+
+\subsection{Adversarial Loss (LSGAN)}
+
+The adversarial loss ensures that generated images are indistinguishable from real images in the target domain. We use Least Squares GAN (LSGAN) \cite{bib:lsgan} instead of the original cross-entropy loss for more stable training.
+
+For generator $G$ and discriminator $D_Y$:
+\begin{equation}
+\mathcal{L}_{LSGAN}(G, D_Y) = \mathbb{E}_{y \sim p_{data}(y)}[(D_Y(y) - 1)^2] + \mathbb{E}_{x \sim p_{data}(x)}[D_Y(G(x))^2]
+\end{equation}
+
+The generator tries to minimize:
+\begin{equation}
+\mathcal{L}_{G}^{adv} = \mathbb{E}_{x \sim p_{data}(x)}[(D_Y(G(x)) - 1)^2]
+\end{equation}
+
+\textbf{Why LSGAN:}
+\begin{itemize}
+    \item Provides smoother gradients compared to binary cross-entropy
+    \item Penalizes samples that are far from the decision boundary
+    \item Reduces vanishing gradient problems during training
+    \item Produces higher quality images with fewer artifacts
+\end{itemize}
+
+\subsection{Cycle-Consistency Loss}
+
+The cycle-consistency loss is the key innovation of CycleGAN that enables learning from unpaired data. It enforces that translating an image to the target domain and back should reconstruct the original image:
+
+\begin{equation}
+\mathcal{L}_{cyc}(G, F) = \mathbb{E}_{x \sim p_{data}(x)}[||F(G(x)) - x||_1] + \mathbb{E}_{y \sim p_{data}(y)}[||G(F(y)) - y||_1]
+\end{equation}
+
+\textbf{Forward Cycle:} $x \rightarrow G(x) \rightarrow F(G(x)) \approx x$
+
+\textbf{Backward Cycle:} $y \rightarrow F(y) \rightarrow G(F(y)) \approx y$
+
+The L1 norm (absolute difference) is used rather than L2 to produce sharper reconstructions. The cycle-consistency loss:
+\begin{itemize}
+    \item Prevents mode collapse (generator producing identical outputs for all inputs)
+    \item Ensures the mapping is meaningful and preserves content
+    \item Regularizes the generators to learn bijective mappings
+    \item Enables learning without paired training data
+\end{itemize}
+
+\subsection{Identity Loss}
+
+The identity loss encourages the generator to preserve the input when it already belongs to the target domain:
+
+\begin{equation}
+\mathcal{L}_{identity}(G, F) = \mathbb{E}_{y \sim p_{data}(y)}[||G(y) - y||_1] + \mathbb{E}_{x \sim p_{data}(x)}[||F(x) - x||_1]
+\end{equation}
+
+This loss is particularly important for:
+\begin{itemize}
+    \item \textbf{Color Preservation:} Prevents drastic, unnecessary color shifts
+    \item \textbf{Style Consistency:} Ensures that images already in the target style are not over-transformed
+    \item \textbf{Regularization:} Provides additional constraint on the mapping function
+\end{itemize}
+
+For our animation style transfer, identity loss helps preserve skin tones and prevents unnatural color distortions in the output.
+
+\subsection{Perceptual Loss}
+
+The perceptual loss uses a pre-trained VGG-19 network to measure high-level perceptual similarity between the input and output:
+
+\begin{equation}
+\mathcal{L}_{perceptual} = \sum_{l \in L} \lambda_l \frac{1}{C_l H_l W_l} ||\phi_l(G(x)) - \phi_l(x)||^2_2
+\end{equation}
+
+where $\phi_l(x)$ denotes the feature map at layer $l$ of VGG-19, and $L$ is the set of layers used (typically relu1\_1, relu2\_1, relu3\_1, relu4\_1).
+
+\textbf{Benefits of Perceptual Loss:}
+\begin{itemize}
+    \item Preserves semantic content better than pixel-wise losses
+    \item Maintains structural similarity during style transformation
+    \item Correlates better with human perception of image quality
+    \item Helps preserve facial features during animation-style transfer
+\end{itemize}
+
+\subsection{Total Generator Loss}
+
+The complete generator loss combines all components with carefully tuned weights:
+
+\begin{equation}
+\mathcal{L}_{G,F} = \lambda_{adv}(\mathcal{L}_{G}^{adv} + \mathcal{L}_{F}^{adv}) + \lambda_{cyc}\mathcal{L}_{cyc} + \lambda_{id}\mathcal{L}_{identity} + \lambda_{perc}\mathcal{L}_{perceptual}
+\end{equation}
+
+\textbf{Loss Weights Used:}
+\begin{table}[H]
+\centering
+\caption{Loss Function Weights}
+\begin{tabular}{|l|c|l|}
+\hline
+\textbf{Loss Component} & \textbf{Weight} & \textbf{Purpose} \\ \hline
+Adversarial ($\lambda_{adv}$) & 1.0 & Realism of generated images \\ \hline
+Cycle-Consistency ($\lambda_{cyc}$) & 10.0 & Content preservation \\ \hline
+Identity ($\lambda_{id}$) & 5.0 & Color preservation \\ \hline
+Perceptual ($\lambda_{perc}$) & 1.0 & Semantic content \\ \hline
+\end{tabular}
+\end{table}
+
+\textbf{Total Loss:}
+\begin{equation}
+\mathcal{L}_{total} = \mathcal{L}_{GAN} + 10\mathcal{L}_{cyc} + 5\mathcal{L}_{identity} + \mathcal{L}_{perceptual}
+\end{equation}
+
+\subsection{Discriminator Loss}
+
+Each discriminator is trained to distinguish real images from generated ones:
+
+\begin{equation}
+\mathcal{L}_{D_Y} = \mathbb{E}_{y}[(D_Y(y) - 1)^2] + \mathbb{E}_{x}[D_Y(G(x))^2]
+\end{equation}
+\begin{equation}
+\mathcal{L}_{D_X} = \mathbb{E}_{x}[(D_X(x) - 1)^2] + \mathbb{E}_{y}[D_X(F(y))^2]
+\end{equation}
+
+The discriminators use a history buffer of 50 previously generated images to stabilize training and prevent oscillation
+
+\section{Training Configuration}
+
+This section details the hyperparameters and training procedures used to train the style transfer models.
+
+\subsection{Hyperparameter Selection}
+
+\begin{table}[H]
+\centering
+\caption{Training Hyperparameters}
+\label{tab:hyperparameters}
+\begin{tabular}{|l|c||l|c|}
+\hline
+\textbf{Parameter} & \textbf{Value} & \textbf{Parameter} & \textbf{Value} \\ \hline
+Image Size & 256$\times$256 & Optimizer & Adam ($\beta_1$=0.5, $\beta_2$=0.999) \\ \hline
+Batch Size & 4 & Learning Rate & 0.0002 (linear decay from epoch 100) \\ \hline
+Total Epochs & 200 & Residual Blocks & 9 \\ \hline
+\end{tabular}
+\end{table}
+
+\textbf{Hyperparameter Justification:}
+
+\begin{itemize}
+    \item \textbf{Image Size (256$\times$256):} Provides a good balance between quality and computational efficiency. Larger sizes increase memory requirements quadratically while providing diminishing returns for style transfer quality.
+
+    \item \textbf{Batch Size (4):} Limited by GPU memory when training with multiple networks (two generators, two discriminators). Smaller batch sizes also help with training stability for GANs.
+
+    \item \textbf{Learning Rate (0.0002):} Standard learning rate for Adam optimizer in GAN training, as recommended in the original CycleGAN paper.
+
+    \item \textbf{$\beta_1$ = 0.5:} Lower momentum than the default 0.9 helps stabilize GAN training by preventing the optimizer from ``overshooting'' in the adversarial dynamics.
+
+    \item \textbf{Linear Decay:} Learning rate is kept constant for the first 100 epochs, then linearly decayed to zero over the remaining 100 epochs. This allows for initial exploration followed by fine-tuning.
+
+    \item \textbf{9 Residual Blocks:} Standard for 256$\times$256 images. 6 blocks are used for 128$\times$128, and 9 for higher resolutions, following the original CycleGAN architecture.
+\end{itemize}
+
+\subsection{Training Procedure}
+
+The training follows an alternating optimization scheme: (1) sample batch from both domains, (2) generate fake images ($\hat{y} = G(x)$, $\hat{x} = F(y)$), (3) compute cycle reconstructions ($\tilde{x} = F(G(x))$, $\tilde{y} = G(F(y))$), (4) compute identity mappings, (5) update generators with total loss, (6) update discriminators using image history buffer.
+
+\subsection{Training Stabilization Techniques}
+
+\textbf{Image History Buffer:} A buffer of 50 previously generated images stabilizes discriminator training by reducing oscillation and providing diverse training signals.
+
+\textbf{Learning Rate Schedule:} Constant rate (0.0002) for epochs 1-100, then linear decay to 0 for epochs 101-200:
+\begin{equation}
+lr_{epoch} = lr_{initial} \times \max\left(0, 1 - \frac{epoch - 100}{100}\right)
+\end{equation}
+
+\textbf{Data Augmentation:} Random horizontal flip (50\%), resize to 286$\times$286 with random crop to 256$\times$256, normalization to [-1, 1].
+
+\textbf{Checkpointing:} Models saved every 10 epochs; best model selected based on FID score and visual quality
+
+\subsection{Training Resources}
+
+Training time and resource requirements vary by style:
+
+\begin{table}[H]
+\centering
+\caption{Training Resource Requirements}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Style} & \textbf{Training Time} & \textbf{GPU Memory} & \textbf{Dataset Size} \\ \hline
+One Piece & 14-15 hours & 8 GB & 5,500+ images \\ \hline
+Disney & 13-14 hours & 8 GB & 5,000+ images \\ \hline
+Studio Ghibli & 13-14 hours & 8 GB & 5,000+ images \\ \hline
+Van Gogh & 8-10 hours & 8 GB & 2,900+ images \\ \hline
+\end{tabular}
+\end{table}
+
+The Van Gogh model trains faster due to the smaller dataset size and simpler style patterns compared to animation styles
+
+%% Chapter 4: System Architecture and High Level Design
+
+\chapter{System Architecture and High Level Design}
+
+This chapter presents the detailed system architecture and high-level design of the neural style transfer system, including UML diagrams, component interactions, and design decisions.
+
+\section{Terminology}
+
+\begin{table}[H]
+\centering
+\caption{Technical Terminology}
+\begin{tabular}{|l|p{10cm}|}
+\hline
+\textbf{Term} & \textbf{Definition} \\ \hline
+CycleGAN & Cycle-Consistent Generative Adversarial Network for unpaired image-to-image translation \\ \hline
+Generator $G$ & Neural network that transforms images from domain $X$ to domain $Y$ \\ \hline
+Generator $F$ & Neural network that transforms images from domain $Y$ to domain $X$ \\ \hline
+Discriminator $D_Y$ & Network that distinguishes real domain $Y$ images from generated ones \\ \hline
+Discriminator $D_X$ & Network that distinguishes real domain $X$ images from generated ones \\ \hline
+Cycle-Consistency & Constraint ensuring $F(G(x)) \approx x$ and $G(F(y)) \approx y$ \\ \hline
+Instance Normalization & Normalization technique that normalizes each sample independently \\ \hline
+PatchGAN & Discriminator that classifies image patches instead of whole images \\ \hline
+Perceptual Loss & Loss computed using features from pre-trained networks (VGG-19) \\ \hline
+\end{tabular}
+\end{table}
+
+\section{System Components}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    scale=0.9,
+    transform shape,
+    component/.style={rectangle, draw, fill=blue!20, minimum width=3cm, minimum height=1.5cm, align=center},
+    storage/.style={cylinder, draw, fill=yellow!30, shape border rotate=90, aspect=0.3, minimum height=1.5cm, minimum width=2cm, align=center},
+    arrow/.style={-latex', thick}
+]
+    % Components
+    \node [component] (ui) at (0, 4) {User Interface\\Module};
+    \node [component] (preprocess) at (0, 2) {Image Preprocessing\\Module};
+    \node [component] (style) at (0, 0) {Style Selection\\Module};
+    \node [component] (inference) at (0, -2) {Inference Engine};
+    \node [component] (postprocess) at (0, -4) {Post-processing\\Module};
+
+    % Storage
+    \node [storage] (models) at (5, 0) {Model\\Weights};
+    \node [storage] (config) at (5, -2) {Config\\Files};
+
+    % Connections
+    \draw [arrow] (ui) -- (preprocess);
+    \draw [arrow] (preprocess) -- (style);
+    \draw [arrow] (style) -- (inference);
+    \draw [arrow] (inference) -- (postprocess);
+    \draw [arrow] (models) -- (inference);
+    \draw [arrow] (config) -- (style);
+\end{tikzpicture}
+\caption{System Component Diagram}
+\label{fig:component_diagram}
+\end{figure}
+
+\subsection{Component Descriptions}
+
+\textbf{1. User Interface Module}
+\begin{itemize}
+    \item Handles image upload from user
+    \item Provides style selection options (One Piece, Disney, Ghibli, Van Gogh)
+    \item Displays progress and results
+\end{itemize}
+
+\textbf{2. Image Preprocessing Module}
+\begin{itemize}
+    \item Validates input image format
+    \item Resizes image to 256$\times$256 pixels
+    \item Normalizes pixel values to [-1, 1] range
+    \item Converts to tensor format
+\end{itemize}
+
+\textbf{3. Style Selection Module}
+\begin{itemize}
+    \item Loads appropriate model weights based on selected style
+    \item Configures inference parameters
+\end{itemize}
+
+\textbf{4. Inference Engine}
+\begin{itemize}
+    \item Loads pre-trained generator model
+    \item Performs forward pass through network
+    \item Generates stylized output
+\end{itemize}
+
+\textbf{5. Post-processing Module}
+\begin{itemize}
+    \item Denormalizes output tensor
+    \item Converts to image format
+    \item Saves result to file
+\end{itemize}
+
+\section{Class Structure}
+
+The system consists of four main classes: (1) \textbf{Generator} - contains encoder, residual blocks, and decoder with forward/encode/decode methods; (2) \textbf{Discriminator} - contains sequential layers and output convolution with forward method; (3) \textbf{CycleGAN} - aggregates two generators (G, F) and two discriminators ($D_X$, $D_Y$) with train\_step and inference methods; (4) \textbf{StyleDataset} - handles domain X/Y image paths with transforms for data loading.
+\section{Inference Sequence}
+
+The inference process: User uploads image $\rightarrow$ UI sends to Preprocessor $\rightarrow$ returns tensor $\rightarrow$ Generator performs forward pass $\rightarrow$ returns output tensor $\rightarrow$ Postprocessor converts to image $\rightarrow$ UI displays result.
+
+\section{Software Requirements}
+
+\textbf{Functional Requirements:} Accept JPG/PNG images; provide 4 style options; preprocess to 256$\times$256; transform using Generator G; output within 3 seconds; save as PNG; support batch processing.
+
+\textbf{Non-Functional Requirements:} Minimum 1,000 images/domain; training $<$5 min/epoch; support up to 1024$\times$1024 input; inference $<$3 seconds; model $<$500MB; VRAM $<$4GB; PyTorch 2.0+; CUDA 11.7+.
+
+\section{Use Cases}
+
+The system supports five primary use cases: (1) Upload Image - user provides JPG/PNG input; (2) Select Style - choose from One Piece, Disney, Ghibli, or Van Gogh; (3) Transform Image - system applies neural style transfer; (4) View Result - display transformed output; (5) Download Output - save result as PNG.
+
+\section{Deployment Architecture}
+
+The system follows a three-tier architecture: \textbf{Client tier} (web browser with HTML/CSS interface), \textbf{Application tier} (Django server with PyTorch integration), and \textbf{Compute tier} (GPU runtime with CUDA). Model weights ($\sim$150MB per style) are stored on server, with image storage for inputs/outputs.
+%% Chapter 5: Software Architecture and Low Level Design
+
+\chapter{Software Architecture and Low Level Design}
+This chapter provides detailed algorithm descriptions, pseudocode, flowcharts, and implementation specifics for the neural style transfer system.
+
+\section{Detailed Generator Architecture}
+
+The generator network transforms input images through a carefully designed encoder-transformer-decoder architecture.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=0.6cm,
+    block/.style={rectangle, draw, fill=blue!20, minimum width=3.5cm, minimum height=0.8cm, align=center, font=\small},
+    resblock/.style={rectangle, draw, fill=green!30, minimum width=3.5cm, minimum height=0.6cm, align=center, font=\small},
+    arrow/.style={-latex', thick}
+]
+    % Input
+    \node[block, fill=gray!30] (input) {Input: 3$\times$256$\times$256};
+
+    % Encoder
+    \node[block, below=of input] (c1) {Conv 7$\times$7, stride 1, 64 filters, IN+ReLU};
+    \node[block, below=of c1] (c2) {Conv 3$\times$3, stride 2, 128 filters, IN+ReLU};
+    \node[block, below=of c2] (c3) {Conv 3$\times$3, stride 2, 256 filters, IN+ReLU};
+
+    % Residual Blocks
+    \node[resblock, below=0.8cm of c3] (res) {9 Residual Blocks (256 channels)};
+
+    % Decoder
+    \node[block, fill=red!20, below=0.8cm of res] (d1) {DeConv 3$\times$3, stride 2, 128 filters, IN+ReLU};
+    \node[block, fill=red!20, below=of d1] (d2) {DeConv 3$\times$3, stride 2, 64 filters, IN+ReLU};
+    \node[block, fill=red!20, below=of d2] (d3) {Conv 7$\times$7, stride 1, 3 filters, Tanh};
+
+    % Output
+    \node[block, fill=gray!30, below=of d3] (output) {Output: 3$\times$256$\times$256};
+
+    % Arrows
+    \draw[arrow] (input) -- (c1);
+    \draw[arrow] (c1) -- (c2);
+    \draw[arrow] (c2) -- (c3);
+    \draw[arrow] (c3) -- (res);
+    \draw[arrow] (res) -- (d1);
+    \draw[arrow] (d1) -- (d2);
+    \draw[arrow] (d2) -- (d3);
+    \draw[arrow] (d3) -- (output);
+
+    % Labels on the right
+    \node[right=0.8cm of c2, font=\small\bfseries, blue!70] {Encoder};
+    \node[right=0.8cm of res, font=\small\bfseries, green!50!black] {Transform};
+    \node[right=0.8cm of d2, font=\small\bfseries, red!70] {Decoder};
+
+    % Dimension annotations on the left
+    \node[left=0.5cm of c1, font=\tiny] {256$\times$256$\times$64};
+    \node[left=0.5cm of c2, font=\tiny] {128$\times$128$\times$128};
+    \node[left=0.5cm of c3, font=\tiny] {64$\times$64$\times$256};
+    \node[left=0.5cm of res, font=\tiny] {64$\times$64$\times$256};
+    \node[left=0.5cm of d1, font=\tiny] {128$\times$128$\times$128};
+    \node[left=0.5cm of d2, font=\tiny] {256$\times$256$\times$64};
+\end{tikzpicture}
+\caption{Detailed Generator Architecture with Layer Specifications}
+\label{fig:generator_lld}
+\end{figure}
+
+\section{Residual Block Internal Structure}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=0.8cm,
+    block/.style={rectangle, draw, fill=blue!15, minimum width=3.5cm, minimum height=0.7cm, align=center, font=\small},
+    arrow/.style={-latex', thick}
+]
+    \node[block, fill=yellow!20] (input) {Input (256 channels)};
+    \node[block, below=of input] (pad1) {ReflectionPad2d(1)};
+    \node[block, below=of pad1] (conv1) {Conv2d(256, 256, 3$\times$3)};
+    \node[block, below=of conv1] (in1) {InstanceNorm2d(256)};
+    \node[block, below=of in1] (relu) {ReLU};
+    \node[block, below=of relu] (pad2) {ReflectionPad2d(1)};
+    \node[block, below=of pad2] (conv2) {Conv2d(256, 256, 3$\times$3)};
+    \node[block, below=of conv2] (in2) {InstanceNorm2d(256)};
+    \node[circle, draw, below=of in2, minimum size=0.6cm] (add) {$+$};
+    \node[block, fill=yellow!20, below=of add] (output) {Output (256 channels)};
+
+    % Main path
+    \draw[arrow] (input) -- (pad1);
+    \draw[arrow] (pad1) -- (conv1);
+    \draw[arrow] (conv1) -- (in1);
+    \draw[arrow] (in1) -- (relu);
+    \draw[arrow] (relu) -- (pad2);
+    \draw[arrow] (pad2) -- (conv2);
+    \draw[arrow] (conv2) -- (in2);
+    \draw[arrow] (in2) -- (add);
+    \draw[arrow] (add) -- (output);
+
+    % Skip connection
+    \draw[arrow, dashed, red, thick] (input.east) -- ++(1.5,0) |- (add.east);
+
+    % Label
+    \node[right=2cm of relu, font=\small, text=red] {Skip Connection};
+\end{tikzpicture}
+\caption{Internal Structure of Residual Block}
+\label{fig:resblock_lld}
+\end{figure}
+
+\section{PatchGAN Discriminator Architecture}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    scale=0.8,
+    transform shape,
+    block/.style={rectangle, draw, fill=red!15, minimum width=2.2cm, minimum height=1cm, align=center, font=\small},
+    arrow/.style={-latex', thick}
+]
+    \node[block, fill=gray!30] (input) at (0,0) {Input\\3$\times$256$\times$256};
+    \node[block] (c1) at (3.5,0) {Conv4s2\\64\\LReLU};
+    \node[block] (c2) at (7,0) {Conv4s2\\128\\IN+LReLU};
+    \node[block] (c3) at (10.5,0) {Conv4s2\\256\\IN+LReLU};
+    \node[block] (c4) at (14,0) {Conv4s1\\512\\IN+LReLU};
+    \node[block, fill=gray!30] (output) at (17.5,0) {Output\\1$\times$30$\times$30};
+
+    \draw[arrow] (input) -- (c1);
+    \draw[arrow] (c1) -- (c2);
+    \draw[arrow] (c2) -- (c3);
+    \draw[arrow] (c3) -- (c4);
+    \draw[arrow] (c4) -- (output);
+
+    % Dimensions below
+    \node[below=0.3cm of input, font=\tiny] {H=256, W=256};
+    \node[below=0.3cm of c1, font=\tiny] {H=128, W=128};
+    \node[below=0.3cm of c2, font=\tiny] {H=64, W=64};
+    \node[below=0.3cm of c3, font=\tiny] {H=32, W=32};
+    \node[below=0.3cm of c4, font=\tiny] {H=31, W=31};
+    \node[below=0.3cm of output, font=\tiny] {H=30, W=30};
+\end{tikzpicture}
+\caption{PatchGAN Discriminator with Spatial Dimensions}
+\label{fig:discriminator_lld}
+\end{figure}
+
+\section{Training Process Flowchart}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=1cm,
+    startstop/.style={rectangle, rounded corners, draw, fill=red!20, minimum width=2.5cm, minimum height=0.7cm, align=center, font=\small},
+    process/.style={rectangle, draw, fill=blue!15, minimum width=3.2cm, minimum height=0.7cm, align=center, font=\small},
+    decision/.style={diamond, draw, fill=yellow!20, minimum width=1.8cm, aspect=2, align=center, font=\scriptsize},
+    arrow/.style={-latex', thick}
+]
+    \node[startstop] (start) {Start Training};
+    \node[process, below=of start] (init) {Initialize G, F, $D_X$, $D_Y$};
+    \node[process, below=of init] (load) {Load batch from X and Y};
+    \node[process, below=of load] (gen) {Generate: $\hat{y}=G(x)$, $\hat{x}=F(y)$};
+    \node[process, below=of gen] (cycle) {Cycle: $\tilde{x}=F(\hat{y})$, $\tilde{y}=G(\hat{x})$};
+    \node[process, below=of cycle] (loss_g) {Compute Generator Losses};
+    \node[process, below=of loss_g] (update_g) {Update G, F (backprop)};
+    \node[process, below=of update_g] (loss_d) {Compute Discriminator Losses};
+    \node[process, below=of loss_d] (update_d) {Update $D_X$, $D_Y$ (backprop)};
+    \node[decision, below=of update_d] (epoch_done) {Epoch\\done?};
+    \node[decision, right=1cm of epoch_done] (all_done) {All epochs\\done?};
+    \node[process, above=of all_done] (decay) {Apply LR decay};
+    \node[startstop, below=of all_done] (end) {Save Model};
+
+    % Main flow arrows
+    \draw[arrow] (start) -- (init);
+    \draw[arrow] (init) -- (load);
+    \draw[arrow] (load) -- (gen);
+    \draw[arrow] (gen) -- (cycle);
+    \draw[arrow] (cycle) -- (loss_g);
+    \draw[arrow] (loss_g) -- (update_g);
+    \draw[arrow] (update_g) -- (loss_d);
+    \draw[arrow] (loss_d) -- (update_d);
+    \draw[arrow] (update_d) -- (epoch_done);
+
+    % Decision arrows
+    \draw[arrow] (epoch_done) -- node[above, font=\scriptsize] {Yes} (all_done);
+    \draw[arrow] (all_done) -- node[right, font=\scriptsize] {Yes} (end);
+    \draw[arrow] (all_done) -- node[right, font=\scriptsize] {No} (decay);
+
+    % Loop back arrow for "Epoch not done" - goes far left around all boxes
+    \draw[arrow] (epoch_done.west) -- ++(-0.3,0) node[above, font=\scriptsize] {No} -- ++(-2.2,0) |- (load.west);
+
+    % Loop back arrow for "LR decay" - goes far right then up and left
+    \draw[arrow] (decay.north) -- ++(0,0.5) -| ([xshift=1.5cm]start.east) -- (start.east);
+\end{tikzpicture}
+\caption{Training Process Flowchart}
+\label{fig:training_flowchart}
+\end{figure}
+
+\section{Inference Pipeline Flowchart}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    scale=0.8,
+    transform shape,
+    node distance=0.5cm,
+    startstop/.style={rectangle, rounded corners, draw, fill=red!20, minimum width=2cm, minimum height=0.6cm, align=center, font=\small},
+    process/.style={rectangle, draw, fill=blue!15, minimum width=2.8cm, minimum height=0.6cm, align=center, font=\small},
+    decision/.style={diamond, draw, fill=yellow!20, minimum width=1.5cm, aspect=2.5, align=center, font=\small},
+    io/.style={trapezium, trapezium left angle=70, trapezium right angle=110, draw, fill=green!15, minimum width=2cm, minimum height=0.6cm, align=center, font=\small},
+    arrow/.style={-latex', thick}
+]
+    \node[startstop] (start) {Start};
+    \node[io, below=of start] (input) {Input Image};
+    \node[decision, below=of input] (valid) {Valid?};
+    \node[process, below=of valid] (select) {Select Style};
+    \node[process, below=of select] (load) {Load Generator G};
+    \node[process, below=of load] (resize) {Resize to 256$\times$256};
+    \node[process, below=of resize] (norm) {Normalize to [-1,1]};
+    \node[process, below=of norm] (forward) {Forward Pass: G(x)};
+    \node[process, below=of forward] (denorm) {Denormalize to [0,1]};
+    \node[io, below=of denorm] (output) {Output Image};
+    \node[startstop, below=of output] (end) {End};
+    \node[process, right=2cm of valid] (error) {Show Error};
+
+    \draw[arrow] (start) -- (input);
+    \draw[arrow] (input) -- (valid);
+    \draw[arrow] (valid) -- node[left] {Yes} (select);
+    \draw[arrow] (valid) -- node[above] {No} (error);
+    \draw[arrow] (error) |- (input);
+    \draw[arrow] (select) -- (load);
+    \draw[arrow] (load) -- (resize);
+    \draw[arrow] (resize) -- (norm);
+    \draw[arrow] (norm) -- (forward);
+    \draw[arrow] (forward) -- (denorm);
+    \draw[arrow] (denorm) -- (output);
+    \draw[arrow] (output) -- (end);
+\end{tikzpicture}
+\caption{Inference Pipeline Flowchart}
+\label{fig:inference_flowchart}
+\end{figure}
+
+\vspace{-0.5cm}
+\section{Loss Computation Diagram}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    scale=0.80,
+    transform shape,
+    domainnode/.style={ellipse, draw, fill=yellow!20, minimum width=2cm, minimum height=1.2cm, align=center, font=\small},
+    gen/.style={rectangle, draw, fill=blue!20, minimum width=1.5cm, minimum height=0.8cm, align=center, font=\small},
+    disc/.style={rectangle, draw, fill=red!20, minimum width=1.5cm, minimum height=0.8cm, align=center, font=\small},
+    loss/.style={rectangle, draw, fill=green!20, minimum width=2cm, minimum height=0.6cm, align=center, font=\scriptsize},
+    arrow/.style={-latex', thick}
+]
+    % Domains
+    \node[domainnode] (X) at (0,0) {Domain X\\(Real Photos)};
+    \node[domainnode] (Y) at (10,0) {Domain Y\\(Style Images)};
+
+    % Generators
+    \node[gen] (G) at (5,1.5) {G};
+    \node[gen] (F) at (5,-1.5) {F};
+
+    % Discriminators
+    \node[disc] (DY) at (10,2.5) {$D_Y$};
+    \node[disc] (DX) at (0,-2.5) {$D_X$};
+
+    % Generated images
+    \node[font=\scriptsize] (fake_y) at (7.5,1.5) {$\hat{y}$};
+    \node[font=\scriptsize] (fake_x) at (2.5,-1.5) {$\hat{x}$};
+
+    % Cycle
+    \node[font=\scriptsize] (rec_x) at (2.5,0.5) {$\tilde{x}$};
+    \node[font=\scriptsize] (rec_y) at (7.5,-0.5) {$\tilde{y}$};
+
+    % Losses
+    \node[loss] (L_adv_G) at (10,4) {$\mathcal{L}_{adv}^G$};
+    \node[loss] (L_adv_F) at (0,-4) {$\mathcal{L}_{adv}^F$};
+    \node[loss] (L_cyc) at (5,-3.5) {$\mathcal{L}_{cyc}$};
+    \node[loss] (L_id) at (5,3.5) {$\mathcal{L}_{id}$};
+
+    % Arrows
+    \draw[arrow, blue] (X) -- (G) node[midway, above, font=\scriptsize] {$x$};
+    \draw[arrow, blue] (G) -- (Y) node[midway, above, font=\scriptsize] {};
+    \draw[arrow, red] (Y) -- (F) node[midway, below, font=\scriptsize] {$y$};
+    \draw[arrow, red] (F) -- (X) node[midway, below, font=\scriptsize] {};
+
+    % Cycle arrows
+    \draw[arrow, dashed, green!60!black] (fake_y) -- (F);
+    \draw[arrow, dashed, green!60!black] (F) -- (rec_x);
+    \draw[arrow, dashed, orange] (fake_x) -- (G);
+    \draw[arrow, dashed, orange] (G) -- (rec_y);
+
+    % Discriminator connections
+    \draw[arrow] (Y) -- (DY);
+    \draw[arrow] (fake_y) -- (DY);
+    \draw[arrow] (X) -- (DX);
+    \draw[arrow] (fake_x) -- (DX);
+
+    % Loss connections
+    \draw[arrow, dotted] (DY) -- (L_adv_G);
+    \draw[arrow, dotted] (DX) -- (L_adv_F);
+    \draw[arrow, dotted] (rec_x) -- (L_cyc);
+    \draw[arrow, dotted] (rec_y) -- (L_cyc);
+\end{tikzpicture}
+\caption{Loss Computation Flow in CycleGAN}
+\label{fig:loss_computation}
+\end{figure}
+
+\section{Training Algorithm}
+
+\textbf{Algorithm 5.1: CycleGAN Training Algorithm}
+\label{alg:cyclegan_training}
+
+\begin{algorithmic}[1]
+\Require Dataset $X$ (content), Dataset $Y$ (style), Epochs $E$, Batch size $B$
+\Ensure Trained generators $G$, $F$
+\State Initialize $G$, $F$, $D_X$, $D_Y$ with random weights
+\State Initialize Adam optimizers for $G$, $F$, $D_X$, $D_Y$
+\State $\lambda_{cyc} \leftarrow 10$, $\lambda_{id} \leftarrow 5$
+
+\For{epoch $= 1$ to $E$}
+    \For{each batch $(x, y)$ from $(X, Y)$}
+        \State \Comment{Generate fake images}
+        \State $\hat{y} \leftarrow G(x)$ \Comment{Fake style image}
+        \State $\hat{x} \leftarrow F(y)$ \Comment{Fake content image}
+
+        \State \Comment{Cycle reconstructions}
+        \State $\tilde{x} \leftarrow F(\hat{y})$ \Comment{Reconstructed content}
+        \State $\tilde{y} \leftarrow G(\hat{x})$ \Comment{Reconstructed style}
+
+        \State \Comment{Identity mappings}
+        \State $x_{id} \leftarrow F(x)$
+        \State $y_{id} \leftarrow G(y)$
+
+        \State \Comment{Compute Generator Losses}
+        \State $\mathcal{L}_G^{adv} \leftarrow MSE(D_Y(\hat{y}), 1)$
+        \State $\mathcal{L}_F^{adv} \leftarrow MSE(D_X(\hat{x}), 1)$
+        \State $\mathcal{L}_{cyc} \leftarrow ||x - \tilde{x}||_1 + ||y - \tilde{y}||_1$
+        \State $\mathcal{L}_{id} \leftarrow ||x - x_{id}||_1 + ||y - y_{id}||_1$
+        \State $\mathcal{L}_{G,F} \leftarrow \mathcal{L}_G^{adv} + \mathcal{L}_F^{adv} + \lambda_{cyc}\mathcal{L}_{cyc} + \lambda_{id}\mathcal{L}_{id}$
+
+        \State Update $G$, $F$ using $\nabla \mathcal{L}_{G,F}$
+
+        \State \Comment{Compute Discriminator Losses}
+        \State $\mathcal{L}_{D_Y} \leftarrow MSE(D_Y(y), 1) + MSE(D_Y(\hat{y}), 0)$
+        \State $\mathcal{L}_{D_X} \leftarrow MSE(D_X(x), 1) + MSE(D_X(\hat{x}), 0)$
+
+        \State Update $D_X$, $D_Y$ using $\nabla \mathcal{L}_{D_X}$, $\nabla \mathcal{L}_{D_Y}$
+    \EndFor
+
+    \If{epoch $> E/2$}
+        \State Apply linear learning rate decay
+    \EndIf
+
+    \State Save checkpoint every 10 epochs
+\EndFor
+
+\State \Return $G$, $F$
+\end{algorithmic}
+
+\section{Inference Algorithm}
+
+\textbf{Algorithm 5.2: Style Transfer Inference}
+\label{alg:inference}
+
+\begin{algorithmic}[1]
+\Require Input image $I$, Style name $S$, Model path $P$
+\Ensure Stylized image $O$
+
+\State \Comment{Load model}
+\State $G \leftarrow$ LoadGenerator($P$, $S$)
+\State $G$.eval() \Comment{Set to evaluation mode}
+
+\State \Comment{Preprocess image}
+\State $I_{resized} \leftarrow$ Resize($I$, 256, 256)
+\State $I_{tensor} \leftarrow$ ToTensor($I_{resized}$)
+\State $I_{norm} \leftarrow (I_{tensor} - 0.5) / 0.5$ \Comment{Normalize to [-1, 1]}
+\State $I_{batch} \leftarrow$ AddBatchDimension($I_{norm}$)
+\State $I_{gpu} \leftarrow I_{batch}$.to(device)
+
+\State \Comment{Generate styled output (with torch.no\_grad())}
+\State $O_{tensor} \leftarrow G(I_{gpu})$
+
+\State \Comment{Postprocess}
+\State $O_{denorm} \leftarrow O_{tensor} * 0.5 + 0.5$ \Comment{Denormalize to [0, 1]}
+\State $O_{clipped} \leftarrow$ Clamp($O_{denorm}$, 0, 1)
+\State $O \leftarrow$ ToPILImage($O_{clipped}$)
+
+\State \Return $O$
+\end{algorithmic}
+
+\section{Generator Forward Pass Algorithm}
+
+\textbf{Algorithm 5.3: Generator Forward Pass}
+\label{alg:generator_forward}
+
+\begin{algorithmic}[1]
+\Require Input tensor $x$ of shape $(B, 3, 256, 256)$
+\Ensure Output tensor $y$ of shape $(B, 3, 256, 256)$
+
+\State \Comment{Encoding Stage}
+\State $h \leftarrow$ ReflectionPad2d($x$, padding=3)
+\State $h \leftarrow$ Conv2d($h$, $3 \rightarrow 64$, kernel=7, stride=1)
+\State $h \leftarrow$ InstanceNorm2d($h$) ; $h \leftarrow$ ReLU($h$)
+
+\State $h \leftarrow$ Conv2d($h$, $64 \rightarrow 128$, kernel=3, stride=2, pad=1)
+\State $h \leftarrow$ InstanceNorm2d($h$) ; $h \leftarrow$ ReLU($h$)
+
+\State $h \leftarrow$ Conv2d($h$, $128 \rightarrow 256$, kernel=3, stride=2, pad=1)
+\State $h \leftarrow$ InstanceNorm2d($h$) ; $h \leftarrow$ ReLU($h$)
+
+\State \Comment{Transformation Stage - 9 Residual Blocks}
+\For{$i = 1$ to $9$}
+    \State $h \leftarrow$ ResidualBlock($h$) \Comment{See Algorithm 5.4}
+\EndFor
+
+\State \Comment{Decoding Stage}
+\State $h \leftarrow$ ConvTranspose2d($h$, $256 \rightarrow 128$, kernel=3, stride=2)
+\State $h \leftarrow$ InstanceNorm2d($h$) ; $h \leftarrow$ ReLU($h$)
+
+\State $h \leftarrow$ ConvTranspose2d($h$, $128 \rightarrow 64$, kernel=3, stride=2)
+\State $h \leftarrow$ InstanceNorm2d($h$) ; $h \leftarrow$ ReLU($h$)
+
+\State $h \leftarrow$ ReflectionPad2d($h$, padding=3)
+\State $y \leftarrow$ Conv2d($h$, $64 \rightarrow 3$, kernel=7, stride=1)
+\State $y \leftarrow$ Tanh($y$)
+
+\State \Return $y$
+\end{algorithmic}
+
+\section{Residual Block Algorithm}
+
+\textbf{Algorithm 5.4: Residual Block Forward Pass}
+\label{alg:resblock}
+
+\begin{algorithmic}[1]
+\Require Input tensor $x$ of shape $(B, 256, H, W)$
+\Ensure Output tensor $y$ of shape $(B, 256, H, W)$
+
+\State $h \leftarrow$ ReflectionPad2d($x$, padding=1)
+\State $h \leftarrow$ Conv2d($h$, $256 \rightarrow 256$, kernel=3)
+\State $h \leftarrow$ InstanceNorm2d($h$)
+\State $h \leftarrow$ ReLU($h$)
+
+\State $h \leftarrow$ ReflectionPad2d($h$, padding=1)
+\State $h \leftarrow$ Conv2d($h$, $256 \rightarrow 256$, kernel=3)
+\State $h \leftarrow$ InstanceNorm2d($h$)
+
+\State $y \leftarrow x + h$ \Comment{Skip connection}
+
+\State \Return $y$
+\end{algorithmic}
+
+\section{Discriminator Forward Pass Algorithm}
+
+\textbf{Algorithm 5.5: PatchGAN Discriminator Forward Pass}
+\label{alg:discriminator_forward}
+
+\begin{algorithmic}[1]
+\Require Input tensor $x$ of shape $(B, 3, 256, 256)$
+\Ensure Output tensor $y$ of shape $(B, 1, 30, 30)$
+
+\State \Comment{Layer 1: No normalization}
+\State $h \leftarrow$ Conv2d($x$, $3 \rightarrow 64$, kernel=4, stride=2, pad=1)
+\State $h \leftarrow$ LeakyReLU($h$, slope=0.2)
+
+\State \Comment{Layer 2}
+\State $h \leftarrow$ Conv2d($h$, $64 \rightarrow 128$, kernel=4, stride=2, pad=1)
+\State $h \leftarrow$ InstanceNorm2d($h$) ; $h \leftarrow$ LeakyReLU($h$, slope=0.2)
+
+\State \Comment{Layer 3}
+\State $h \leftarrow$ Conv2d($h$, $128 \rightarrow 256$, kernel=4, stride=2, pad=1)
+\State $h \leftarrow$ InstanceNorm2d($h$) ; $h \leftarrow$ LeakyReLU($h$, slope=0.2)
+
+\State \Comment{Layer 4}
+\State $h \leftarrow$ Conv2d($h$, $256 \rightarrow 512$, kernel=4, stride=1, pad=1)
+\State $h \leftarrow$ InstanceNorm2d($h$) ; $h \leftarrow$ LeakyReLU($h$, slope=0.2)
+
+\State \Comment{Output Layer}
+\State $y \leftarrow$ Conv2d($h$, $512 \rightarrow 1$, kernel=4, stride=1, pad=1)
+
+\State \Return $y$ \Comment{30$\times$30 patch classification map}
+\end{algorithmic}
+
+\section{Image History Buffer Algorithm}
+
+\textbf{Algorithm 5.6: Image History Buffer for Discriminator Training}
+\label{alg:buffer}
+
+\begin{algorithmic}[1]
+\Require Generated image $img$, Buffer $B$ with max size $N=50$
+\Ensure Image to use for discriminator update
+
+\If{$|B| < N$}
+    \State $B$.append($img$)
+    \State \Return $img$
+\Else
+    \State $p \leftarrow$ random() \Comment{Random value in [0, 1]}
+    \If{$p < 0.5$}
+        \State $idx \leftarrow$ randint($0$, $N-1$)
+        \State $old\_img \leftarrow B[idx]$
+        \State $B[idx] \leftarrow img$
+        \State \Return $old\_img$
+    \Else
+        \State \Return $img$
+    \EndIf
+\EndIf
+\end{algorithmic}
+
+\section{Data Preprocessing Algorithm}
+
+\textbf{Algorithm 5.7: Image Preprocessing Pipeline}
+\label{alg:preprocess}
+
+\begin{algorithmic}[1]
+\Require Raw image file path $path$
+\Ensure Preprocessed tensor $x$ of shape $(1, 3, 256, 256)$
+
+\State $img \leftarrow$ LoadImage($path$)
+\If{$img$ is None}
+    \State \textbf{raise} InvalidImageError
+\EndIf
+
+\State \Comment{Convert to RGB}
+\If{$img$.channels $= 1$}
+    \State $img \leftarrow$ GrayscaleToRGB($img$)
+\ElsIf{$img$.channels $= 4$}
+    \State $img \leftarrow$ RGBAToRGB($img$)
+\EndIf
+
+\State \Comment{Resize with aspect ratio preservation}
+\State $h, w \leftarrow img$.shape
+\State $scale \leftarrow 256 / \min(h, w)$
+\State $img \leftarrow$ Resize($img$, $(h \times scale, w \times scale)$)
+
+\State \Comment{Center crop}
+\State $img \leftarrow$ CenterCrop($img$, $(256, 256)$)
+
+\State \Comment{Convert to tensor and normalize}
+\State $x \leftarrow$ ToTensor($img$) \Comment{Scale to [0, 1]}
+\State $x \leftarrow (x - 0.5) / 0.5$ \Comment{Normalize to [-1, 1]}
+\State $x \leftarrow$ AddBatchDim($x$) \Comment{Shape: (1, 3, 256, 256)}
+
+\State \Return $x$
+\end{algorithmic}
+
+\section{Frame Extraction Algorithm}
+
+\textbf{Algorithm 5.8: Animation Frame Extraction for Dataset Creation}
+\label{alg:frame_extraction}
+
+\begin{algorithmic}[1]
+\Require Video file $V$, Output directory $D$, Frame interval $k$, Confidence threshold $\tau$
+\Ensure Extracted character face images saved to $D$
+
+\State $detector \leftarrow$ LoadFaceDetector() \Comment{Haar cascade or DNN}
+\State $frame\_count \leftarrow 0$
+\State $saved\_count \leftarrow 0$
+\State $prev\_features \leftarrow$ None
+
+\While{$V$.hasNextFrame()}
+    \State $frame \leftarrow V$.readFrame()
+    \State $frame\_count \leftarrow frame\_count + 1$
+
+    \If{$frame\_count \mod k \neq 0$}
+        \State \textbf{continue} \Comment{Skip frames for efficiency}
+    \EndIf
+
+    \State $faces \leftarrow detector$.detect($frame$)
+
+    \For{each $face$ in $faces$}
+        \State $confidence \leftarrow face$.confidence
+
+        \If{$confidence < \tau$}
+            \State \textbf{continue} \Comment{Skip low confidence detections}
+        \EndIf
+
+        \State $cropped \leftarrow$ CropAndResize($frame$, $face$.bbox, $256 \times 256$)
+
+        \State \Comment{Check similarity to avoid duplicates}
+        \State $features \leftarrow$ ExtractFeatures($cropped$)
+        \If{$prev\_features \neq$ None}
+            \State $similarity \leftarrow$ CosineSimilarity($features$, $prev\_features$)
+            \If{$similarity > 0.95$}
+                \State \textbf{continue} \Comment{Skip similar frames}
+            \EndIf
+        \EndIf
+
+        \State \Comment{Quality check}
+        \If{IsBlurry($cropped$) or HasArtifacts($cropped$)}
+            \State \textbf{continue}
+        \EndIf
+
+        \State SaveImage($cropped$, $D$/$saved\_count$.jpg)
+        \State $saved\_count \leftarrow saved\_count + 1$
+        \State $prev\_features \leftarrow features$
+    \EndFor
+\EndWhile
+
+\State \Return $saved\_count$
+\end{algorithmic}
+
+\section{Data Preprocessing}
+
+\subsection{Preprocessing Pipeline}
+
+Input images undergo: (1) format and dimension validation (min 64$\times$64), (2) conversion to RGB, (3) resize to 286$\times$286, (4) crop to 256$\times$256, (5) tensor conversion, (6) normalization from [0,1] to [-1,1]:
+\begin{equation}
+x_{normalized} = 2x - 1
+\end{equation}
+
+\subsection{Postprocessing Pipeline}
+
+Output tensors are denormalized ($x_{denorm} = 0.5x + 0.5$), clamped to [0,1], converted to uint8, and saved as PNG for quality preservation
+
+\section{System Flow}
+
+The inference process follows: Start $\rightarrow$ Input Image $\rightarrow$ Validate $\rightarrow$ Select Style $\rightarrow$ Preprocess $\rightarrow$ Load Model $\rightarrow$ Run Inference $\rightarrow$ Postprocess $\rightarrow$ Display Result $\rightarrow$ End. Invalid images trigger error messages and return to input.
+
+\section{Data Flow}
+
+The system data flow follows: User $\rightarrow$ Upload $\rightarrow$ Preprocess $\rightarrow$ Transform (using model weights) $\rightarrow$ Output. During training, Domain X and Y images are loaded via DataLoader, passed through generators G and F to produce fake images, which are then evaluated by discriminators $D_Y$ and $D_X$ for loss computation.
+
+\section{Hardware and Software Specifications}
+
+\textbf{Hardware (Training):} NVIDIA RTX 2080+ GPU with 8GB+ VRAM, 16GB+ RAM, 100GB+ SSD, Intel i7/AMD Ryzen 7.
+\textbf{Hardware (Inference):} NVIDIA GTX 1060+ with 4GB+ VRAM, 8GB+ RAM, 10GB+ storage.
+
+\textbf{Software Stack:} Python 3.8+, PyTorch 2.0+, Django 4.2+, CUDA 11.7+, cuDNN 8.0+, OpenCV 4.5+, Pillow 9.0+, NumPy 1.21+.
+

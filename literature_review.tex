@@ -1,0 +1,273 @@
+\chapter{Literature Survey}
+
+This chapter presents a comprehensive review of the existing research in neural style transfer, generative adversarial networks, and image-to-image translation that forms the foundation of our implementation. The literature is organized into key research areas: foundational neural style transfer methods, generative adversarial networks, normalization techniques, image-to-image translation frameworks, and recent advances in style synthesis.
+
+\section{Introduction to Neural Style Transfer}
+
+Neural Style Transfer (NST) is a class of software algorithms that manipulate digital images or videos to adopt the appearance or visual style of another image. The field emerged from the intersection of computer vision and deep learning, leveraging the hierarchical feature representations learned by convolutional neural networks (CNNs).
+
+The fundamental insight behind NST is that deep neural networks trained for object recognition learn to encode both content and style information at different layers of the network hierarchy. Lower layers capture low-level features like edges and textures, while higher layers encode semantic content like objects and scenes. By manipulating these feature representations, it becomes possible to transfer artistic styles between images while preserving semantic content.
+
+The evolution of NST can be broadly categorized into three generations:
+\begin{enumerate}
+    \item \textbf{Optimization-based methods:} The original approach by Gatys et al. that iteratively optimizes a random noise image to match content and style statistics.
+    \item \textbf{Feed-forward methods:} Networks trained to directly transform images in a single forward pass, enabling real-time stylization.
+    \item \textbf{Arbitrary style methods:} Networks capable of applying any style without retraining, using techniques like adaptive instance normalization.
+\end{enumerate}
+
+\section{Foundational Neural Style Transfer Methods}
+
+\subsection{Image Style Transfer Using Convolutional Neural Networks}
+
+\textbf{A Neural Algorithm of Artistic Style} \cite{bib:gatys2016}: Gatys et al. introduce the first deep-learning method that explicitly separates image content and style using a pretrained VGG network. This seminal work established the theoretical foundation for neural style transfer.
+
+The key insight is that CNN features at different layers encode different aspects of an image:
+\begin{itemize}
+    \item \textbf{Content Representation:} High-level feature maps (conv4\_2, conv5\_2) encode the spatial arrangement of objects and scene structure
+    \item \textbf{Style Representation:} Gram matrices of lower layer features capture textures, colors, and local patterns that define artistic style
+\end{itemize}
+
+The Gram matrix $G^l$ for layer $l$ with $N_l$ feature maps of size $M_l$ is computed as:
+\begin{equation}
+G^l_{ij} = \sum_k F^l_{ik} F^l_{jk}
+\end{equation}
+where $F^l_{ik}$ is the activation of the $i$-th filter at position $k$ in layer $l$.
+
+The total loss function combines content and style losses:
+\begin{equation}
+\mathcal{L}_{total} = \alpha \mathcal{L}_{content} + \beta \mathcal{L}_{style}
+\end{equation}
+where $\alpha$ and $\beta$ control the relative importance of content preservation versus style transfer.
+
+By optimizing a random image to match the content representation of one image and the style statistics of another, the algorithm synthesizes paintings that mimic famous artists while preserving underlying objects. This optimization-based approach is flexible but computationally expensive (requiring several minutes per image), and it became the foundational reference for nearly all later neural style transfer methods.
+
+\subsection{Perceptual Losses for Real-Time Style Transfer}
+
+\textbf{Perceptual Losses for Real-Time Style Transfer and Super-Resolution} \cite{bib:johnson2016}: Johnson et al. revolutionized the field by replacing pixel-wise training losses with perceptual losses computed on VGG features to train fast feed-forward networks for image transformation.
+
+The key innovation is training a feed-forward transformation network $f_W$ to minimize a perceptual loss function that measures high-level perceptual and semantic differences between images:
+\begin{equation}
+\mathcal{L}_{perceptual} = \mathcal{L}_{feature} + \lambda_{style}\mathcal{L}_{style}
+\end{equation}
+
+The feature reconstruction loss is defined as:
+\begin{equation}
+\mathcal{L}_{feature}(\hat{y}, y) = \frac{1}{C_jH_jW_j} ||\phi_j(\hat{y}) - \phi_j(y)||^2_2
+\end{equation}
+where $\phi_j(x)$ denotes the feature map of shape $C_j \times H_j \times W_j$ at layer $j$ of a pre-trained loss network.
+
+For style transfer, a single network is optimized to approximate the expensive Gatys objective, producing stylized images in real time ($\sim$10ms vs. minutes) with comparable visual quality. The work demonstrates that high-level feature differences correlate better with human perception than pixel-wise losses, enabling efficient networks that still respect semantic structure and texture.
+
+The transformation network architecture follows an encoder-decoder structure:
+\begin{itemize}
+    \item \textbf{Encoder:} Three convolutional layers with stride 2 for downsampling
+    \item \textbf{Residual blocks:} Five residual blocks for feature transformation
+    \item \textbf{Decoder:} Two fractionally-strided convolutions for upsampling
+\end{itemize}
+
+\section{Normalization Techniques for Style Transfer}
+
+\subsection{Instance Normalization}
+
+\textbf{Instance Normalization: The Missing Ingredient for Fast Stylization} \cite{bib:ulyanov2016}: Ulyanov et al. revisit feed-forward style transfer networks and discover that simply replacing batch normalization with instance normalization dramatically improves visual quality.
+
+Batch Normalization normalizes across the batch dimension:
+\begin{equation}
+BN(x) = \gamma \frac{x - \mu(x)}{\sigma(x)} + \beta
+\end{equation}
+where $\mu(x)$ and $\sigma(x)$ are computed across both the batch and spatial dimensions.
+
+In contrast, Instance Normalization operates independently on each sample:
+\begin{equation}
+IN(x) = \gamma \frac{x - \mu(x)}{\sigma(x)} + \beta
+\end{equation}
+where $\mu(x)$ and $\sigma(x)$ are computed only across spatial dimensions for each instance.
+
+Instance normalization normalizes each feature map per image, effectively discarding instance-specific contrast and making the generator focus on style statistics instead of global illumination. This established instance normalization as a standard component in style transfer networks. The improvement is particularly noticeable in:
+\begin{itemize}
+    \item Consistent style application across images with different illumination
+    \item Reduced artifacts at object boundaries
+    \item Better preservation of fine texture details
+\end{itemize}
+
+\subsection{Adaptive Instance Normalization}
+
+\textbf{Adaptive Instance Normalization (AdaIN)} \cite{bib:adain}: Huang and Belongie propose AdaIN, a simple layer that aligns the channel-wise mean and variance of content features to those of a style image. This enables arbitrary style transfer in real-time without style-specific training.
+
+The AdaIN operation is defined as:
+\begin{equation}
+AdaIN(x, y) = \sigma(y) \left( \frac{x - \mu(x)}{\sigma(x)} \right) + \mu(y)
+\end{equation}
+where $x$ is the content feature map, $y$ is the style feature map, and $\mu$, $\sigma$ denote channel-wise mean and standard deviation.
+
+A fixed encoder–decoder network, combined with AdaIN, directly produces stylized images for any style without retraining. The method matches the flexibility of optimization-based NST while running nearly three orders of magnitude faster, supporting controls such as:
+\begin{itemize}
+    \item Content–style trade-off through interpolation
+    \item Style interpolation between multiple styles
+    \item Spatial control over style application
+\end{itemize}
+
+The architecture consists of:
+\begin{itemize}
+    \item \textbf{Encoder:} Fixed VGG-19 encoder (up to relu4\_1)
+    \item \textbf{AdaIN layer:} Transfers statistics from style to content features
+    \item \textbf{Decoder:} Trained decoder that inverts the encoder
+\end{itemize}
+
+\section{Universal and Arbitrary Style Transfer}
+
+\textbf{Universal Style Transfer via Feature Transforms} \cite{bib:li2017}: Li et al. introduce the Whitening and Coloring Transform (WCT) for universal style transfer. The whitening transform removes original feature correlations ($\hat{f}_c = E_c D_c^{-1/2} E_c^T f_c$), while coloring applies style correlations. Using cascaded decoders at multiple VGG levels enables progressive stylization from coarse to fine.
+
+\textbf{Exploring the Structure of a Real-Time, Arbitrary Stylization Network} \cite{bib:ghiasi2017}: Ghiasi et al. learn a style prediction network that maps style images to conditional instance normalization parameters. Trained on 80,000+ paintings, the system performs real-time stylization for unseen styles with smooth style interpolation capabilities
+
+\section{Generative Adversarial Networks}
+
+\subsection{Generative Adversarial Networks Foundation}
+
+The introduction of Generative Adversarial Networks (GANs) by Goodfellow et al. \cite{bib:goodfellow2014} in 2014 marked a paradigm shift in generative modeling. GANs consist of two neural networks—a generator $G$ and a discriminator $D$—trained in a minimax game:
+\begin{equation}
+\min_G \max_D V(D, G) = \mathbb{E}_{x \sim p_{data}(x)}[\log D(x)] + \mathbb{E}_{z \sim p_z(z)}[\log(1 - D(G(z)))]
+\end{equation}
+
+The generator aims to produce samples indistinguishable from real data, while the discriminator learns to distinguish real from generated samples. This adversarial training produces remarkably realistic generated samples across various domains including images, audio, and text.
+
+Key properties of GANs:
+\begin{itemize}
+    \item Implicit density estimation (no explicit probability model)
+    \item Sharp, high-quality sample generation
+    \item Mode coverage challenges and training instability
+\end{itemize}
+
+\subsection{Least Squares GAN}
+
+\textbf{Least Squares Generative Adversarial Networks} \cite{bib:lsgan}: Mao et al. propose replacing the binary cross-entropy loss with least squares loss for more stable training. The LSGAN objectives are:
+\begin{equation}
+\min_D V_{LSGAN}(D) = \frac{1}{2}\mathbb{E}_{x}[(D(x) - 1)^2] + \frac{1}{2}\mathbb{E}_{z}[(D(G(z)))^2]
+\end{equation}
+\begin{equation}
+\min_G V_{LSGAN}(G) = \frac{1}{2}\mathbb{E}_{z}[(D(G(z)) - 1)^2]
+\end{equation}
+
+This formulation provides:
+\begin{itemize}
+    \item More stable gradients during training
+    \item Penalizes samples far from the decision boundary
+    \item Reduces vanishing gradient problems
+    \item Higher quality generated images
+\end{itemize}
+
+\section{Image-to-Image Translation}
+
+\subsection{Paired Image-to-Image Translation (Pix2Pix)}
+
+\textbf{Image-to-Image Translation with Conditional Adversarial Networks} \cite{bib:pix2pix}: Isola et al. propose a general-purpose framework for paired image-to-image translation using conditional GANs. Given paired training data $\{(x_i, y_i)\}$, the network learns a mapping $G: X \rightarrow Y$.
+
+The objective combines adversarial loss with L1 reconstruction loss:
+\begin{equation}
+\mathcal{L}_{cGAN}(G, D) = \mathbb{E}_{x,y}[\log D(x, y)] + \mathbb{E}_{x,z}[\log(1 - D(x, G(x, z)))]
+\end{equation}
+\begin{equation}
+\mathcal{L}_{L1}(G) = \mathbb{E}_{x,y,z}[||y - G(x, z)||_1]
+\end{equation}
+
+Key architectural innovations:
+\begin{itemize}
+    \item \textbf{U-Net Generator:} Skip connections between encoder and decoder preserve spatial information
+    \item \textbf{PatchGAN Discriminator:} Classifies local patches instead of whole images, focusing on high-frequency structure
+\end{itemize}
+
+Applications demonstrated include:
+\begin{itemize}
+    \item Semantic label $\rightarrow$ photo
+    \item Edges $\rightarrow$ photo
+    \item Day $\rightarrow$ night
+    \item Black \& white $\rightarrow$ color
+\end{itemize}
+
+\subsection{Unpaired Image-to-Image Translation (CycleGAN)}
+
+\textbf{Unpaired Image-to-Image Translation Using Cycle-Consistent Adversarial Networks} \cite{bib:cyclegan}: Zhu et al. propose CycleGAN, an unpaired image-to-image translation framework that learns mappings between two visual domains without requiring paired training examples. This breakthrough enables style transfer applications where paired data is impossible to obtain.
+
+The framework consists of:
+\begin{itemize}
+    \item Two generators: $G: X \rightarrow Y$ and $F: Y \rightarrow X$
+    \item Two discriminators: $D_X$ and $D_Y$
+\end{itemize}
+
+The key innovation is the cycle-consistency loss:
+\begin{equation}
+\mathcal{L}_{cyc}(G, F) = \mathbb{E}_{x \sim p_{data}(x)}[||F(G(x)) - x||_1] + \mathbb{E}_{y \sim p_{data}(y)}[||G(F(y)) - y||_1]
+\end{equation}
+
+This enforces that translating an image to the target domain and back should return the original image, preventing mode collapse and ensuring meaningful mappings. The total objective is:
+\begin{equation}
+\mathcal{L}(G, F, D_X, D_Y) = \mathcal{L}_{GAN}(G, D_Y, X, Y) + \mathcal{L}_{GAN}(F, D_X, Y, X) + \lambda\mathcal{L}_{cyc}(G, F)
+\end{equation}
+
+CycleGAN became a standard baseline for unpaired translation and inspired many subsequent guided and multi-domain style synthesis methods. Applications include:
+\begin{itemize}
+    \item Horse $\leftrightarrow$ zebra transformation
+    \item Summer $\leftrightarrow$ winter scenes
+    \item Photo $\leftrightarrow$ painting styles
+    \item Apple $\leftrightarrow$ orange
+\end{itemize}
+
+\section{Photorealistic and Domain-Specific Style Transfer}
+
+\textbf{Deep Photo Style Transfer} \cite{bib:luan2017}: Luan et al. adapt NST to photorealistic scenarios using a Matting-Laplacian-based regularizer that forces locally affine color transformations, preserving edges and structures for realistic weather, time-of-day, and season changes.
+
+\textbf{CartoonGAN} \cite{bib:cartoongan}: Chen et al. propose edge-promoting adversarial loss for photo cartoonization with two-phase training.
+
+\textbf{AnimeGAN} \cite{bib:animegan}: A lightweight network using grayscale style loss and color reconstruction for anime-style transformation.
+
+\textbf{White-box Cartoon Representations} \cite{bib:whitebox}: Wang and Yu decompose cartoons into surface, structure, and texture components for interpretable stylization
+
+\section{Recent Advances in Style Transfer}
+
+\textbf{SSIT} \cite{bib:ssit}: Oh and Gonsalves introduce a single-encoder architecture with Direct Adaptive Instance Normalization with Pooling, achieving lower FID scores than previous methods while reducing complexity.
+
+\textbf{Digital Art Style Transfer} \cite{bib:zhang2023}: Zhang et al. integrate AdaIN with Gram-matrix representation, achieving 15\% loss reduction and 76\% faster processing for near-real-time digital art creation.
+
+\textbf{Neural Style Transfer Survey} \cite{bib:scott2024}: Scott et al. survey hybrid GAN-NST pipelines and applications in design, film, and education, emphasizing human-AI co-creation paradigms.
+
+\textbf{Generative AI Art} \cite{bib:choi2024}: Choi traces developments from GANs through Stable Diffusion, covering latent-space generation, prompt engineering, and fine-tuning for custom styles
+
+\section{Summary and Research Gaps}
+
+Table \ref{tab:lit_comparison} provides a comparative summary of the key methods reviewed.
+
+\begin{table}[H]
+\centering
+\caption{Comparison of Neural Style Transfer Methods}
+\label{tab:lit_comparison}
+\small
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+\textbf{Method} & \textbf{Year} & \textbf{Speed} & \textbf{Arbitrary} & \textbf{Unpaired} & \textbf{Quality} \\ \hline
+Gatys et al. & 2016 & Slow & Yes & N/A & High \\ \hline
+Johnson et al. & 2016 & Fast & No & N/A & High \\ \hline
+AdaIN & 2017 & Fast & Yes & N/A & High \\ \hline
+Pix2Pix & 2017 & Fast & No & No & High \\ \hline
+CycleGAN & 2017 & Fast & No & Yes & High \\ \hline
+CartoonGAN & 2018 & Fast & No & No & Medium \\ \hline
+AnimeGAN & 2019 & Fast & No & No & Medium \\ \hline
+SSIT & 2023 & Fast & Yes & Yes & High \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Identified Research Gaps}
+
+Based on the literature review, the following research gaps motivate our work:
+
+\begin{enumerate}
+    \item \textbf{Style-Specific Animation Transfer:} While general cartoon/anime transfer exists, style-specific models capturing the unique characteristics of distinct animation studios (One Piece, Disney, Ghibli) remain underexplored.
+
+    \item \textbf{Face-Focused Animation:} Most methods focus on general scene transformation rather than face-specific stylization preserving identity and expression.
+
+    \item \textbf{Multi-Style Framework:} A unified framework supporting multiple distinct animation styles with consistent quality is needed.
+
+    \item \textbf{Dataset Creation:} Systematic approaches for creating animation-style datasets from video sources are not well documented.
+\end{enumerate}
+
+Our project addresses these gaps by implementing CycleGAN-based style transfer specifically targeting four distinct styles with custom dataset creation pipelines
+
