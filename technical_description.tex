@@ -285,9 +285,9 @@ c7s1-3 & Conv + Tanh & 3 & 7$\times$7 & 1 \\ \hline
     arrow/.style={-latex', thick}
 ]
     \node [block] (input) {Input};
-    \node [block, right=1.5cm of input] (conv1) {Conv 3$\times$3 + IN + ReLU};
-    \node [block, right=1.5cm of conv1] (conv2) {Conv 3$\times$3 + IN};
-    \node [circle, draw, right=1.5cm of conv2] (add) {$+$};
+    \node [block, right=1cm of input] (conv1) {Conv 3$\times$3 + IN + ReLU};
+    \node [block, right=1cm of conv1] (conv2) {Conv 3$\times$3 + IN};
+    \node [circle, draw, right=1cm of conv2] (add) {$+$};
     \node [block, right=1cm of add] (output) {Output};
 
     \draw [arrow] (input) -- (conv1);
@@ -313,11 +313,11 @@ The discriminator uses a PatchGAN architecture that classifies 70$\times$70 over
     arrow/.style={-latex'}
 ]
     \node [block, fill=gray!30] (input) at (0, 0) {Input\\3$\times$256$\times$256};
-    \node [block] (c1) at (3, 0) {Conv 64\\LReLU};
-    \node [block] (c2) at (6, 0) {Conv 128\\IN + LReLU};
-    \node [block] (c3) at (9, 0) {Conv 256\\IN + LReLU};
-    \node [block] (c4) at (12, 0) {Conv 512\\IN + LReLU};
-    \node [block, fill=gray!30] (output) at (15, 0) {Output\\1$\times$30$\times$30};
+    \node [block] (c1) at (2.2, 0) {Conv 64\\LReLU};
+    \node [block] (c2) at (4.4, 0) {Conv 128\\IN + LReLU};
+    \node [block] (c3) at (6.6, 0) {Conv 256\\IN + LReLU};
+    \node [block] (c4) at (8.8, 0) {Conv 512\\IN + LReLU};
+    \node [block, fill=gray!30] (output) at (11, 0) {Output\\1$\times$30$\times$30};
 
     \draw [arrow] (input) -- (c1);
     \draw [arrow] (c1) -- (c2);

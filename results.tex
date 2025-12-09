@@ -40,42 +40,6 @@ OpenCV & 4.7.0 \\ \hline
 
 \section{Training Results}
 
-\subsection{Training Loss Curves}
-
-The following figures show the training loss progression for each style model over 200 epochs.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\caption{Training Loss Curves - One Piece Style Model}
-\label{fig:loss_onepiece}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\caption{Training Loss Curves - Disney Style Model}
-\label{fig:loss_disney}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\caption{Training Loss Curves - Studio Ghibli Style Model}
-\label{fig:loss_ghibli}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\caption{Training Loss Curves - Van Gogh Style Model}
-\label{fig:loss_vangogh}
-\end{figure}
-
 \subsection{Training Statistics}
 
 \begin{table}[H]
@@ -133,46 +97,20 @@ TC08 & Landscape photograph (Van Gogh) & Painterly transformation & Brush stroke
 
 \section{Style Transfer Results}
 
-\subsection{One Piece Style Results}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\caption{One Piece Style Transfer Results - Sample 1}
-\label{fig:results_onepiece_1}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\caption{One Piece Style Transfer Results - Sample 2}
-\label{fig:results_onepiece_2}
-\end{figure}
-
-\textbf{Observations:}
-\begin{itemize}
-    \item Bold outlines successfully applied to facial features
-    \item Eye style transformation captures One Piece aesthetic
-    \item Hair and skin colors appropriately stylized
-    \item Facial structure preserved while achieving anime look
-\end{itemize}
-
 \subsection{Disney Style Results}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
+\includegraphics[width=0.45\textwidth]{images/sample1.png}
+\includegraphics[width=0.45\textwidth]{images/disney1.png}
 \caption{Disney Style Transfer Results - Sample 1}
 \label{fig:results_disney_1}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
+\includegraphics[width=0.45\textwidth]{images/sample2.png}
+\includegraphics[width=0.45\textwidth]{images/disney2.png}
 \caption{Disney Style Transfer Results - Sample 2}
 \label{fig:results_disney_2}
 \end{figure}
@@ -189,16 +127,16 @@ TC08 & Landscape photograph (Van Gogh) & Painterly transformation & Brush stroke
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
+\includegraphics[width=0.45\textwidth]{images/sample1.png}
+\includegraphics[width=0.45\textwidth]{images/ghibli1.png}
 \caption{Studio Ghibli Style Transfer Results - Sample 1}
 \label{fig:results_ghibli_1}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
+\includegraphics[width=0.45\textwidth]{images/sample2.png}
+\includegraphics[width=0.45\textwidth]{images/ghibli2.png}
 \caption{Studio Ghibli Style Transfer Results - Sample 2}
 \label{fig:results_ghibli_2}
 \end{figure}
@@ -215,16 +153,16 @@ TC08 & Landscape photograph (Van Gogh) & Painterly transformation & Brush stroke
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
+\includegraphics[width=0.45\textwidth]{images/sample_land1.png}
+\includegraphics[width=0.45\textwidth]{images/van_gogh1.png}
 \caption{Van Gogh Style Transfer Results - Sample 1}
 \label{fig:results_vangogh_1}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
+\includegraphics[width=0.45\textwidth]{images/sample_land2.png}
+\includegraphics[width=0.45\textwidth]{images/van_gogh2.png}
 \caption{Van Gogh Style Transfer Results - Sample 2}
 \label{fig:results_vangogh_2}
 \end{figure}
@@ -237,84 +175,55 @@ TC08 & Landscape photograph (Van Gogh) & Painterly transformation & Brush stroke
     \item Original scene composition preserved
 \end{itemize}
 
-\section{Comparative Analysis}
+\subsection{One Piece Style Results}
 
-\subsection{Style Comparison Grid}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\caption{Comparison of All Style Transfers on Same Input - Set 1}
-\label{fig:style_comparison_1}
-\end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\caption{Comparison of All Style Transfers on Same Input - Set 2}
-\label{fig:style_comparison_2}
+\includegraphics[width=0.45\textwidth]{images/sample2.png}
+\includegraphics[width=0.45\textwidth]{images/onepiece2.png}
+\caption{One Piece Style Transfer Results - Sample}
+\label{fig:results_onepiece_2}
 \end{figure}
 
-\subsection{Quantitative Metrics}
+\textbf{Observations:}
+\begin{itemize}
+    \item Bold outlines successfully applied to facial features
+    \item Eye style transformation captures One Piece aesthetic
+    \item Hair and skin colors appropriately stylized
+    \item Facial structure preserved while achieving anime look
+\end{itemize}
 
-We evaluate the models using the following metrics:
+\section{Website User Interface}
 
-\textbf{1. Fréchet Inception Distance (FID):}\\
-Measures the similarity between generated images and real style images. Lower values indicate better quality.
+The style transfer system is deployed through a user-friendly web interface that allows users to easily upload images and apply different artistic styles.
 
-\textbf{2. Inference Time:}\\
-Time taken to process a single 256$\times$256 image.
-
-\textbf{3. Cycle Consistency Error:}\\
-Measures how well the reconstruction $F(G(x))$ matches the original input $x$.
-
-\begin{table}[H]
-\centering
-\caption{Quantitative Evaluation Metrics}
-\label{tab:metrics}
-\begin{tabular}{|l|c|c|c|c|}
-\hline
-\textbf{Metric} & \textbf{One Piece} & \textbf{Disney} & \textbf{Ghibli} & \textbf{Van Gogh} \\ \hline
-FID Score ($\downarrow$) & -- & -- & -- & -- \\ \hline
-Inference Time (ms) & -- & -- & -- & -- \\ \hline
-Cycle Consistency Error & -- & -- & -- & -- \\ \hline
-Model Size (MB) & -- & -- & -- & -- \\ \hline
-GPU Memory Usage (GB) & -- & -- & -- & -- \\ \hline
-\end{tabular}
-\end{table}
-
-\textit{Note: Fill in actual metric values from your evaluation.}
-
-\section{Failure Cases and Limitations}
-
-\subsection{Identified Failure Cases}
+\subsection{Home Page}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\caption{Examples of Failure Cases - Set 1}
-\label{fig:failure_cases_1}
+\includegraphics[width=0.9\textwidth]{images/user_interface.png}
+\caption{Website Home Page - Style Selection Interface}
+\label{fig:ui_home}
 \end{figure}
+
+\subsection{Style Selection}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\includegraphics[width=0.45\textwidth]{images/ghibli_generated.png}
-\caption{Examples of Failure Cases - Set 2}
-\label{fig:failure_cases_2}
+\includegraphics[width=0.9\textwidth]{images/style_selector.png}
+\caption{Style Selection Menu - Choose from One Piece, Disney, Ghibli, or Van Gogh}
+\label{fig:ui_style_select}
 \end{figure}
 
-\textbf{Identified Limitations:}
-\begin{enumerate}
-    \item \textbf{Extreme Poses:} Side profiles and extreme angles may produce inconsistent results
-    \item \textbf{Occlusion:} Partially covered faces may have artifacts
-    \item \textbf{Complex Backgrounds:} Background elements may interfere with face stylization
-    \item \textbf{Very Dark/Bright Images:} Extreme lighting conditions affect quality
-    \item \textbf{Non-Standard Faces:} Very unusual facial features may not transform well
-\end{enumerate}
+\subsection{Results Display}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{images/result.png}
+\caption{Results Page - Side-by-Side Comparison of Original and Stylized Image}
+\label{fig:ui_results}
+\end{figure}
 
 \section{Inference Performance}
 
@@ -403,22 +312,6 @@ Overall Quality & 4.0 & 4.3 & 4.1 & 4.2 \\ \hline
     \item \textbf{Loss Balance:} High cycle-consistency weight (10.0) prevents content distortion.
 \end{enumerate}
 
-\subsection{Comparison with Existing Methods}
-
-\begin{table}[H]
-\centering
-\caption{Comparison with Existing Style Transfer Methods}
-\begin{tabular}{|l|c|c|c|c|}
-\hline
-\textbf{Method} & \textbf{Style Quality} & \textbf{Speed} & \textbf{Unpaired Data} & \textbf{Animation} \\ \hline
-Gatys et al. (2016) & High & Slow (minutes) & N/A & Limited \\ \hline
-Johnson et al. (2016) & Medium-High & Fast & No & Limited \\ \hline
-AdaIN (2017) & High & Fast & N/A & Limited \\ \hline
-CartoonGAN (2018) & High & Fast & No & Yes \\ \hline
-AnimeGAN (2019) & Medium-High & Fast & No & Yes \\ \hline
-\textbf{Our Method} & High & Fast ($<$1s) & Yes & Yes \\ \hline
-\end{tabular}
-\end{table}
 
 \subsection{Error Analysis}
 
