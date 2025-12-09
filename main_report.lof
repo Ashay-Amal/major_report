@@ -3,38 +3,35 @@
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Project Methodology Overview}}{6}{}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces High-Level System Architecture}}{19}{}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Frame Extraction Pipeline}}{21}{}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Complete CycleGAN Architecture for Style Transfer}}{22}{}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Generator Network Architecture}}{23}{}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Residual Block Structure}}{23}{}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces PatchGAN Discriminator Architecture}}{23}{}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces High-Level System Architecture}}{14}{}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Frame Extraction Pipeline}}{16}{}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Complete CycleGAN Architecture for Style Transfer}}{17}{}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Generator Network Architecture}}{18}{}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Residual Block Structure}}{18}{}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces PatchGAN Discriminator Architecture}}{18}{}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces System Component Diagram}}{31}{}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces System Component Diagram}}{26}{}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Detailed Generator Architecture with Layer Specifications}}{34}{}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Internal Structure of Residual Block}}{35}{}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces PatchGAN Discriminator with Spatial Dimensions}}{35}{}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Training Process Flowchart}}{36}{}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Inference Pipeline Flowchart}}{37}{}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Loss Computation Flow in CycleGAN}}{37}{}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Detailed Generator Architecture with Layer Specifications}}{29}{}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Internal Structure of Residual Block}}{30}{}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces PatchGAN Discriminator with Spatial Dimensions}}{30}{}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Training Process Flowchart}}{31}{}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Inference Pipeline Flowchart}}{32}{}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Loss Computation Flow in CycleGAN}}{32}{}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Disney Style Transfer Results - Sample 1}}{49}{}%
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Disney Style Transfer Results - Sample 2}}{49}{}%
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Studio Ghibli Style Transfer Results - Sample 1}}{50}{}%
-\contentsline {figure}{\numberline {6.4}{\ignorespaces Studio Ghibli Style Transfer Results - Sample 2}}{50}{}%
-\contentsline {figure}{\numberline {6.5}{\ignorespaces Van Gogh Style Transfer Results - Sample 1}}{51}{}%
-\contentsline {figure}{\numberline {6.6}{\ignorespaces Van Gogh Style Transfer Results - Sample 2}}{51}{}%
-\contentsline {figure}{\numberline {6.7}{\ignorespaces One Piece Style Transfer Results - Sample}}{52}{}%
-\contentsline {figure}{\numberline {6.8}{\ignorespaces Website Home Page - Style Selection Interface}}{53}{}%
-\contentsline {figure}{\numberline {6.9}{\ignorespaces Style Selection Menu - Choose from One Piece, Disney, Ghibli, or Van Gogh}}{53}{}%
-\contentsline {figure}{\numberline {6.10}{\ignorespaces Results Page - Side-by-Side Comparison of Original and Stylized Image}}{54}{}%
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces Project Timeline}}{66}{}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Disney Style Transfer Results - Sample 1}}{44}{}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Disney Style Transfer Results - Sample 2}}{44}{}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Studio Ghibli Style Transfer Results - Sample 1}}{45}{}%
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Studio Ghibli Style Transfer Results - Sample 2}}{45}{}%
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Van Gogh Style Transfer Results - Sample 1}}{46}{}%
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Van Gogh Style Transfer Results - Sample 2}}{46}{}%
+\contentsline {figure}{\numberline {6.7}{\ignorespaces One Piece Style Transfer Results - Sample}}{47}{}%
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Website Home Page - Style Selection Interface}}{48}{}%
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Style Selection Menu - Choose from One Piece, Disney, Ghibli, or Van Gogh}}{48}{}%
+\contentsline {figure}{\numberline {6.10}{\ignorespaces Results Page - Side-by-Side Comparison of Original and Stylized Image}}{49}{}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {A.1}{\ignorespaces The Project Timeline.}}{61}{}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

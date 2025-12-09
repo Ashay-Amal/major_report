@@ -1,39 +1,32 @@
 \babel@toc {english}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces Comparison of Neural Style Transfer Methods}}{18}{}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Complete Dataset Summary}}{22}{}%
-\contentsline {table}{\numberline {3.2}{\ignorespaces Generator Network Layers}}{23}{}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces Discriminator Network Layers}}{24}{}%
-\contentsline {table}{\numberline {3.4}{\ignorespaces Loss Function Weights}}{26}{}%
-\contentsline {table}{\numberline {3.5}{\ignorespaces Training Hyperparameters}}{27}{}%
-\contentsline {table}{\numberline {3.6}{\ignorespaces Training Resource Requirements}}{29}{}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces Complete Dataset Summary}}{17}{}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Generator Network Layers}}{18}{}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Discriminator Network Layers}}{19}{}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Loss Function Weights}}{21}{}%
+\contentsline {table}{\numberline {3.5}{\ignorespaces Training Hyperparameters}}{22}{}%
+\contentsline {table}{\numberline {3.6}{\ignorespaces Training Resource Requirements}}{24}{}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Technical Terminology}}{30}{}%
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {6.1}{\ignorespaces Test Environment Hardware}}{46}{}%
-\contentsline {table}{\numberline {6.2}{\ignorespaces Software Configuration}}{46}{}%
-\contentsline {table}{\numberline {6.3}{\ignorespaces Training Statistics per Style Model}}{47}{}%
-\contentsline {table}{\numberline {6.4}{\ignorespaces Test Cases for Style Transfer Evaluation}}{48}{}%
-\contentsline {table}{\numberline {6.5}{\ignorespaces Inference Speed Benchmarks}}{54}{}%
-\contentsline {table}{\numberline {6.6}{\ignorespaces GPU Memory Usage During Inference}}{54}{}%
-\contentsline {table}{\numberline {6.7}{\ignorespaces Qualitative Evaluation Criteria and Scores (1-5 scale)}}{55}{}%
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {7.1}{\ignorespaces Objective Completion Status}}{59}{}%
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {1.1}{\ignorespaces Project Milestone Schedule}}{66}{}%
-\contentsline {table}{\numberline {1.2}{\ignorespaces Project Budget Estimation}}{67}{}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Technical Terminology}}{25}{}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {6.1}{\ignorespaces Test Environment Hardware}}{41}{}%
+\contentsline {table}{\numberline {6.2}{\ignorespaces Software Configuration}}{41}{}%
+\contentsline {table}{\numberline {6.3}{\ignorespaces Training Statistics per Style Model}}{42}{}%
+\contentsline {table}{\numberline {6.4}{\ignorespaces Test Cases for Style Transfer Evaluation}}{43}{}%
+\contentsline {table}{\numberline {6.5}{\ignorespaces Inference Speed Benchmarks}}{49}{}%
+\contentsline {table}{\numberline {6.6}{\ignorespaces GPU Memory Usage During Inference}}{49}{}%
+\contentsline {table}{\numberline {6.7}{\ignorespaces Qualitative Evaluation Criteria and Scores (1-5 scale)}}{50}{}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Complete Dataset Statistics}}{72}{}%
+\contentsline {table}{\numberline {7.1}{\ignorespaces Objective Completion Status}}{54}{}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Project Directory Structure}}{73}{}%
-\contentsline {table}{\numberline {5.2}{\ignorespaces System Requirements}}{74}{}%
-\contentsline {table}{\numberline {5.3}{\ignorespaces Python Package Dependencies}}{75}{}%
-\contentsline {table}{\numberline {5.4}{\ignorespaces Training Command Line Arguments}}{76}{}%
+\contentsline {table}{\numberline {1.1}{\ignorespaces Project Milestone Schedule}}{62}{}%
+\contentsline {table}{\numberline {1.2}{\ignorespaces Project Budget Estimation}}{62}{}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Complete Dataset Statistics}}{66}{}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Project Directory Structure}}{67}{}%

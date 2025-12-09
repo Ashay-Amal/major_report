@@ -4,17 +4,12 @@
 \chapter{Project Planning}
 
 \section{Project Timeline}
-
-% PLACEHOLDER: Insert Gantt chart
-% Filename: gantt_chart.png
-% Description: Gantt chart showing project phases from dataset collection to final testing
-
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
-\fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}\textbf{[INSERT: gantt\_chart.png]}\vspace{2cm}}}
-\caption{Project Timeline}
+\includegraphics[width=\textwidth,height=1\textwidth]{timeline.png}
+\caption{The Project Timeline.}
 \label{fig:timeline}
-\end{figure}
+\end{figure} 
 
 \begin{table}[H]
 \centering
@@ -39,14 +34,14 @@ Phase 5 & Testing, Evaluation \& Documentation & 2 weeks \\ \hline
 \begin{tabular}{|l|l|r|}
 \hline
 \textbf{Category} & \textbf{Item} & \textbf{Cost (INR)} \\ \hline
-\multirow{3}{*}{Hardware} & GPU Cloud Computing (Google Colab Pro) & 2,500/month \\ \cline{2-3}
- & Storage (Cloud) & 500/month \\ \cline{2-3}
+\multirow{3}{*}{Hardware} & GPU Cloud Computing (Google Colab Pro) & 2,500 \\ \cline{2-3}
+ & Storage (Cloud) & 200/month \\ \cline{2-3}
  & Miscellaneous Hardware & 2,000 \\ \hline
 \multirow{2}{*}{Software} & Dataset (Kaggle - Free) & 0 \\ \cline{2-3}
  & Development Tools (Open Source) & 0 \\ \hline
 \multirow{2}{*}{Other} & Documentation \& Printing & 1,500 \\ \cline{2-3}
  & Contingency & 1,500 \\ \hline
-\multicolumn{2}{|l|}{\textbf{Total Estimated Cost (4 months)}} & \textbf{17,000} \\ \hline
+\multicolumn{2}{|l|}{\textbf{Total Estimated Cost (4 months)}} & \textbf{9,000} \\ \hline
 \end{tabular}
 \end{table}
 
@@ -75,12 +70,6 @@ Partnerships for the Goals & 2 \\ \hline
 \end{longtable}
 \textbf{Levels:} Poor = 1, Good = 2, Excellent = 3
 
-\textbf{Justification:}
-\begin{itemize}
-    \item \textbf{Quality Education (Level 3):} The project provides educational value by demonstrating deep learning concepts and can be used as a teaching tool for neural networks and computer vision.
-    \item \textbf{Industry, Innovation and Infrastructure (Level 3):} The project contributes to innovation in digital art creation and has applications in the creative industry.
-    \item \textbf{Decent Work and Economic Growth (Level 2):} The technology can create new opportunities in digital content creation and entertainment industries.
-\end{itemize}
 
 \chapter{Self-Assessment of the Project}
 
@@ -129,10 +118,12 @@ Detailed dataset information is provided in Chapter 3 (System Overview). The sum
 \begin{tabular}{|l|c|c|c|l|}
 \hline
 \textbf{Style} & \textbf{Domain X} & \textbf{Domain Y} & \textbf{Total} & \textbf{Source} \\ \hline
-One Piece & 3,000+ & 2,500+ & 5,500+ & Kaggle + Episodes \\ \hline
-Disney & 3,000+ & 2,000+ & 5,000+ & Kaggle + Movies \\ \hline
-Studio Ghibli & 3,000+ & 2,000+ & 5,000+ & Kaggle + Films \\ \hline
+One Piece & 3,000+ & 2,500+ & 5,500+ & Episodes \\ \hline
+Disney & 3,000+ & 2,000+ & 5,000+ & Movies \\ \hline
+Studio Ghibli & 3,000+ & 2,000+ & 5,000+ & Films \\ \hline
 Van Gogh & 2,500+ & 400+ & 2,900+ & Kaggle Datasets \\ \hline
+Human Faces & 3,000+ & 2,000+ & 5,000+ & Kaggle \\ \hline
+Landscape Images & 3,000+ & 2,000+ & 5,000+ & Kaggle \\ \hline
 \textbf{Total} & \textbf{11,500+} & \textbf{6,900+} & \textbf{18,400+} & -- \\ \hline
 \end{tabular}
 \end{table}
@@ -170,22 +161,6 @@ The source code is organized in a modular structure to facilitate understanding,
 
 \section{Installation Guide}
 
-\subsection{System Requirements}
-
-\begin{table}[H]
-\centering
-\caption{System Requirements}
-\begin{tabular}{|l|l|l|}
-\hline
-\textbf{Component} & \textbf{Minimum} & \textbf{Recommended} \\ \hline
-GPU & NVIDIA GTX 1060 (6GB) & NVIDIA RTX 3080 (10GB) \\ \hline
-CPU & Intel i5 / AMD Ryzen 5 & Intel i7 / AMD Ryzen 7 \\ \hline
-RAM & 8 GB & 16 GB \\ \hline
-Storage & 20 GB & 100 GB (for datasets) \\ \hline
-OS & Ubuntu 18.04 / Windows 10 & Ubuntu 20.04 / Windows 11 \\ \hline
-\end{tabular}
-\end{table}
-
 \subsection{Installation Steps}
 
 \begin{enumerate}
@@ -214,178 +189,5 @@ print(torch.cuda.is_available())  # Should print True
 print(torch.cuda.get_device_name(0))
 \end{lstlisting}
 \end{enumerate}
-
-\subsection{Dependencies}
-
-\begin{table}[H]
-\centering
-\caption{Python Package Dependencies}
-\begin{tabular}{|l|l|l|}
-\hline
-\textbf{Package} & \textbf{Version} & \textbf{Purpose} \\ \hline
-torch & $\geq$2.0.0 & Deep learning framework \\ \hline
-torchvision & $\geq$0.15.0 & Image processing and pretrained models \\ \hline
-numpy & $\geq$1.21.0 & Numerical operations \\ \hline
-Pillow & $\geq$9.0.0 & Image loading and saving \\ \hline
-opencv-python & $\geq$4.5.0 & Video processing and face detection \\ \hline
-tqdm & $\geq$4.60.0 & Progress bar for training \\ \hline
-matplotlib & $\geq$3.5.0 & Visualization and plotting \\ \hline
-\end{tabular}
-\end{table}
-
-\section{Usage Instructions}
-
-\subsection{Inference (Style Transfer)}
-
-To transform an image using a pre-trained model:
-
-\begin{lstlisting}[language=bash]
-python inference.py --input path/to/image.jpg \
-                    --style onepiece \
-                    --output path/to/result.png
-\end{lstlisting}
-
-\textbf{Available Styles:}
-\begin{itemize}
-    \item \texttt{onepiece} - One Piece anime style
-    \item \texttt{disney} - Disney animation style
-    \item \texttt{ghibli} - Studio Ghibli animation style
-    \item \texttt{vangogh} - Van Gogh painting style
-\end{itemize}
-
-\textbf{Additional Options:}
-\begin{lstlisting}[language=bash]
---gpu 0           # GPU device ID (default: 0)
---size 256        # Output image size (default: 256)
---checkpoint dir  # Custom checkpoint directory
-\end{lstlisting}
-
-\subsection{Training a New Model}
-
-To train a new style transfer model:
-
-\begin{lstlisting}[language=bash]
-python train.py --dataroot ./data/style_name \
-                --name style_name \
-                --epochs 200 \
-                --batch_size 4 \
-                --lr 0.0002
-\end{lstlisting}
-
-\textbf{Training Options:}
-\begin{table}[H]
-\centering
-\caption{Training Command Line Arguments}
-\begin{tabular}{|l|l|p{6cm}|}
-\hline
-\textbf{Argument} & \textbf{Default} & \textbf{Description} \\ \hline
-\texttt{--dataroot} & Required & Path to dataset directory \\ \hline
-\texttt{--name} & Required & Experiment name for checkpoints \\ \hline
-\texttt{--epochs} & 200 & Total training epochs \\ \hline
-\texttt{--batch\_size} & 4 & Batch size for training \\ \hline
-\texttt{--lr} & 0.0002 & Initial learning rate \\ \hline
-\texttt{--lambda\_cyc} & 10.0 & Cycle consistency loss weight \\ \hline
-\texttt{--lambda\_id} & 5.0 & Identity loss weight \\ \hline
-\texttt{--n\_res} & 9 & Number of residual blocks \\ \hline
-\texttt{--save\_freq} & 10 & Checkpoint save frequency (epochs) \\ \hline
-\end{tabular}
-\end{table}
-
-\subsection{Dataset Preparation}
-
-Organize datasets in the following structure:
-
-\begin{lstlisting}
-data/style_name/
-    trainA/     # Domain A (e.g., human faces)
-        img001.jpg
-        img002.jpg
-        ...
-    trainB/     # Domain B (e.g., anime faces)
-        img001.jpg
-        img002.jpg
-        ...
-    testA/      # Test images from Domain A
-    testB/      # Test images from Domain B
-\end{lstlisting}
-
-\chapter{Key Code Snippets}
-
-This appendix provides essential code implementations for reference.
-
-\section{Generator Network (Condensed)}
-
-The ResNet-based generator uses reflection padding, instance normalization, and 9 residual blocks:
-
-\begin{lstlisting}[language=Python, caption=Generator Core Structure]
-class ResnetGenerator(nn.Module):
-    def __init__(self, input_nc=3, output_nc=3, ngf=64, n_blocks=9):
-        # Encoder: 3 conv layers (3->64->128->256 channels)
-        # Transform: 9 ResnetBlocks (256 channels)
-        # Decoder: 2 transposed conv (256->128->64->3)
-        # Output: Tanh activation [-1, 1]
-
-class ResnetBlock(nn.Module):
-    def forward(self, x):
-        return x + self.conv_block(x)  # Skip connection
-\end{lstlisting}
-
-\section{PatchGAN Discriminator (Condensed)}
-
-\begin{lstlisting}[language=Python, caption=Discriminator Structure]
-class NLayerDiscriminator(nn.Module):
-    # 4 conv layers: 3->64->128->256->512->1
-    # LeakyReLU(0.2), InstanceNorm (except first layer)
-    # Output: 30x30 patch classification map
-\end{lstlisting}
-
-\section{Loss Functions}
-
-\begin{lstlisting}[language=Python, caption=CycleGAN Loss Functions]
-# GAN Loss (LSGAN): MSE between pred and target (0 or 1)
-# Cycle Loss: L1(F(G(x)), x) + L1(G(F(y)), y)
-# Identity Loss: L1(G(y), y) + L1(F(x), x)
-# Weights: lambda_cyc=10.0, lambda_id=5.0
-\end{lstlisting}
-
-\chapter{Mathematical Summary}
-
-\section{Key Equations}
-
-\textbf{Gram Matrix:} $G^l_{ij} = \sum_k F^l_{ik} F^l_{jk}$
-
-\textbf{Style Loss:} $\mathcal{L}_{style}^l = \frac{1}{4N_l^2 M_l^2} \sum_{i,j} (G^l_{ij}(\hat{y}) - G^l_{ij}(s))^2$
-
-\textbf{Cycle-Consistency:} $\mathcal{L}_{cyc} = \mathbb{E}_{x}[||F(G(x)) - x||_1] + \mathbb{E}_{y}[||G(F(y)) - y||_1]$
-
-\textbf{LSGAN Discriminator:} $\min_D \frac{1}{2}\mathbb{E}_{x}[(D(x) - 1)^2] + \frac{1}{2}\mathbb{E}_{z}[D(G(z))^2]$
-
-\textbf{LSGAN Generator:} $\min_G \frac{1}{2}\mathbb{E}_{z}[(D(G(z)) - 1)^2]$
-
-\textbf{Total Loss:} $\mathcal{L}_{total} = \mathcal{L}_{GAN} + 10\mathcal{L}_{cyc} + 5\mathcal{L}_{id} + \mathcal{L}_{perceptual}$
-
-\chapter{Glossary}
-
-\begin{table}[H]
-\centering
-\small
-\begin{tabular}{|l|p{9cm}|}
-\hline
-\textbf{Term} & \textbf{Definition} \\ \hline
-CycleGAN & Unpaired image-to-image translation using cycle-consistency \\ \hline
-Discriminator & Network classifying images as real or generated \\ \hline
-GAN & Generative Adversarial Network for image synthesis \\ \hline
-Generator & Network producing synthetic images \\ \hline
-Gram Matrix & Feature correlation matrix for style representation \\ \hline
-Instance Norm & Per-sample normalization for style transfer \\ \hline
-LSGAN & Least Squares GAN for stable training \\ \hline
-NST & Neural Style Transfer technique \\ \hline
-PatchGAN & Discriminator classifying image patches \\ \hline
-Perceptual Loss & Loss using pre-trained network features \\ \hline
-Residual Block & Network block with skip connection \\ \hline
-VGG-19 & 19-layer CNN for perceptual loss \\ \hline
-\end{tabular}
-\end{table}
-
 \end{appendices}
 
