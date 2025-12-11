@@ -1,10 +1,10 @@
 \restylefloat{algorithm}
 \chapter{System Overview}
-This chapter provides a comprehensive overview of the AI-Based Neural Style Transfer system, including the overall architecture, dataset creation methodology, and the four distinct style transfer models implemented: One Piece, Disney, Studio Ghibli, and Van Gogh.
+This chapter gives a detailed look at the AI-based Neural Style Transfer system. It explains the overall architecture, how the dataset was prepared, and the four style transfer models used in the project—One Piece, Disney, Studio Ghibli, and Van Gogh.
 
 \section{System Architecture Overview}
 
-The system is designed as a modular pipeline that transforms user-provided content images into artistic stylizations using CycleGAN-based neural networks. The architecture supports four distinct style transfer modes, each trained on custom-curated datasets.
+The system follows a modular pipeline that converts user-uploaded content images into artistic versions using CycleGAN-based neural networks. Its architecture includes four different style transfer modes, each trained on carefully curated custom datasets.
 
 \begin{figure}[H]
 \centering
@@ -43,7 +43,7 @@ The system is designed as a modular pipeline that transforms user-provided conte
 \end{figure}
 
 \section{Style Transfer Modes}
-The system implements four distinct style transfer modes:\\
+The system includes four separate style transfer modes:\\
 \vspace{-0.9cm}
 \subsection{One Piece Style Transfer}
 \begin{itemize}
@@ -79,7 +79,7 @@ The system implements four distinct style transfer modes:\\
 \newpage
 \section{Dataset Creation Methodology}
 
-Since CycleGAN requires unpaired datasets from two domains (Domain X: real-world images, Domain Y: stylized images), we developed a comprehensive dataset creation pipeline.
+Because CycleGAN works with unpaired datasets from two domains (Domain X: real-world images and Domain Y: stylized images), we created a complete pipeline for generating these datasets.
 
 \subsection{Animation Frame Extraction Pipeline}
 
@@ -121,7 +121,7 @@ Since CycleGAN requires unpaired datasets from two domains (Domain X: real-world
 
 \subsection{Dataset Details}
 
-All datasets use 256$\times$256 resolution images in JPG/PNG format. Domain X uses human faces from Kaggle (3,000+ images each for face-based styles) or landscapes (2,500+ for Van Gogh). Domain Y contains style-specific frames extracted using our pipeline.
+All datasets consist of 256×256 resolution images in JPG or PNG format. For Domain X, we used human face images from Kaggle (over 3,000 images for the face-based styles) and landscape images (more than 2,500 for the Van Gogh model). Domain Y includes style-specific frames that were extracted through our custom pipeline.
 
 \subsection{Dataset Summary}
 
@@ -143,7 +143,7 @@ Van Gogh & Landscapes & 2,500+ & Paintings & 400+ \\ \hline
 
 \subsection{Overall Architecture}
 
-The CycleGAN architecture consists of two generator-discriminator pairs that learn bidirectional mappings between domains.
+The CycleGAN model uses two generator–discriminator pairs that work together to learn mappings in both directions between the two domains.
 
 \begin{figure}[H]
 \centering
@@ -199,7 +199,7 @@ The CycleGAN architecture consists of two generator-discriminator pairs that lea
 
 \subsection{Generator Network Architecture}
 
-The generator follows a ResNet-based encoder-decoder architecture with 9 residual blocks for 256$\times$256 images.
+The generator is built using a ResNet-style encoder–decoder structure and includes nine residual blocks, which is suitable for 256×256 images.
 
 \begin{figure}[H]
 \centering
@@ -297,7 +297,7 @@ c7s1-3 & Conv + Tanh & 3 & 7$\times$7 & 1 \\ \hline
 
 \subsection{Discriminator Network Architecture (PatchGAN)}
 
-The discriminator uses a PatchGAN architecture that classifies 70$\times$70 overlapping patches.
+The discriminator adopts a PatchGAN design, where it evaluates and classifies overlapping 70×70 image patches.
 
 \begin{figure}[H]
 \centering
@@ -342,11 +342,11 @@ Output & Conv & 1 & 4$\times$4 & 1 \\ \hline
 
 \section{Loss Functions}
 
-The training combines multiple loss functions, each serving a specific purpose in achieving high-quality style transfer. The careful balance of these losses is crucial for producing visually appealing results while maintaining content fidelity.
+Training uses a combination of different loss functions, each contributing to a specific aspect of achieving high-quality style transfer. Balancing these losses properly is essential to generate visually appealing outputs while still preserving the original content.
 
 \subsection{Adversarial Loss (LSGAN)}
 
-The adversarial loss ensures that generated images are indistinguishable from real images in the target domain. We use Least Squares GAN (LSGAN) \cite{bib:lsgan} instead of the original cross-entropy loss for more stable training.
+The adversarial loss helps the model generate images that look as realistic as those in the target domain. For improved training stability, we use the Least Squares GAN (LSGAN) approach \cite{bib:lsgan} instead of the standard cross-entropy loss.
 
 For generator $G$ and discriminator $D_Y$:
 \begin{equation}
@@ -360,15 +360,15 @@ The generator tries to minimize:
 
 \textbf{Why LSGAN:}
 \begin{itemize}
-    \item Provides smoother gradients compared to binary cross-entropy
-    \item Penalizes samples that are far from the decision boundary
-    \item Reduces vanishing gradient problems during training
-    \item Produces higher quality images with fewer artifacts
+    \item Offers smoother gradients than traditional binary cross-entropy
+    \item Applies stronger penalties to samples that lie far from the decision boundary
+    \item Helps prevent vanishing gradient issues during training
+    \item Generates higher-quality images with fewer visible artifacts
 \end{itemize}
 
 \subsection{Cycle-Consistency Loss}
 
-The cycle-consistency loss is the key innovation of CycleGAN that enables learning from unpaired data. It enforces that translating an image to the target domain and back should reconstruct the original image:
+The cycle-consistency loss is the core idea behind CycleGAN that makes training on unpaired data possible. It ensures that when an image is translated to the target domain and then converted back, the result remains close to the original image:
 
 \begin{equation}
 \mathcal{L}_{cyc}(G, F) = \mathbb{E}_{x \sim p_{data}(x)}[||F(G(x)) - x||_1] + \mathbb{E}_{y \sim p_{data}(y)}[||G(F(y)) - y||_1]
@@ -388,7 +388,7 @@ The L1 norm (absolute difference) is used rather than L2 to produce sharper reco
 
 \subsection{Identity Loss}
 
-The identity loss encourages the generator to preserve the input when it already belongs to the target domain:
+The identity loss helps the generator keep the input unchanged when it is already from the target domain:
 
 \begin{equation}
 \mathcal{L}_{identity}(G, F) = \mathbb{E}_{y \sim p_{data}(y)}[||G(y) - y||_1] + \mathbb{E}_{x \sim p_{data}(x)}[||F(x) - x||_1]
@@ -401,11 +401,11 @@ This loss is particularly important for:
     \item \textbf{Regularization:} Provides additional constraint on the mapping function
 \end{itemize}
 
-For our animation style transfer, identity loss helps preserve skin tones and prevents unnatural color distortions in the output.
+In our animation style transfer models, the identity loss plays an important role in maintaining natural skin tones and avoiding unwanted color distortions in the final output.
 
 \subsection{Perceptual Loss}
 
-The perceptual loss uses a pre-trained VGG-19 network to measure high-level perceptual similarity between the input and output:
+The perceptual loss relies on a pre-trained VGG-19 network to compare high-level perceptual features between the input and the generated output:
 
 \begin{equation}
 \mathcal{L}_{perceptual} = \sum_{l \in L} \lambda_l \frac{1}{C_l H_l W_l} ||\phi_l(G(x)) - \phi_l(x)||^2_2
@@ -423,7 +423,7 @@ where $\phi_l(x)$ denotes the feature map at layer $l$ of VGG-19, and $L$ is the
 
 \subsection{Total Generator Loss}
 
-The complete generator loss combines all components with carefully tuned weights:
+The final generator loss is obtained by combining all the loss components, each weighted appropriately to achieve the best overall performance:
 
 \begin{equation}
 \mathcal{L}_{G,F} = \lambda_{adv}(\mathcal{L}_{G}^{adv} + \mathcal{L}_{F}^{adv}) + \lambda_{cyc}\mathcal{L}_{cyc} + \lambda_{id}\mathcal{L}_{identity} + \lambda_{perc}\mathcal{L}_{perceptual}
@@ -450,7 +450,7 @@ Perceptual ($\lambda_{perc}$) & 1.0 & Semantic content \\ \hline
 
 \subsection{Discriminator Loss}
 
-Each discriminator is trained to distinguish real images from generated ones:
+Each discriminator is trained to tell apart real images from those produced by the generator:
 
 \begin{equation}
 \mathcal{L}_{D_Y} = \mathbb{E}_{y}[(D_Y(y) - 1)^2] + \mathbb{E}_{x}[D_Y(G(x))^2]
@@ -458,9 +458,9 @@ Each discriminator is trained to distinguish real images from generated ones:
 \begin{equation}
 \mathcal{L}_{D_X} = \mathbb{E}_{x}[(D_X(x) - 1)^2] + \mathbb{E}_{y}[D_X(F(y))^2]
 \end{equation}
-The discriminators use a history buffer of 50 previously generated images to stabilize training and prevent oscillation
+The discriminators use a history buffer of 50 previously generated images to help stabilize training and reduce oscillations.
 \section{Training Configuration}
-This section details the hyperparameters and training procedures used to train the style transfer models.
+This section explains the hyperparameters and the training processes used to develop the style transfer models.
 \subsection{Hyperparameter Selection}
 \begin{table}[H]
 \centering
@@ -477,12 +477,12 @@ Total Epochs & 200 & Residual Blocks & 9 \\ \hline
 
 \textbf{Hyperparameter Justification:}
 \begin{itemize}
-    \item \textbf{Image Size (256$\times$256):} Provides a good balance between quality and computational efficiency. Larger sizes increase memory requirements quadratically while providing diminishing returns for style transfer quality.
-    \item \textbf{Batch Size (4):} Limited by GPU memory when training with multiple networks (two generators, two discriminators). Smaller batch sizes also help with training stability for GANs.
-    \item \textbf{Learning Rate (0.0002):} Standard learning rate for Adam optimizer in GAN training, as recommended in the original CycleGAN paper.
-    \item \textbf{$\beta_1$ = 0.5:} Lower momentum than the default 0.9 helps stabilize GAN training by preventing the optimizer from ``overshooting'' in the adversarial dynamics.
-    \item \textbf{Linear Decay:} Learning rate is kept constant for the first 100 epochs, then linearly decayed to zero over the remaining 100 epochs. This allows for initial exploration followed by fine-tuning.
-    \item \textbf{9 Residual Blocks:} Standard for 256$\times$256 images. 6 blocks are used for 128$\times$128, and 9 for higher resolutions, following the original CycleGAN architecture.
+    \item \textbf{Image Size (256$\times$256):} This size offers a good balance between output quality and computational efficiency. Using larger resolutions would significantly increase memory usage while giving only minimal improvements in style transfer quality.
+    \item \textbf{Batch Size (4):} GPU memory limits become a concern when training multiple networks simultaneously (two generators and two discriminators). Using smaller batch sizes also improves the stability of GAN training.
+    \item \textbf{Learning Rate (0.0002):} This is the standard learning rate used with the Adam optimizer for GAN training, as suggested in the original CycleGAN paper.
+    \item \textbf{$\beta_1$ = 0.5:} Using a lower momentum than the default value of 0.9 helps stabilize GAN training by reducing the chance of the optimizer “overshooting” during the adversarial updates.
+    \item \textbf{Linear Decay:} The learning rate stays fixed for the first 100 epochs and then gradually decreases to zero over the next 100. This approach supports broad exploration early in training and fine-tuning in the later stages.
+    \item \textbf{9 Residual Blocks:} This is the standard choice for 256×256 images. For 128×128 resolutions, six residual blocks are used, while nine blocks are applied for higher resolutions, following the original CycleGAN design.
 \end{itemize}
 
 \subsection{Training Procedure}
@@ -490,16 +490,16 @@ The training follows an alternating optimization scheme: (1) sample batch from b
 
 \subsection{Training Stabilization Techniques}
 
-\textbf{Image History Buffer:} A buffer of 50 previously generated images stabilizes discriminator training by reducing oscillation and providing diverse training signals.
+\textbf{Image History Buffer:} A buffer containing 50 previously generated images helps stabilize discriminator training by reducing oscillations and offering more diverse training samples.
 
-\textbf{Learning Rate Schedule:} Constant rate (0.0002) for epochs 1-100, then linear decay to 0 for epochs 101-200:
+\textbf{Learning Rate Schedule:} The learning rate is kept constant at 0.0002 for the first 100 epochs, after which it is gradually reduced to zero over epochs 101 to 200.
 \begin{equation}
 lr_{epoch} = lr_{initial} \times \max\left(0, 1 - \frac{epoch - 100}{100}\right)
 \end{equation}
 
 \textbf{Data Augmentation:} Random horizontal flip (50\%), resize to 286$\times$286 with random crop to 256$\times$256, normalization to [-1, 1].
 
-\textbf{Checkpointing:} Models saved every 10 epochs; best model selected based on FID score and visual quality
+\textbf{Checkpointing:} The models are saved every 10 epochs, and the best-performing version is chosen based on the FID score and overall visual quality.
 \newpage
 \subsection{Training Resources}
 
@@ -518,12 +518,12 @@ Van Gogh & 8-10 hours & 8 GB & 2,900+ images \\ \hline
 \end{tabular}
 \end{table}
 
-The Van Gogh model trains faster due to the smaller dataset size and simpler style patterns compared to animation styles
+The Van Gogh model trains more quickly because it uses a smaller dataset and the style patterns are less complex compared to the animation-based styles.
 
 %% Chapter 4: System Architecture and High Level Design
 
 \chapter{System Architecture and High Level Design}
-This chapter presents the detailed system architecture and high-level design of the neural style transfer system, including UML diagrams, component interactions, and design decisions.
+This chapter provides a detailed overview of the system architecture and the high-level design of the neural style transfer system. It includes UML diagrams, explanations of component interactions, and the key design decisions made during development.
 \section{Terminology}
 
 \begin{table}[H]
@@ -632,9 +632,9 @@ The inference process: User uploads image $\rightarrow$ UI sends to Preprocessor
 
 \section{Software Requirements}
 
-\textbf{Functional Requirements:} Accept JPG/PNG images; provide 4 style options; preprocess to 256$\times$256; transform using Generator G; output within 3 seconds; save as PNG; support batch processing.
+\textbf{Functional Requirements:} The system accepts JPG and PNG images, offers four style options, and preprocesses all inputs to 256×256 resolution. The selected style is applied using Generator G, and the final output is produced within about three seconds. Results are saved as PNG files, and the system also supports batch processing.
 
-\textbf{Non-Functional Requirements:} Minimum 1,000 images/domain; training $<$5 min/epoch; support up to 1024$\times$1024 input; inference $<$3 seconds; model $<$500MB; VRAM $<$4GB; PyTorch 2.0+; CUDA 11.7+.
+\textbf{Non-Functional Requirements:} Each domain should contain at least 1,000 images, and training should take less than five minutes per epoch. The system must handle inputs up to 1024×1024, produce inference results in under three seconds, keep the model size below 500 MB, and run within 4 GB of VRAM. It also requires PyTorch 2.0 or higher and CUDA 11.7 or above.
 
 \section{Use Cases}
 
@@ -646,11 +646,11 @@ The system follows a three-tier architecture: \textbf{Client tier} (web browser 
 %% Chapter 5: Software Architecture and Low Level Design
 
 \chapter{Software Architecture and Low Level Design}
-This chapter provides detailed algorithm descriptions, pseudocode, flowcharts, and implementation specifics for the neural style transfer system.
+This chapter offers detailed explanations of the algorithms, along with pseudocode, flowcharts, and implementation details used in the neural style transfer system.
 
 \section{Detailed Generator Architecture}
 
-The generator network transforms input images through a carefully designed encoder-transformer-decoder architecture.
+The generator network processes input images using a well-structured encoder–transformer–decoder architecture designed to gradually extract features and produce the final stylized output.
 
 \begin{figure}[H]
 \centering
