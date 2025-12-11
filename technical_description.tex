@@ -127,8 +127,6 @@ Every dataset uses JPG/PNG images with a resolution of 256 $\times$256. Domain X
 
 \begin{table}[H]
 \centering
-\caption{Complete Dataset Summary}
-\label{tab:dataset_summary}
 \begin{tabular}{|l|c|c|c|c|}
 \hline
 \textbf{Style} & \textbf{Domain X} & \textbf{Domain X Size} & \textbf{Domain Y} & \textbf{Domain Y Size} \\ \hline
@@ -137,6 +135,8 @@ Disney & Human Faces & 3,000+ & Disney Frames & 2,000+ \\ \hline
 Ghibli & Human Faces & 3,000+ & Ghibli Frames & 2,000+ \\ \hline
 Van Gogh & Landscapes & 2,500+ & Paintings & 400+ \\ \hline
 \end{tabular}
+\caption{Complete Dataset Summary}
+\label{tab:dataset_summary}
 \end{table}
 
 \section{CycleGAN Architecture Details}
@@ -256,8 +256,6 @@ The generator is built using a ResNet-style encoder–decoder structure and incl
 \textbf{Generator Layer Specifications:}
 \begin{table}[H]
 \centering
-\caption{Generator Network Layers}
-\label{tab:generator_layers}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Layer} & \textbf{Type} & \textbf{Filters} & \textbf{Kernel} & \textbf{Stride} \\ \hline
@@ -269,6 +267,8 @@ u128 & DeConv + IN + ReLU & 128 & 3$\times$3 & 2 \\ \hline
 u64 & DeConv + IN + ReLU & 64 & 3$\times$3 & 2 \\ \hline
 c7s1-3 & Conv + Tanh & 3 & 7$\times$7 & 1 \\ \hline
 \end{tabular}
+\caption{Generator Network Layers}
+\label{tab:generator_layers}
 \end{table}
 
 \subsection{Residual Block Architecture}
@@ -327,8 +327,6 @@ The discriminator adopts a PatchGAN design, where it evaluates and classifies ov
 \textbf{Discriminator Layer Specifications:}
 \begin{table}[H]
 \centering
-\caption{Discriminator Network Layers}
-\label{tab:discriminator_layers}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Layer} & \textbf{Type} & \textbf{Filters} & \textbf{Kernel} & \textbf{Stride} \\ \hline
@@ -338,6 +336,8 @@ C256 & Conv + IN + LeakyReLU & 256 & 4$\times$4 & 2 \\ \hline
 C512 & Conv + IN + LeakyReLU & 512 & 4$\times$4 & 1 \\ \hline
 Output & Conv & 1 & 4$\times$4 & 1 \\ \hline
 \end{tabular}
+\caption{Discriminator Network Layers}
+\label{tab:discriminator_layers}
 \end{table}
 
 \section{Loss Functions}
@@ -346,7 +346,7 @@ Training uses a combination of different loss functions, each contributing to a 
 
 \subsection{Adversarial Loss (LSGAN)}
 
-The adversarial loss helps the model generate images that look as realistic as those in the target domain. For improved training stability, we use the Least Squares GAN (LSGAN) approach \cite{bib:lsgan} instead of the standard cross-entropy loss.
+The adversarial loss helps the model generate images that look as realistic as those in the target domain. For improved training stability, we use the Least Squares GAN (LSGAN) approach instead of the standard cross-entropy loss.
 
 For generator $G$ and discriminator $D_Y$:
 \begin{equation}
@@ -432,7 +432,6 @@ The final generator loss is obtained by combining all the loss components, each 
 \textbf{Loss Weights Used:}
 \begin{table}[H]
 \centering
-\caption{Loss Function Weights}
 \begin{tabular}{|l|c|l|}
 \hline
 \textbf{Loss Component} & \textbf{Weight} & \textbf{Purpose} \\ \hline
@@ -441,6 +440,7 @@ Cycle-Consistency ($\lambda_{cyc}$) & 10.0 & Content preservation \\ \hline
 Identity ($\lambda_{id}$) & 5.0 & Color preservation \\ \hline
 Perceptual ($\lambda_{perc}$) & 1.0 & Semantic content \\ \hline
 \end{tabular}
+\caption{Loss Function Weights}
 \end{table}
 
 \textbf{Total Loss:}
@@ -464,8 +464,6 @@ This section explains the hyperparameters and the training processes used to dev
 \subsection{Hyperparameter Selection}
 \begin{table}[H]
 \centering
-\caption{Training Hyperparameters}
-\label{tab:hyperparameters}
 \begin{tabular}{|l|c||l|c|}
 \hline
 \textbf{Parameter} & \textbf{Value} & \textbf{Parameter} & \textbf{Value} \\ \hline
@@ -473,6 +471,8 @@ Image Size & 256$\times$256 & Optimizer & Adam ($\beta_1$=0.5, $\beta_2$=0.999) 
 Batch Size & 4 & Learning Rate & 0.0002 (linear decay from epoch 100) \\ \hline
 Total Epochs & 200 & Residual Blocks & 9 \\ \hline
 \end{tabular}
+\caption{Training Hyperparameters}
+\label{tab:hyperparameters}
 \end{table}
 
 \textbf{Hyperparameter Justification:}
@@ -507,7 +507,6 @@ Training time and resource requirements vary by style:
 
 \begin{table}[H]
 \centering
-\caption{Training Resource Requirements}
 \begin{tabular}{|l|c|c|c|}
 \hline
 \textbf{Style} & \textbf{Training Time} & \textbf{GPU Memory} & \textbf{Dataset Size} \\ \hline
@@ -516,6 +515,7 @@ Disney & 13-14 hours & 8 GB & 5,000+ images \\ \hline
 Studio Ghibli & 13-14 hours & 8 GB & 5,000+ images \\ \hline
 Van Gogh & 8-10 hours & 8 GB & 2,900+ images \\ \hline
 \end{tabular}
+\caption{Training Resource Requirements}
 \end{table}
 
 The Van Gogh model trains more quickly because it uses a smaller dataset and the style patterns are less complex compared to the animation-based styles.
@@ -528,7 +528,6 @@ This chapter provides a detailed overview of the system architecture and the hig
 
 \begin{table}[H]
 \centering
-\caption{Technical Terminology}
 \begin{tabular}{|l|p{10cm}|}
 \hline
 \textbf{Term} & \textbf{Definition} \\ \hline
@@ -542,6 +541,7 @@ Instance Normalization & Normalization technique that normalizes each sample ind
 PatchGAN & Discriminator that classifies image patches instead of whole images \\ \hline
 Perceptual Loss & Loss computed using features from pre-trained networks (VGG-19) \\ \hline
 \end{tabular}
+\caption{Technical Terminology}
 \end{table}
 
 \section{System Components}
@@ -787,6 +787,8 @@ The generator network processes input images using a well-structured encoder–t
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[
+    scale=1.1,
+    transform shape,
     node distance=1cm,
     startstop/.style={rectangle, rounded corners, draw, fill=red!20, minimum width=2.5cm, minimum height=0.7cm, align=center, font=\small},
     process/.style={rectangle, draw, fill=blue!15, minimum width=3.2cm, minimum height=0.7cm, align=center, font=\small},
@@ -1082,7 +1084,6 @@ The generator network processes input images using a well-structured encoder–t
 
 \State $h \leftarrow$ ReflectionPad2d($h$, padding=1)
 \State $h \leftarrow$ Conv2d($h$, $256 \rightarrow 256$, kernel=3)
-\State $h \leftarrow$ InstanceNorm2d($h$)
 
 \State $y \leftarrow x + h$ \Comment{Skip connection}
 
@@ -1256,7 +1257,7 @@ The inference process follows: Start $\rightarrow$ Input Image $\rightarrow$ Val
 \section{Data Flow}
 
 The system data flow follows: User $\rightarrow$ Upload $\rightarrow$ Preprocess $\rightarrow$ Transform (using model weights) $\rightarrow$ Output. During training, Domain X and Y images are loaded via DataLoader, passed through generators G and F to produce fake images, which are then evaluated by discriminators $D_Y$ and $D_X$ for loss computation.
-
+\newpage
 \section{Hardware and Software Specifications}
 
 \textbf{Hardware (Training):} NVIDIA RTX 2080+ GPU with 8GB+ VRAM, 16GB+ RAM, 100GB+ SSD, Intel i7/AMD Ryzen 7.

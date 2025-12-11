@@ -1,8 +1,8 @@
 \chapter{Introduction}
-
 The convergence of artificial intelligence and creative arts has created infinite opportunities for the creation of digital based artwork. One of the most exciting current uses of deep learning is in Neural Style Transfer (NST), which allows you to take a normal photo and create an amazing piece of art from it, by learning what makes a particular style "art" and then applying that same "art" style to create something new with your own image. This project's goal is to design a seamless style transfer system using CycleGAN (Cycle-Consistent Generative Adversarial Networks) to enable the ability to convert images into 4 very unique artistic styles, which include: One Piece anime, Disney animated characters, Studio Ghibli animated characters, and Van Gogh style painting.\\
 The emergence of Generative Adversarial Networks (GANs) in 2014 by Goodfellow et al. \cite{bib:goodfellow2014} marked a paradigm shift in generative modeling. Subsequently, the introduction of CycleGAN by Zhu et al. \cite{bib:cyclegan} revolutionized image-to-image translation by eliminating the requirement for paired training data. This advancement is particularly significant for artistic style transfer, where obtaining perfectly aligned pairs of content and stylized images is impractical.\\
 This project utilises the characterisation of the above examples to produce an animated human face and to create painting-like landscapes based on this characterisation. Each of these three animation styles (One Piece, Disney, Studio Ghibli) has a unique visual appearance, making it immediately identifiable. The post-impressionist style designed by Vincent Van Gogh is accepted as having a very particular brushstroke and a colour palette that is especially vibrant.\\
+\newpage
 \section{Background}
 \subsection{Evolution of Computer Vision}
 
@@ -19,6 +19,7 @@ GANs consist of two components: the generator, which is responsible for generati
 
 GANs comprise two essential elements: a Generator responsible for the creation of synthetic samples, and a Discriminator which judges if a particular sample is classified as real or fake. By using the principles of adversarial training, both components were trained until the generator produces synthetically produced samples in such a manner that they look "real" to the human eye. Examples of several types of GANs include cGANs (Conditional GANs), Pix2Pix, CycleGANs and StyleGANs.
 \section{Motivation}
+\vspace{-0.7cm}
 The motivation for this project stems from several converging factors in technology, art, and social media culture:\\
 \textbf{1. Growing Demand for Personalized Digital Art:}\\
 The popularity of photo filter apps and personalized artistic transformation utilities are driven by the need for users to create artistically altered versions of their own images in creative ways. There is a large market demand for systems that can provide high-quality anime or painterly transformations of photographs to fulfill this need.\\
@@ -41,7 +42,6 @@ Taking an input image $x$ from domain $X$ (real photographs), the goal is to lea
     \item The transformation is realistic and free from artifacts
     \item The system operates efficiently for real-time applications
 \end{enumerate}
-\newpage
 The specific style domains addressed are:
 \begin{itemize}
     \item \textbf{One Piece Style:} Bold outlines, exaggerated expressions, vibrant colors characteristic of Eiichiro Oda's artwork
@@ -49,7 +49,7 @@ The specific style domains addressed are:
     \item \textbf{Studio Ghibli Style:} Watercolor textures, naturalistic expressions, warm earthy tones of Hayao Miyazaki's films
     \item \textbf{Van Gogh Style:} Swirling brushstrokes, impasto technique, vibrant post-impressionist colors
 \end{itemize}
-
+\newpage
 \section{Objective of the Project}
 The primary objectives of this project are:\\
 \textbf{1. Develop Style-Specific Neural Style Transfer Models:}\\
@@ -70,6 +70,7 @@ Implement the following key algorithms with improvements tailored to our applica
 Achieve inference times of under 3 seconds per image through model optimization, efficient data pipelines, and GPU acceleration.\\
 \textbf{5. Build a Modular and Extensible System:}\\
 Design the system architecture to allow easy addition of new styles and modification of existing models.\\
+\newpage
 \section{Scope of the Project}
 The scope of this project encompasses the following:\\
 \textbf{Included in Scope:}
