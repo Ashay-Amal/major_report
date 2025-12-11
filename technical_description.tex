@@ -1,9 +1,5 @@
-%%  Technical Chapters
-
 \restylefloat{algorithm}
-
 \chapter{System Overview}
-
 This chapter provides a comprehensive overview of the AI-Based Neural Style Transfer system, including the overall architecture, dataset creation methodology, and the four distinct style transfer models implemented: One Piece, Disney, Studio Ghibli, and Van Gogh.
 
 \section{System Architecture Overview}
@@ -46,19 +42,19 @@ The system is designed as a modular pipeline that transforms user-provided conte
 \label{fig:system_arch}
 \end{figure}
 
-
 \section{Style Transfer Modes}
-
 The system implements four distinct style transfer modes:\\
-
+\vspace{-0.9cm}
 \subsection{One Piece Style Transfer}
 \begin{itemize}
     \item \textbf{Input:} Human face photographs
+    \vspace{-0.5cm}
     \item \textbf{Output:} One Piece anime-style character faces
+    \vspace{-0.5cm}
     \item \textbf{Characteristics:} Bold black outlines, exaggerated expressions, vibrant saturated colors, distinctive large eyes
+    \vspace{-0.5cm}
     \item \textbf{Dataset Source:} Frames extracted from One Piece anime episodes and movies
 \end{itemize}
-
 \subsection{Disney Style Transfer}
 \begin{itemize}
     \item \textbf{Input:} Human face photographs
@@ -66,7 +62,6 @@ The system implements four distinct style transfer modes:\\
     \item \textbf{Characteristics:} Smooth color gradients, large expressive eyes with reflections, soft pastel color palettes, polished clean lines
     \item \textbf{Dataset Source:} Frames extracted from Disney animated feature films
 \end{itemize}
-
 \subsection{Studio Ghibli Style Transfer}
 \begin{itemize}
     \item \textbf{Input:} Human face photographs
@@ -74,7 +69,6 @@ The system implements four distinct style transfer modes:\\
     \item \textbf{Characteristics:} Soft watercolor-like textures, naturalistic expressions, warm earthy tones, hand-drawn aesthetic
     \item \textbf{Dataset Source:} Frames extracted from Studio Ghibli films (Spirited Away, Howl's Moving Castle, etc.)
 \end{itemize}
-
 \subsection{Van Gogh Style Transfer}
 \begin{itemize}
     \item \textbf{Input:} Landscape photographs
@@ -82,7 +76,7 @@ The system implements four distinct style transfer modes:\\
     \item \textbf{Characteristics:} Swirling brushstrokes, vibrant colors (yellows, blues), impasto technique, post-impressionist aesthetic
     \item \textbf{Dataset Source:} Van Gogh paintings from Kaggle dataset
 \end{itemize}
-
+\newpage
 \section{Dataset Creation Methodology}
 
 Since CycleGAN requires unpaired datasets from two domains (Domain X: real-world images, Domain Y: stylized images), we developed a comprehensive dataset creation pipeline.
@@ -92,6 +86,7 @@ Since CycleGAN requires unpaired datasets from two domains (Domain X: real-world
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[
+    scale=0.8, transform shape,
     node distance=1cm,
     block/.style={rectangle, draw, fill=green!20, text width=7em, text centered, minimum height=2.5em},
     decision/.style={diamond, draw, fill=orange!20, text width=5em, text centered, aspect=2},
@@ -463,15 +458,10 @@ Each discriminator is trained to distinguish real images from generated ones:
 \begin{equation}
 \mathcal{L}_{D_X} = \mathbb{E}_{x}[(D_X(x) - 1)^2] + \mathbb{E}_{y}[D_X(F(y))^2]
 \end{equation}
-
 The discriminators use a history buffer of 50 previously generated images to stabilize training and prevent oscillation
-
 \section{Training Configuration}
-
 This section details the hyperparameters and training procedures used to train the style transfer models.
-
 \subsection{Hyperparameter Selection}
-
 \begin{table}[H]
 \centering
 \caption{Training Hyperparameters}
@@ -486,23 +476,16 @@ Total Epochs & 200 & Residual Blocks & 9 \\ \hline
 \end{table}
 
 \textbf{Hyperparameter Justification:}
-
 \begin{itemize}
     \item \textbf{Image Size (256$\times$256):} Provides a good balance between quality and computational efficiency. Larger sizes increase memory requirements quadratically while providing diminishing returns for style transfer quality.
-
     \item \textbf{Batch Size (4):} Limited by GPU memory when training with multiple networks (two generators, two discriminators). Smaller batch sizes also help with training stability for GANs.
-
     \item \textbf{Learning Rate (0.0002):} Standard learning rate for Adam optimizer in GAN training, as recommended in the original CycleGAN paper.
-
     \item \textbf{$\beta_1$ = 0.5:} Lower momentum than the default 0.9 helps stabilize GAN training by preventing the optimizer from ``overshooting'' in the adversarial dynamics.
-
     \item \textbf{Linear Decay:} Learning rate is kept constant for the first 100 epochs, then linearly decayed to zero over the remaining 100 epochs. This allows for initial exploration followed by fine-tuning.
-
     \item \textbf{9 Residual Blocks:} Standard for 256$\times$256 images. 6 blocks are used for 128$\times$128, and 9 for higher resolutions, following the original CycleGAN architecture.
 \end{itemize}
 
 \subsection{Training Procedure}
-
 The training follows an alternating optimization scheme: (1) sample batch from both domains, (2) generate fake images ($\hat{y} = G(x)$, $\hat{x} = F(y)$), (3) compute cycle reconstructions ($\tilde{x} = F(G(x))$, $\tilde{y} = G(F(y))$), (4) compute identity mappings, (5) update generators with total loss, (6) update discriminators using image history buffer.
 
 \subsection{Training Stabilization Techniques}
@@ -517,7 +500,7 @@ lr_{epoch} = lr_{initial} \times \max\left(0, 1 - \frac{epoch - 100}{100}\right)
 \textbf{Data Augmentation:} Random horizontal flip (50\%), resize to 286$\times$286 with random crop to 256$\times$256, normalization to [-1, 1].
 
 \textbf{Checkpointing:} Models saved every 10 epochs; best model selected based on FID score and visual quality
-
+\newpage
 \subsection{Training Resources}
 
 Training time and resource requirements vary by style:
@@ -540,9 +523,7 @@ The Van Gogh model trains faster due to the smaller dataset size and simpler sty
 %% Chapter 4: System Architecture and High Level Design
 
 \chapter{System Architecture and High Level Design}
-
 This chapter presents the detailed system architecture and high-level design of the neural style transfer system, including UML diagrams, component interactions, and design decisions.
-
 \section{Terminology}
 
 \begin{table}[H]
@@ -598,44 +579,52 @@ Perceptual Loss & Loss computed using features from pre-trained networks (VGG-19
 \end{figure}
 
 \subsection{Component Descriptions}
-
 \textbf{1. User Interface Module}
+\vspace{-0.2cm}
 \begin{itemize}
     \item Handles image upload from user
+    \vspace{-0.2cm}
     \item Provides style selection options (One Piece, Disney, Ghibli, Van Gogh)
+    \vspace{-0.2cm}
     \item Displays progress and results
 \end{itemize}
-
 \textbf{2. Image Preprocessing Module}
+\vspace{-0.2cm}
 \begin{itemize}
     \item Validates input image format
+    \vspace{-0.2cm}
     \item Resizes image to 256$\times$256 pixels
+    \vspace{-0.2cm}
     \item Normalizes pixel values to [-1, 1] range
+    \vspace{-0.2cm}
     \item Converts to tensor format
 \end{itemize}
-
 \textbf{3. Style Selection Module}
+\vspace{-0.2cm}
 \begin{itemize}
     \item Loads appropriate model weights based on selected style
+    \vspace{-0.2cm}
     \item Configures inference parameters
 \end{itemize}
-
 \textbf{4. Inference Engine}
+\vspace{-0.2cm}
 \begin{itemize}
     \item Loads pre-trained generator model
+    \vspace{-0.2cm}
     \item Performs forward pass through network
+    \vspace{-0.2cm}
     \item Generates stylized output
 \end{itemize}
-
 \textbf{5. Post-processing Module}
+\vspace{-0.2cm}
 \begin{itemize}
     \item Denormalizes output tensor
+    \vspace{-0.2cm}
     \item Converts to image format
+    \vspace{-0.2cm}
     \item Saves result to file
 \end{itemize}
-
 \section{Class Structure}
-
 The system consists of four main classes: (1) \textbf{Generator} - contains encoder, residual blocks, and decoder with forward/encode/decode methods; (2) \textbf{Discriminator} - contains sequential layers and output convolution with forward method; (3) \textbf{CycleGAN} - aggregates two generators (G, F) and two discriminators ($D_X$, $D_Y$) with train\_step and inference methods; (4) \textbf{StyleDataset} - handles domain X/Y image paths with transforms for data loading.
 \section{Inference Sequence}
 
@@ -1169,8 +1158,6 @@ The generator network transforms input images through a carefully designed encod
 \If{$img$ is None}
     \State \textbf{raise} InvalidImageError
 \EndIf
-
-\State \Comment{Convert to RGB}
 \If{$img$.channels $= 1$}
     \State $img \leftarrow$ GrayscaleToRGB($img$)
 \ElsIf{$img$.channels $= 4$}

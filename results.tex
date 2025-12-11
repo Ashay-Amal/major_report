@@ -38,27 +38,27 @@ OpenCV & 4.7.0 \\ \hline
 \end{tabular}
 \end{table}
 
-\section{Training Results}
+% \section{Training Results}
 
-\subsection{Training Statistics}
+% \subsection{Training Statistics}
 
-\begin{table}[H]
-\centering
-\caption{Training Statistics per Style Model}
-\label{tab:training_stats}
-\begin{tabular}{|l|c|c|c|c|}
-\hline
-\textbf{Metric} & \textbf{One Piece} & \textbf{Disney} & \textbf{Ghibli} & \textbf{Van Gogh} \\ \hline
-Total Epochs & 200 & 200 & 200 & 200 \\ \hline
-Training Time & 14.2 hrs & 13.8 hrs & 13.5 hrs & 9.2 hrs \\ \hline
-Final Gen. Loss & -- & -- & -- & -- \\ \hline
-Final Disc. Loss & -- & -- & -- & -- \\ \hline
-Final Cycle Loss & -- & -- & -- & -- \\ \hline
-Best Epoch & -- & -- & -- & -- \\ \hline
-\end{tabular}
-\end{table}
+% \begin{table}[H]
+% \centering
+% \caption{Training Statistics per Style Model}
+% \label{tab:training_stats}
+% \begin{tabular}{|l|c|c|c|c|}
+% \hline
+% \textbf{Metric} & \textbf{One Piece} & \textbf{Disney} & \textbf{Ghibli} & \textbf{Van Gogh} \\ \hline
+% Total Epochs & 200 & 200 & 200 & 200 \\ \hline
+% Training Time & 14.2 hrs & 13.8 hrs & 13.5 hrs & 9.2 hrs \\ \hline
+% Final Gen. Loss & -- & -- & -- & -- \\ \hline
+% Final Disc. Loss & -- & -- & -- & -- \\ \hline
+% Final Cycle Loss & -- & -- & -- & -- \\ \hline
+% Best Epoch & -- & -- & -- & -- \\ \hline
+% \end{tabular}
+% \end{table}
 
-\textit{Note: Fill in the actual values from your training logs.}
+% \textit{Note: Fill in the actual values from your training logs.}
 
 \section{Test Procedures and Test Cases}
 
@@ -68,6 +68,7 @@ We designed test cases to evaluate the style transfer models across various inpu
 
 \begin{table}[H]
 \centering
+\small
 \caption{Test Cases for Style Transfer Evaluation}
 \label{tab:test_cases}
 \begin{tabular}{|l|p{4cm}|p{4cm}|p{4cm}|}
@@ -85,13 +86,17 @@ TC08 & Landscape photograph (Van Gogh) & Painterly transformation & Brush stroke
 \end{table}
 
 \subsection{Test Procedure}
-
 \begin{enumerate}
     \item Load pre-trained generator model for selected style
+    \vspace{-0.2cm}
     \item Preprocess input image to 256$\times$256 resolution
+    \vspace{-0.2cm}
     \item Run inference with torch.no\_grad() for efficiency
+    \vspace{-0.2cm}
     \item Postprocess output tensor to image format
+    \vspace{-0.2cm}
     \item Save result and record inference time
+    \vspace{-0.2cm}
     \item Evaluate output quality using metrics and visual inspection
 \end{enumerate}
 
@@ -118,8 +123,11 @@ TC08 & Landscape photograph (Van Gogh) & Painterly transformation & Brush stroke
 \textbf{Observations:}
 \begin{itemize}
     \item Smooth gradients achieved in skin and hair
+    \vspace{-0.3cm}
     \item Eye enlargement and expressiveness enhanced
+    \vspace{-0.3cm}
     \item Soft color palette transformation applied
+    \vspace{-0.3cm}
     \item Clean, polished appearance characteristic of Disney
 \end{itemize}
 
@@ -193,7 +201,7 @@ TC08 & Landscape photograph (Van Gogh) & Painterly transformation & Brush stroke
     \item Hair and skin colors appropriately stylized
     \item Facial structure preserved while achieving anime look
 \end{itemize}
-
+\newpage
 \section{Website User Interface}
 
 The style transfer system is deployed through a user-friendly web interface that allows users to easily upload images and apply different artistic styles.

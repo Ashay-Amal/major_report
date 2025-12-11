@@ -452,7 +452,6 @@ INPUT C:\Users\ashay\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\sym
 INPUT .\results.tex
 INPUT .\results.tex
 INPUT results.tex
-INPUT C:\Users\ashay\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmti12.tfm
 INPUT .\images\sample1.png
 INPUT .\images\sample1.png
 INPUT .\images\sample1.png
@@ -569,6 +568,7 @@ INPUT conclusion.tex
 INPUT .\bibliography.tex
 INPUT .\bibliography.tex
 INPUT bibliography.tex
+INPUT C:\Users\ashay\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmti12.tfm
 INPUT .\appendix.tex
 INPUT .\appendix.tex
 INPUT appendix.tex

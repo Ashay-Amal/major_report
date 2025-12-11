@@ -3,68 +3,71 @@
 This chapter summarizes the achievements of the AI-Based Neural Style Transfer project, discusses the contributions made, and outlines potential directions for future work.
 
 \section{Summary of the Project Work}
-
 The project titled "AI-Based Neural Style Transfer using CycleGAN" has been successfully designed, implemented, and tested. The system enables the transformation of ordinary photographs into distinctive artistic styles using deep learning techniques.
-
 \subsection{Achievements}
-
 \textbf{1. Successful Implementation of Four Style Transfer Models:}
+\vspace{-0.4cm}
 \begin{itemize}
     \item \textbf{One Piece Style:} Transforms human face photographs into One Piece anime character style with bold outlines, exaggerated expressions, and vibrant colors characteristic of Eiichiro Oda's artwork
+    \vspace{-0.2cm}
     \item \textbf{Disney Style:} Transforms human faces into Disney animation style featuring smooth gradients, large expressive eyes, and soft color palettes
+    \vspace{-0.2cm}
     \item \textbf{Studio Ghibli Style:} Transforms human faces into Studio Ghibli animation style with soft watercolor textures, naturalistic expressions, and warm earthy tones
+    \vspace{-0.2cm}
     \item \textbf{Van Gogh Style:} Transforms landscape photographs into Van Gogh painting style with distinctive swirling brushstrokes, vibrant colors, and post-impressionist aesthetic
 \end{itemize}
-
 \textbf{2. Custom Dataset Creation Pipeline:}
+\vspace{-0.4cm}
 \begin{itemize}
     \item Developed an automated frame extraction algorithm using OpenCV and face detection
+    \vspace{-0.2cm}
     \item Successfully extracted character frames from One Piece episodes, Disney movies, and Studio Ghibli films
+    \vspace{-0.2cm}
     \item Curated human face and landscape datasets from Kaggle
+    \vspace{-0.2cm}
     \item Implemented quality filtering and similarity checking to ensure dataset quality
 \end{itemize}
-
 \textbf{3. CycleGAN Architecture Implementation:}
 \begin{itemize}
     \item Implemented ResNet-based generator with 9 residual blocks
+    \vspace{-0.2cm}
     \item Implemented PatchGAN discriminator for local style assessment
+    \vspace{-0.2cm}
     \item Integrated multiple loss functions: adversarial, cycle-consistency, identity, and perceptual
+    \vspace{-0.2cm}
     \item Achieved stable training with LSGAN loss formulation
 \end{itemize}
-
 \textbf{4. Performance Optimization:}
 \begin{itemize}
     \item Achieved inference times under 3 seconds per image on GPU
+    \vspace{-0.2cm}
     \item Optimized memory usage for efficient deployment
+    \vspace{-0.2cm}
     \item Implemented batch processing capabilities
 \end{itemize}
-
 \textbf{5. Algorithm Improvements:}
 \begin{itemize}
     \item Added identity loss for color preservation
+    \vspace{-0.2cm}
     \item Integrated perceptual loss using VGG-19 features
+    \vspace{-0.2cm}
     \item Used LSGAN loss for more stable training
+    \vspace{-0.2cm}
     \item Developed custom frame extraction algorithm with quality filtering
 \end{itemize}
-
 \subsection{Technical Contributions}
-
 The project makes the following technical contributions:
-
 \begin{enumerate}
     \item \textbf{Multi-Style Architecture:} Demonstrated that a single CycleGAN architecture can be effectively trained for diverse animation styles (anime, Western animation, Ghibli) and painting styles (Van Gogh)
-
+    \vspace{-0.2cm}
     \item \textbf{Dataset Creation Methodology:} Provided a systematic approach for creating animation-style datasets from video sources, which can be extended to other animation styles
-
+    \vspace{-0.2cm}
     \item \textbf{Style-Specific Optimization:} Identified and documented the hyperparameter configurations and loss weights that work best for each style category
-
+    \vspace{-0.2cm}
     \item \textbf{Comprehensive Evaluation:} Established evaluation criteria and test procedures for assessing style transfer quality
 \end{enumerate}
-
 \subsection{Meeting Project Objectives}
-
 The project successfully met all stated objectives:
-
 \begin{table}[H]
 \centering
 \caption{Objective Completion Status}
@@ -79,53 +82,47 @@ Build modular and extensible system & Achieved \\ \hline
 Implement evaluation metrics & Achieved \\ \hline
 \end{tabular}
 \end{table}
-
 \section{Limitations}
-
 Despite the successful implementation, the system has certain limitations:
-
 \begin{enumerate}
     \item \textbf{Resolution Constraints:} The system processes images at 256$\times$256 resolution, which may not be sufficient for high-resolution applications
-
+    \vspace{-0.2cm}
     \item \textbf{Pose Sensitivity:} Style transfer quality may degrade for extreme poses or side profiles
-
+    \vspace{-0.2cm}
     \item \textbf{Training Time:} Training a new style model requires 12-15 hours on a modern GPU
-
+    \vspace{-0.2cm}
     \item \textbf{Dataset Dependency:} Quality of results depends heavily on the quality and diversity of training data
-
+    \vspace{-0.2cm}
     \item \textbf{Single Image Processing:} Current implementation does not support real-time video processing
 \end{enumerate}
-
+\newpage
 \section{Scope for Future Work}
-
 Future enhancements can be categorized into three areas:
-
 \textbf{Short-term Improvements:}
 \begin{itemize}
     \item Higher resolution support (512$\times$512 or 1024$\times$1024) using progressive growing
+    \vspace{-0.2cm}
     \item Additional animation styles (Pixar, DreamWorks, Dragon Ball, Naruto)
+    \vspace{-0.2cm}
     \item Model optimization through pruning and knowledge distillation for mobile deployment
 \end{itemize}
-
 \textbf{Medium-term Extensions:}
 \begin{itemize}
     \item Video style transfer with temporal consistency constraints
+    \vspace{-0.2cm}
     \item Multi-style transfer enabling blending and style interpolation
+    \vspace{-0.2cm}
     \item Interactive web and mobile applications with real-time camera support
 \end{itemize}
-
 \textbf{Long-term Research Directions:}
 \begin{itemize}
     \item User personalization with few-shot learning for custom styles
+    \vspace{-0.2cm}
     \item AR/VR integration for immersive artistic experiences
+    \vspace{-0.2cm}
     \item Advanced architectures using transformers and diffusion models
 \end{itemize}
-
 \section{Conclusion}
-
-The AI-Based Neural Style Transfer project has successfully demonstrated the application of CycleGAN for transforming photographs into distinctive artistic styles. The system effectively captures the visual characteristics of four diverse styles—One Piece anime, Disney animation, Studio Ghibli animation, and Van Gogh painting—while preserving the semantic content of input images.
-
-The project contributes a complete pipeline from dataset creation through frame extraction to model training and inference. The modular architecture allows for easy extension to additional styles, and the optimized implementation achieves real-time performance suitable for practical applications.
-
-The work presented in this report provides a foundation for further research in artistic style transfer and demonstrates the potential of deep learning for creative applications in digital art, entertainment, and social media.
-
+The AI-Based Neural Style Transfer project has successfully demonstrated the application of CycleGAN for transforming photographs into distinctive artistic styles. The system effectively captures the visual characteristics of four diverse styles—One Piece anime, Disney animation, Studio Ghibli animation, and Van Gogh painting—while preserving the semantic content of input images.\\
+The project contributes a complete pipeline from dataset creation through frame extraction to model training and inference. The modular architecture allows for easy extension to additional styles, and the optimized implementation achieves real-time performance suitable for practical applications.\\
+The work presented in this report provides a foundation for further research in artistic style transfer and demonstrates the potential of deep learning for creative applications in digital art, entertainment, and social media.\\

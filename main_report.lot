@@ -2,31 +2,30 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Complete Dataset Summary}}{17}{}%
-\contentsline {table}{\numberline {3.2}{\ignorespaces Generator Network Layers}}{18}{}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces Discriminator Network Layers}}{19}{}%
-\contentsline {table}{\numberline {3.4}{\ignorespaces Loss Function Weights}}{21}{}%
-\contentsline {table}{\numberline {3.5}{\ignorespaces Training Hyperparameters}}{22}{}%
-\contentsline {table}{\numberline {3.6}{\ignorespaces Training Resource Requirements}}{24}{}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces Complete Dataset Summary}}{16}{}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Generator Network Layers}}{17}{}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Discriminator Network Layers}}{18}{}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Loss Function Weights}}{20}{}%
+\contentsline {table}{\numberline {3.5}{\ignorespaces Training Hyperparameters}}{21}{}%
+\contentsline {table}{\numberline {3.6}{\ignorespaces Training Resource Requirements}}{23}{}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Technical Terminology}}{25}{}%
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {6.1}{\ignorespaces Test Environment Hardware}}{41}{}%
-\contentsline {table}{\numberline {6.2}{\ignorespaces Software Configuration}}{41}{}%
-\contentsline {table}{\numberline {6.3}{\ignorespaces Training Statistics per Style Model}}{42}{}%
-\contentsline {table}{\numberline {6.4}{\ignorespaces Test Cases for Style Transfer Evaluation}}{43}{}%
-\contentsline {table}{\numberline {6.5}{\ignorespaces Inference Speed Benchmarks}}{49}{}%
-\contentsline {table}{\numberline {6.6}{\ignorespaces GPU Memory Usage During Inference}}{49}{}%
-\contentsline {table}{\numberline {6.7}{\ignorespaces Qualitative Evaluation Criteria and Scores (1-5 scale)}}{50}{}%
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {7.1}{\ignorespaces Objective Completion Status}}{54}{}%
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {1.1}{\ignorespaces Project Milestone Schedule}}{62}{}%
-\contentsline {table}{\numberline {1.2}{\ignorespaces Project Budget Estimation}}{62}{}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Technical Terminology}}{24}{}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {6.1}{\ignorespaces Test Environment Hardware}}{40}{}%
+\contentsline {table}{\numberline {6.2}{\ignorespaces Software Configuration}}{40}{}%
+\contentsline {table}{\numberline {6.3}{\ignorespaces Test Cases for Style Transfer Evaluation}}{41}{}%
+\contentsline {table}{\numberline {6.4}{\ignorespaces Inference Speed Benchmarks}}{47}{}%
+\contentsline {table}{\numberline {6.5}{\ignorespaces GPU Memory Usage During Inference}}{47}{}%
+\contentsline {table}{\numberline {6.6}{\ignorespaces Qualitative Evaluation Criteria and Scores (1-5 scale)}}{48}{}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Complete Dataset Statistics}}{66}{}%
+\contentsline {table}{\numberline {7.1}{\ignorespaces Objective Completion Status}}{52}{}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Project Directory Structure}}{67}{}%
+\contentsline {table}{\numberline {1.1}{\ignorespaces Project Milestone Schedule}}{58}{}%
+\contentsline {table}{\numberline {1.2}{\ignorespaces Project Budget Estimation}}{58}{}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Complete Dataset Statistics}}{62}{}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Project Directory Structure}}{63}{}%
