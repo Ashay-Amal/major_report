@@ -2,11 +2,11 @@
 \thispagestyle{plain}
 \addcontentsline{toc}{chapter}{\numberline{}Abstract}
 
-This project presents a Neural Style Transfer system using CycleGAN (Cycle-Consistent Generative Adversarial Networks) to transform photographs into four artistic styles: One Piece anime, Disney animation, Studio Ghibli animation, and Van Gogh painting. The system transforms human faces into animated characters and landscapes into post-impressionist paintings using unpaired datasets with bidirectional mappings through cycle-consistency constraints.\\
+The project proposes a CycleGAN based Neural Style Transfer (NST) system for converting photographs into four distinct artistic styles of One Piece anime, Disney, Studio Ghibli, and paintings by Van Gogh. The system will utilize unpaired data sets with cycle-consistency constraints, which allows for the bidirectional mapping of human faces to animated characters and scenery to post-impressionist style works of art.\\
 
-The implementation includes dual generators and discriminators, adversarial loss for realistic generation, cycle-consistency loss for content preservation, identity loss for color preservation, and perceptual loss using VGG-19. A custom frame extraction algorithm using OpenCV creates animation datasets from video sources, while Van Gogh data combines landscapes and paintings from Kaggle.\\
+Utilization of the generator-discriminator (GAN-D) model involves utilizing both a generator and discriminator to create realistic artwork through adversarial loss, preserve content using Cycle-consistency loss, use identity loss for colour preservation, and incorporate VGG-19 perceptual loss. OpenCV's custom frame extraction method retrieves animated datasets from video sources, while Van Gogh datasets are constructed using landscapes and paintings retrieved from Kaggle.\\
 
-Built with PyTorch 2.0 and CUDA acceleration, the system achieves inference times under 3 seconds per image on NVIDIA GPUs. The modular architecture enables extension to additional styles, and results demonstrate successful style capture while preserving semantic content.\\
+Utilizing PyTorch 2.0 and accelerated by CUDA, the system provides an estimated 3-second or less delivery timeframe for each image processed by NVIDIA Graphics Processing Unit (GPU). This modular framework permits the extension of additional styles as confirmed through successful styling capture with semantic content maintained.\\
 
 \textbf{Keywords:} Neural Style Transfer, CycleGAN, Generative Adversarial Networks, Deep Learning, Image-to-Image Translation, Computer Vision, Animation Style Transfer, Van Gogh Style
 
