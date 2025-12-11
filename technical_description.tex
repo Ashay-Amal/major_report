@@ -1,10 +1,10 @@
 \restylefloat{algorithm}
 \chapter{System Overview}
-This chapter gives a detailed look at the AI-based Neural Style Transfer system. It explains the overall architecture, how the dataset was prepared, and the four style transfer models used in the project—One Piece, Disney, Studio Ghibli, and Van Gogh.
+The overall architecture, dataset creation process, and four different style transfer models—One Piece, Disney, Studio Ghibli, and Van Gogh—of the AI-Based Neural Style Transfer system are all covered in detail in this chapter.
 
 \section{System Architecture Overview}
 
-The system follows a modular pipeline that converts user-uploaded content images into artistic versions using CycleGAN-based neural networks. Its architecture includes four different style transfer modes, each trained on carefully curated custom datasets.
+CycleGAN-based neural networks are used in the system's modular pipeline design to create artistic stylizations from user-provided content images. Four different style transfer modes, each trained on specially chosen datasets, are supported by the architecture.
 
 \begin{figure}[H]
 \centering
@@ -43,7 +43,7 @@ The system follows a modular pipeline that converts user-uploaded content images
 \end{figure}
 
 \section{Style Transfer Modes}
-The system includes four separate style transfer modes:\\
+Four different style transfer modes are used by the system:\\
 \vspace{-0.9cm}
 \subsection{One Piece Style Transfer}
 \begin{itemize}
@@ -79,7 +79,7 @@ The system includes four separate style transfer modes:\\
 \newpage
 \section{Dataset Creation Methodology}
 
-Because CycleGAN works with unpaired datasets from two domains (Domain X: real-world images and Domain Y: stylized images), we created a complete pipeline for generating these datasets.
+We created a thorough dataset creation pipeline because CycleGAN requires unpaired datasets from two domains (Domain X: real-world images, Domain Y: stylized images).
 
 \subsection{Animation Frame Extraction Pipeline}
 
@@ -121,7 +121,7 @@ Because CycleGAN works with unpaired datasets from two domains (Domain X: real-w
 
 \subsection{Dataset Details}
 
-All datasets consist of 256×256 resolution images in JPG or PNG format. For Domain X, we used human face images from Kaggle (over 3,000 images for the face-based styles) and landscape images (more than 2,500 for the Van Gogh model). Domain Y includes style-specific frames that were extracted through our custom pipeline.
+Every dataset uses JPG/PNG images with a resolution of 256 $\times$256. Domain X utilizes either landscapes or human faces from Kaggle (3,000+ images each for face-based styles).
 
 \subsection{Dataset Summary}
 
