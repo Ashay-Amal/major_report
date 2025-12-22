@@ -1,10 +1,10 @@
 \restylefloat{algorithm}
 \chapter{System Overview}
-The overall architecture, dataset creation process, and four different style transfer models—One Piece, Disney, Studio Ghibli, and Van Gogh—of the AI-Based Neural Style Transfer system are all covered in detail in this chapter.
+The overall architecture, dataset creation process, and four different style transfer models: One Piece, Disney, Studio Ghibli, and Van Gogh of the AI-Based Neural Style Transfer system are all covered in detail in this chapter.
 
 \section{System Architecture Overview}
 
-CycleGAN-based neural networks are used in the system's modular pipeline design to create artistic stylizations from user-provided content images. Four different style transfer modes, each trained on specially chosen datasets, are supported by the architecture.
+The system employs a modular pipeline design using CycleGAN-based neural networks to create artistic stylizations from user-provided content images, as shown in Figure \ref{fig:system_arch}. The architecture supports four different style transfer modes, each trained on specially chosen datasets.
 
 \begin{figure}[H]
 \centering
@@ -15,7 +15,7 @@ CycleGAN-based neural networks are used in the system's modular pipeline design 
     arrow/.style={-latex', thick}
 ]
 
-    \node [block] (input) {Input Image\\(Photo/Landscape)};
+    \node [block, text width=9em] (input) {Input Image\\(Photo/Landscape)};
     \node [block, right=1.6cm of input] (select) {Style Selection\\Module};
 
     % Style Models (Closer + Smaller Text Width)
@@ -95,7 +95,7 @@ We created a thorough dataset creation pipeline because CycleGAN requires unpair
     \node [block] (video) {Video File\\(Episode/Movie)};
     \node [block, below=of video] (extract) {Frame\\Extraction};
     \node [block, below=of extract] (detect) {Face/Character\\Detection};
-    \node [decision, below=of detect] (conf) {Confidence\\$> \tau$?};
+    \node [decision, below=of detect] (conf) {Confidence\\$> 0.9$?};
     \node [block, below left=1cm and 0.5cm of conf] (discard) {Discard\\Frame};
     \node [block, below right=1cm and 0.5cm of conf] (crop) {Crop \&\\Resize};
     \node [decision, below=of crop] (sim) {Similar to\\existing?};
@@ -143,7 +143,7 @@ Van Gogh & Landscapes & 2,500+ & Paintings & 400+ \\ \hline
 
 \subsection{Overall Architecture}
 
-The CycleGAN model uses two generator–discriminator pairs that work together to learn mappings in both directions between the two domains.
+The CycleGAN model uses two generator–discriminator pairs that work together to learn mappings in both directions between the two domains, as illustrated in Figure \ref{fig:cyclegan_complete}.
 
 \begin{figure}[H]
 \centering
@@ -199,7 +199,7 @@ The CycleGAN model uses two generator–discriminator pairs that work together t
 
 \subsection{Generator Network Architecture}
 
-The generator is built using a ResNet-style encoder–decoder structure and includes nine residual blocks, which is suitable for 256×256 images.
+The generator is built using a ResNet-style encoder–decoder structure and includes nine residual blocks, which is suitable for 256×256 images. Figure \ref{fig:generator_detailed} shows the detailed architecture of the generator network.
 
 \begin{figure}[H]
 \centering
@@ -273,6 +273,8 @@ c7s1-3 & Conv + Tanh & 3 & 7$\times$7 & 1 \\ \hline
 
 \subsection{Residual Block Architecture}
 
+Each residual block preserves the input information through a skip connection while learning additional transformations, as depicted in Figure \ref{fig:resblock}.
+
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[
@@ -297,7 +299,7 @@ c7s1-3 & Conv + Tanh & 3 & 7$\times$7 & 1 \\ \hline
 
 \subsection{Discriminator Network Architecture (PatchGAN)}
 
-The discriminator adopts a PatchGAN design, where it evaluates and classifies overlapping 70×70 image patches.
+The discriminator adopts a PatchGAN design, where it evaluates and classifies overlapping 70×70 image patches, as shown in Figure \ref{fig:discriminator}.
 
 \begin{figure}[H]
 \centering
@@ -357,7 +359,7 @@ The generator tries to minimize:
 \begin{equation}
 \mathcal{L}_{G}^{adv} = \mathbb{E}_{x \sim p_{data}(x)}[(D_Y(G(x)) - 1)^2]
 \end{equation}
-
+\newpage
 \textbf{Why LSGAN:}
 \begin{itemize}
     \item Offers smoother gradients than traditional binary cross-entropy
@@ -474,7 +476,7 @@ Total Epochs & 200 & Residual Blocks & 9 \\ \hline
 \caption{Training Hyperparameters}
 \label{tab:hyperparameters}
 \end{table}
-
+\newpage
 \textbf{Hyperparameter Justification:}
 \begin{itemize}
     \item \textbf{Image Size (256$\times$256):} This size offers a good balance between output quality and computational efficiency. Using larger resolutions would significantly increase memory usage while giving only minimal improvements in style transfer quality.
@@ -650,7 +652,7 @@ This chapter offers detailed explanations of the algorithms, along with pseudoco
 
 \section{Detailed Generator Architecture}
 
-The generator network processes input images using a well-structured encoder–transformer–decoder architecture designed to gradually extract features and produce the final stylized output.
+The generator network processes input images using a well-structured encoder–transformer–decoder architecture designed to gradually extract features and produce the final stylized output, as shown in Figure \ref{fig:generator_lld}.
 
 \begin{figure}[H]
 \centering

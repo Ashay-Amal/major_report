@@ -1,6 +1,6 @@
 \chapter{Introduction}
 The convergence of artificial intelligence and creative arts has created infinite opportunities for the creation of digital based artwork. One of the most exciting current uses of deep learning is in Neural Style Transfer (NST), which allows you to take a normal photo and create an amazing piece of art from it, by learning what makes a particular style "art" and then applying that same "art" style to create something new with your own image. This project's goal is to design a seamless style transfer system using CycleGAN (Cycle-Consistent Generative Adversarial Networks) to enable the ability to convert images into 4 very unique artistic styles, which include: One Piece anime, Disney animated characters, Studio Ghibli animated characters, and Van Gogh style painting.\\
-The emergence of Generative Adversarial Networks (GANs) in 2014 by Goodfellow et al. \cite{bib:goodfellow2014} marked a paradigm shift in generative modeling. Subsequently, the introduction of CycleGAN by Zhu et al. \cite{bib:cyclegan} revolutionized image-to-image translation by eliminating the requirement for paired training data. This advancement is particularly significant for artistic style transfer, where obtaining perfectly aligned pairs of content and stylized images is impractical.\\
+The emergence of Generative Adversarial Networks (GANs) in 2014 marked a paradigm shift in generative modeling. Subsequently, the introduction of CycleGAN by Zhu et al. \cite{bib:cyclegan} revolutionized image-to-image translation by eliminating the requirement for paired training data. This advancement is particularly significant for artistic style transfer, where obtaining perfectly aligned pairs of content and stylized images is impractical.\\
 This project utilises the characterisation of the above examples to produce an animated human face and to create painting-like landscapes based on this characterisation. Each of these three animation styles (One Piece, Disney, Studio Ghibli) has a unique visual appearance, making it immediately identifiable. The post-impressionist style designed by Vincent Van Gogh is accepted as having a very particular brushstroke and a colour palette that is especially vibrant.\\
 \newpage
 \section{Background}
@@ -17,7 +17,7 @@ CNNs learn features in a hierarchical manner. The early layers typically capture
 GANs consist of two components: the generator, which is responsible for generating synthetic samples, and the discriminator, which determines whether or not a given sample is considered real or fake. Using adversarial training techniques, both components are trained until the generator produces samples created in a way that they appear realistic to real humans. Some popular variants of GAN include Conditional GAN, Pix2Pix, Cycle GAN, and Style GAN.
 \subsection{Style Transfer Approaches}
 
-GANs comprise two essential elements: a Generator responsible for the creation of synthetic samples, and a Discriminator which judges if a particular sample is classified as real or fake. By using the principles of adversarial training, both components were trained until the generator produces synthetically produced samples in such a manner that they look "real" to the human eye. Examples of several types of GANs include cGANs (Conditional GANs), Pix2Pix, CycleGANs and StyleGANs.
+GANs comprise two essential elements: a Generator responsible for the creation of synthetic samples, and a Discriminator which judges if a particular sample is classified as real or fake. By using the principles of adversarial training, both components were trained until the generator produces synthetically produced samples in such a manner that they look real to the human eye. Examples of several types of GANs include cGANs (Conditional GANs), Pix2Pix, CycleGANs and StyleGANs.
 \section{Motivation}
 \vspace{-0.7cm}
 The motivation for this project stems from several converging factors in technology, art, and social media culture:\\
@@ -26,7 +26,7 @@ The popularity of photo filter apps and personalized artistic transformation uti
 \textbf{2. Bridging Art and Technology:}\\
 It normally takes a lot of time and training to develop your artistic skills through traditional means, but thanks to neural style transfer, you do not need either of those to create art. With neural style transfer, anyone can create photo-based artwork that captures the essence of famous artists or animation studios. As a result, neural style transfer has made it easier than ever for people to appreciate and create art.\\
 \textbf{3. Advances in Deep Learning:}\\
-Deep learning has made tremendous strides in just a few years. Developments in image generation and transformation based on GANs (Generative Adversarial Networks) enable the creation of complex and highly realistic photographic imagery via computational techniques. Combining the development of very capable GPU computing systems with the growing number of free/open-source frameworks such as PyTorch means that building these capabilities is now easier than ever before.\\
+Deep learning has made tremendous strides in just a few years. Developments in image generation and transformation based on GANs (Generative Adversarial Networks) enable the creation of complex and highly realistic photographic imagery via computational techniques. Combining the development of very capable GPU computing systems with the growing number of open-source frameworks such as PyTorch means that building these capabilities is now easier than ever before.\\
 \textbf{4. Cultural Significance of Animation Styles:}\\
 Japanese Animation (One Piece) is an entirely different visual vocabulary than Western Animation (Disney) and Studio Ghibli. Fans of both styles have a huge following around the world and this is why there is such a high demand to develop software that converts photographs into these two styles for fans and content developers around the globe.\\
 \textbf{5. Preservation and Appreciation of Artistic Heritage:}\\
@@ -84,7 +84,7 @@ The scope of this project encompasses the following:\\
 \end{itemize}
 \newpage
 \section{Methodology Overview}
-The methodology employed in this project follows a systematic approach:\\
+The methodology employed in this project follows a systematic approach as illustrated in Figure \ref{fig:methodology}.\\
 \usetikzlibrary{positioning}
 \begin{figure}[H]
 \centering
