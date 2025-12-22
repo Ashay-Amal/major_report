@@ -126,6 +126,8 @@ Every dataset uses JPG/PNG images with a resolution of 256 $\times$256. Domain X
 \subsection{Dataset Summary}
 
 \begin{table}[H]
+\caption{Complete Dataset Summary}
+\label{tab:dataset_summary}
 \centering
 \begin{tabular}{|l|c|c|c|c|}
 \hline
@@ -135,8 +137,6 @@ Disney & Human Faces & 3,000+ & Disney Frames & 2,000+ \\ \hline
 Ghibli & Human Faces & 3,000+ & Ghibli Frames & 2,000+ \\ \hline
 Van Gogh & Landscapes & 2,500+ & Paintings & 400+ \\ \hline
 \end{tabular}
-\caption{Complete Dataset Summary}
-\label{tab:dataset_summary}
 \end{table}
 
 \section{CycleGAN Architecture Details}
@@ -255,6 +255,8 @@ The generator is built using a ResNet-style encoder–decoder structure and incl
 
 \textbf{Generator Layer Specifications:}
 \begin{table}[H]
+\caption{Generator Network Layers}
+\label{tab:generator_layers}
 \centering
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -267,8 +269,6 @@ u128 & DeConv + IN + ReLU & 128 & 3$\times$3 & 2 \\ \hline
 u64 & DeConv + IN + ReLU & 64 & 3$\times$3 & 2 \\ \hline
 c7s1-3 & Conv + Tanh & 3 & 7$\times$7 & 1 \\ \hline
 \end{tabular}
-\caption{Generator Network Layers}
-\label{tab:generator_layers}
 \end{table}
 
 \subsection{Residual Block Architecture}
@@ -328,6 +328,8 @@ The discriminator adopts a PatchGAN design, where it evaluates and classifies ov
 
 \textbf{Discriminator Layer Specifications:}
 \begin{table}[H]
+\caption{Discriminator Network Layers}
+\label{tab:discriminator_layers}
 \centering
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -338,8 +340,6 @@ C256 & Conv + IN + LeakyReLU & 256 & 4$\times$4 & 2 \\ \hline
 C512 & Conv + IN + LeakyReLU & 512 & 4$\times$4 & 1 \\ \hline
 Output & Conv & 1 & 4$\times$4 & 1 \\ \hline
 \end{tabular}
-\caption{Discriminator Network Layers}
-\label{tab:discriminator_layers}
 \end{table}
 
 \section{Loss Functions}
@@ -433,6 +433,7 @@ The final generator loss is obtained by combining all the loss components, each 
 
 \textbf{Loss Weights Used:}
 \begin{table}[H]
+\caption{Loss Function Weights}
 \centering
 \begin{tabular}{|l|c|l|}
 \hline
@@ -442,7 +443,6 @@ Cycle-Consistency ($\lambda_{cyc}$) & 10.0 & Content preservation \\ \hline
 Identity ($\lambda_{id}$) & 5.0 & Color preservation \\ \hline
 Perceptual ($\lambda_{perc}$) & 1.0 & Semantic content \\ \hline
 \end{tabular}
-\caption{Loss Function Weights}
 \end{table}
 
 \textbf{Total Loss:}
@@ -465,6 +465,8 @@ The discriminators use a history buffer of 50 previously generated images to hel
 This section explains the hyperparameters and the training processes used to develop the style transfer models.
 \subsection{Hyperparameter Selection}
 \begin{table}[H]
+\caption{Training Hyperparameters}
+\label{tab:hyperparameters}
 \centering
 \begin{tabular}{|l|c||l|c|}
 \hline
@@ -473,8 +475,6 @@ Image Size & 256$\times$256 & Optimizer & Adam ($\beta_1$=0.5, $\beta_2$=0.999) 
 Batch Size & 4 & Learning Rate & 0.0002 (linear decay from epoch 100) \\ \hline
 Total Epochs & 200 & Residual Blocks & 9 \\ \hline
 \end{tabular}
-\caption{Training Hyperparameters}
-\label{tab:hyperparameters}
 \end{table}
 \newpage
 \textbf{Hyperparameter Justification:}
@@ -508,6 +508,7 @@ lr_{epoch} = lr_{initial} \times \max\left(0, 1 - \frac{epoch - 100}{100}\right)
 Training time and resource requirements vary by style:
 
 \begin{table}[H]
+\caption{Training Resource Requirements}
 \centering
 \begin{tabular}{|l|c|c|c|}
 \hline
@@ -517,7 +518,6 @@ Disney & 13-14 hours & 8 GB & 5,000+ images \\ \hline
 Studio Ghibli & 13-14 hours & 8 GB & 5,000+ images \\ \hline
 Van Gogh & 8-10 hours & 8 GB & 2,900+ images \\ \hline
 \end{tabular}
-\caption{Training Resource Requirements}
 \end{table}
 
 The Van Gogh model trains more quickly because it uses a smaller dataset and the style patterns are less complex compared to the animation-based styles.
@@ -529,6 +529,7 @@ This chapter provides a detailed overview of the system architecture and the hig
 \section{Terminology}
 
 \begin{table}[H]
+\caption{Technical Terminology}
 \centering
 \begin{tabular}{|l|p{10cm}|}
 \hline
@@ -543,7 +544,6 @@ Instance Normalization & Normalization technique that normalizes each sample ind
 PatchGAN & Discriminator that classifies image patches instead of whole images \\ \hline
 Perceptual Loss & Loss computed using features from pre-trained networks (VGG-19) \\ \hline
 \end{tabular}
-\caption{Technical Terminology}
 \end{table}
 
 \section{System Components}

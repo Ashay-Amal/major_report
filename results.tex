@@ -8,6 +8,7 @@ This chapter presents the experimental setup, test procedures, and results obtai
 
 \vspace{-0.7cm}
 \begin{table}[H]
+\caption{Test Environment Hardware}
 \centering
 \begin{tabular}{|l|l|}
 \hline
@@ -18,12 +19,12 @@ RAM & 16GB DDR5 \\ \hline
 Storage & 512GB NVMe SSD \\ \hline
 Operating System & Windows 11 \\ \hline
 \end{tabular}
-\caption{Test Environment Hardware}
 \end{table}
 
 \subsection{Software Environment}
 \vspace{-0.7cm}
 \begin{table}[H]
+\caption{Software Configuration}
 \centering
 \begin{tabular}{|l|l|}
 \hline
@@ -35,7 +36,6 @@ cuDNN & 8.6 \\ \hline
 torchvision & 0.15.2 \\ \hline
 OpenCV & 4.7.0 \\ \hline
 \end{tabular}
-\caption{Software Configuration}
 \end{table}
 
 % \section{Training Results}
@@ -67,6 +67,8 @@ OpenCV & 4.7.0 \\ \hline
 We designed test cases to evaluate the style transfer models across various input conditions:
 
 \begin{table}[H]
+\caption{Test Cases for Style Transfer Evaluation}
+\label{tab:test_cases}
 \centering
 \small
 \begin{tabular}{|l|p{4cm}|p{4cm}|p{4cm}|}
@@ -81,8 +83,6 @@ TC06 & Various lighting conditions & Consistent style application & Robustness t
 TC07 & Different skin tones & Equal quality transformation & No bias in results \\ \hline
 TC08 & Landscape photograph (Van Gogh) & Painterly transformation & Brush stroke visibility \\ \hline
 \end{tabular}
-\caption{Test Cases for Style Transfer Evaluation}
-\label{tab:test_cases}
 \end{table}
 
 \subsection{Test Procedure}
@@ -238,6 +238,7 @@ The style transfer system is deployed through a user-friendly web interface that
 \subsection{Speed Benchmarks}
 
 \begin{table}[H]
+\caption{Inference Speed Benchmarks}
 \centering
 \begin{tabular}{|l|c|c|c|}
 \hline
@@ -245,12 +246,12 @@ The style transfer system is deployed through a user-friendly web interface that
 256$\times$256 & $\sim$50 ms & $\sim$150 ms & $\sim$2000 ms \\ \hline
 512$\times$512 & $\sim$180 ms & $\sim$500 ms & $\sim$8000 ms \\ \hline
 \end{tabular}
-\caption{Inference Speed Benchmarks}
 \end{table}
 
 \subsection{Memory Usage}
 
 \begin{table}[H]
+\caption{GPU Memory Usage During Inference}
 \centering
 \begin{tabular}{|l|c|}
 \hline
@@ -259,7 +260,6 @@ Model Loading & $\sim$1.5 \\ \hline
 Single Image Inference (256$\times$256) & $\sim$2.0 \\ \hline
 Batch Inference (4 images) & $\sim$3.5 \\ \hline
 \end{tabular}
-\caption{GPU Memory Usage During Inference}
 \end{table}
 
 \section{Analysis and Discussion}
@@ -281,6 +281,7 @@ This section provides detailed analysis of the experimental results, discussing 
 We conducted qualitative evaluation with the following criteria:
 
 \begin{table}[H]
+\caption{Qualitative Evaluation Criteria and Scores (1-5 scale)}
 \centering
 \begin{tabular}{|l|c|c|c|c|}
 \hline
@@ -291,7 +292,6 @@ Visual Artifacts & 3.8 & 4.1 & 3.9 & 4.2 \\ \hline
 Color Naturalness & 4.1 & 4.4 & 4.3 & 4.0 \\ \hline
 Overall Quality & 4.0 & 4.3 & 4.1 & 4.2 \\ \hline
 \end{tabular}
-\caption{Qualitative Evaluation Criteria and Scores (1-5 scale)}
 \end{table}
 
 \textbf{Style-Specific Analysis:}
