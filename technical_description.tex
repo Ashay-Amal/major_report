@@ -83,24 +83,26 @@ We created a thorough dataset creation pipeline because CycleGAN requires unpair
 
 \subsection{Animation Frame Extraction Pipeline}
 
+The frame extraction pipeline, as shown in Figure \ref{fig:frame_extraction_pipeline}, automates the process of extracting high-quality character frames from video sources. The pipeline starts by reading video files and extracting individual frames, followed by face or character detection. Frames with detection confidence below 0.9 are discarded. Accepted frames are cropped and resized, then checked for similarity against existing images to avoid duplicates. Finally, a quality check filters out blurry or artifact-containing frames before saving to the dataset.
+
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[
-    scale=0.8, transform shape,
-    node distance=1cm,
-    block/.style={rectangle, draw, fill=green!20, text width=7em, text centered, minimum height=2.5em},
-    decision/.style={diamond, draw, fill=orange!20, text width=5em, text centered, aspect=2},
+    scale=0.65, transform shape,
+    node distance=0.8cm,
+    block/.style={rectangle, draw, fill=green!20, text width=6em, text centered, minimum height=2em},
+    decision/.style={diamond, draw, fill=orange!20, text width=4.5em, text centered, aspect=2},
     arrow/.style={-latex', thick}
 ]
     \node [block] (video) {Video File\\(Episode/Movie)};
     \node [block, below=of video] (extract) {Frame\\Extraction};
     \node [block, below=of extract] (detect) {Face/Character\\Detection};
     \node [decision, below=of detect] (conf) {Confidence\\$> 0.9$?};
-    \node [block, below left=1cm and 0.5cm of conf] (discard) {Discard\\Frame};
-    \node [block, below right=1cm and 0.5cm of conf] (crop) {Crop \&\\Resize};
+    \node [block, below left=0.8cm and 0.4cm of conf] (discard) {Discard\\Frame};
+    \node [block, below right=0.8cm and 0.4cm of conf] (crop) {Crop \&\\Resize};
     \node [decision, below=of crop] (sim) {Similar to\\existing?};
-    \node [block, below right=1cm and 0.5cm of sim] (skip) {Skip\\Frame};
-    \node [block, below left=1cm and 0.5cm of sim] (quality) {Quality\\Check};
+    \node [block, below right=0.8cm and 0.4cm of sim] (skip) {Skip\\Frame};
+    \node [block, below left=0.8cm and 0.4cm of sim] (quality) {Quality\\Check};
     \node [decision, below=of quality] (pass) {Pass?};
     \node [block, below=of pass] (save) {Save to\\Dataset};
 
@@ -124,6 +126,8 @@ We created a thorough dataset creation pipeline because CycleGAN requires unpair
 Every dataset uses JPG/PNG images with a resolution of 256 $\times$256. Domain X utilizes either landscapes or human faces from Kaggle (3,000+ images each for face-based styles).
 
 \subsection{Dataset Summary}
+
+Table \ref{tab:dataset_summary} provides a comprehensive overview of the datasets used for training each style transfer model, showing the domain sources and the number of images collected for both real and stylized domains.
 
 \begin{table}[H]
 \caption{Complete Dataset Summary}
@@ -254,10 +258,14 @@ The generator is built using a ResNet-style encoder–decoder structure and incl
 \end{figure}
 
 \textbf{Generator Layer Specifications:}
+
+The detailed layer-by-layer specifications of the generator network are presented in Table \ref{tab:generator_layers}, including filter sizes, kernel dimensions, and stride values for each convolutional layer.
+
 \begin{table}[H]
 \caption{Generator Network Layers}
 \label{tab:generator_layers}
 \centering
+\small
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Layer} & \textbf{Type} & \textbf{Filters} & \textbf{Kernel} & \textbf{Stride} \\ \hline
@@ -298,9 +306,7 @@ Each residual block preserves the input information through a skip connection wh
 \end{figure}
 
 \subsection{Discriminator Network Architecture (PatchGAN)}
-
 The discriminator adopts a PatchGAN design, where it evaluates and classifies overlapping 70×70 image patches, as shown in Figure \ref{fig:discriminator}.
-
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[
@@ -327,10 +333,14 @@ The discriminator adopts a PatchGAN design, where it evaluates and classifies ov
 \end{figure}
 
 \textbf{Discriminator Layer Specifications:}
+
+Table \ref{tab:discriminator_layers} details the PatchGAN discriminator architecture, showing how spatial dimensions are progressively reduced while feature depth increases through successive convolutional layers.
+\vspace{-0.2cm}
 \begin{table}[H]
 \caption{Discriminator Network Layers}
 \label{tab:discriminator_layers}
 \centering
+\footnotesize
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Layer} & \textbf{Type} & \textbf{Filters} & \textbf{Kernel} & \textbf{Stride} \\ \hline
@@ -413,14 +423,13 @@ The perceptual loss relies on a pre-trained VGG-19 network to compare high-level
 \mathcal{L}_{perceptual} = \sum_{l \in L} \lambda_l \frac{1}{C_l H_l W_l} ||\phi_l(G(x)) - \phi_l(x)||^2_2
 \end{equation}
 
-where $\phi_l(x)$ denotes the feature map at layer $l$ of VGG-19, and $L$ is the set of layers used (typically relu1\_1, relu2\_1, relu3\_1, relu4\_1).
+Here, $\phi_l(x)$ denotes the feature map at layer $l$ of VGG-19, and $L$ is the set of layers used (typically relu1\_1, relu2\_1, relu3\_1, relu4\_1). The term $C_l H_l W_l$ normalizes by feature map dimensions, ensuring equal contribution from all layers. The weight $\lambda_l$ controls each layer's importance in the final loss.
 
 \textbf{Benefits of Perceptual Loss:}
 \begin{itemize}
     \item Preserves semantic content better than pixel-wise losses
     \item Maintains structural similarity during style transformation
     \item Correlates better with human perception of image quality
-    \item Helps preserve facial features during animation-style transfer
 \end{itemize}
 
 \subsection{Total Generator Loss}
@@ -431,9 +440,16 @@ The final generator loss is obtained by combining all the loss components, each 
 \mathcal{L}_{G,F} = \lambda_{adv}(\mathcal{L}_{G}^{adv} + \mathcal{L}_{F}^{adv}) + \lambda_{cyc}\mathcal{L}_{cyc} + \lambda_{id}\mathcal{L}_{identity} + \lambda_{perc}\mathcal{L}_{perceptual}
 \end{equation}
 
+Here, $\mathcal{L}_{G}^{adv}$ and $\mathcal{L}_{F}^{adv}$ are the adversarial losses for generators $G$ and $F$, $\mathcal{L}_{cyc}$ ensures reversible mapping, $\mathcal{L}_{identity}$ preserves colors, and $\mathcal{L}_{perceptual}$ maintains semantic features. The $\lambda$ parameters control the relative importance of each component.
+
+\newpage
 \textbf{Loss Weights Used:}
+
+The carefully tuned weights for each loss component are shown in Table \ref{tab:loss_weights}. These hyperparameters balance the competing objectives of generating realistic stylizations while preserving content and color fidelity.
+
 \begin{table}[H]
 \caption{Loss Function Weights}
+\label{tab:loss_weights}
 \centering
 \begin{tabular}{|l|c|l|}
 \hline
@@ -464,6 +480,9 @@ The discriminators use a history buffer of 50 previously generated images to hel
 \section{Training Configuration}
 This section explains the hyperparameters and the training processes used to develop the style transfer models.
 \subsection{Hyperparameter Selection}
+
+Table \ref{tab:hyperparameters} summarizes the key training hyperparameters used across all style transfer models, including image resolution, batch size, optimizer settings, and learning rate schedules.
+
 \begin{table}[H]
 \caption{Training Hyperparameters}
 \label{tab:hyperparameters}
@@ -476,7 +495,6 @@ Batch Size & 4 & Learning Rate & 0.0002 (linear decay from epoch 100) \\ \hline
 Total Epochs & 200 & Residual Blocks & 9 \\ \hline
 \end{tabular}
 \end{table}
-\newpage
 \textbf{Hyperparameter Justification:}
 \begin{itemize}
     \item \textbf{Image Size (256$\times$256):} This size offers a good balance between output quality and computational efficiency. Using larger resolutions would significantly increase memory usage while giving only minimal improvements in style transfer quality.
@@ -502,13 +520,13 @@ lr_{epoch} = lr_{initial} \times \max\left(0, 1 - \frac{epoch - 100}{100}\right)
 \textbf{Data Augmentation:} Random horizontal flip (50\%), resize to 286$\times$286 with random crop to 256$\times$256, normalization to [-1, 1].
 
 \textbf{Checkpointing:} The models are saved every 10 epochs, and the best-performing version is chosen based on the FID score and overall visual quality.
-\newpage
 \subsection{Training Resources}
 
-Training time and resource requirements vary by style:
+Training time and resource requirements vary by style. Table \ref{tab:training_resources} compares the computational demands across different models, with Van Gogh training faster due to its smaller dataset size.
 
 \begin{table}[H]
 \caption{Training Resource Requirements}
+\label{tab:training_resources}
 \centering
 \begin{tabular}{|l|c|c|c|}
 \hline
@@ -527,10 +545,12 @@ The Van Gogh model trains more quickly because it uses a smaller dataset and the
 \chapter{System Architecture and High Level Design}
 This chapter provides a detailed overview of the system architecture and the high-level design of the neural style transfer system. It includes UML diagrams, explanations of component interactions, and the key design decisions made during development.
 \section{Terminology}
-
+Table \ref{tab:terminology} defines the key technical terms and concepts used throughout this document, providing clear explanations of the specialized terminology in CycleGAN-based neural style transfer.
 \begin{table}[H]
 \caption{Technical Terminology}
+\label{tab:terminology}
 \centering
+\footnotesize
 \begin{tabular}{|l|p{10cm}|}
 \hline
 \textbf{Term} & \textbf{Definition} \\ \hline
@@ -547,6 +567,8 @@ Perceptual Loss & Loss computed using features from pre-trained networks (VGG-19
 \end{table}
 
 \section{System Components}
+
+The neural style transfer system is organized into five primary modules that work together in a sequential pipeline, as illustrated in Figure \ref{fig:component_diagram}. The architecture follows a modular design where each component has a specific responsibility in the transformation process. The User Interface Module accepts input images and style preferences from users, which are then validated and preprocessed by the Image Preprocessing Module. The Style Selection Module loads the appropriate pre-trained model weights based on the chosen artistic style. The Inference Engine executes the forward pass through the generator network to produce the stylized output. Finally, the Post-processing Module converts the output tensor back into a displayable image format. This modular approach ensures clean separation of concerns and facilitates easier maintenance and updates to individual components.
 
 \begin{figure}[H]
 \centering
@@ -646,20 +668,20 @@ The system supports five primary use cases: (1) Upload Image - user provides JPG
 
 The system follows a three-tier architecture: \textbf{Client tier} (web browser with HTML/CSS interface), \textbf{Application tier} (Django server with PyTorch integration), and \textbf{Compute tier} (GPU runtime with CUDA). Model weights ($\sim$150MB per style) are stored on server, with image storage for inputs/outputs.
 %% Chapter 5: Software Architecture and Low Level Design
-
 \chapter{Software Architecture and Low Level Design}
 This chapter offers detailed explanations of the algorithms, along with pseudocode, flowcharts, and implementation details used in the neural style transfer system.
-
 \section{Detailed Generator Architecture}
 
-The generator network processes input images using a well-structured encoder–transformer–decoder architecture designed to gradually extract features and produce the final stylized output, as shown in Figure \ref{fig:generator_lld}.
+The generator network employs an encoder–transformer–decoder architecture with three distinct stages, as shown in Figure \ref{fig:generator_lld}. The encoder uses three convolutional layers with increasing filter depths (64, 128, 256) to extract hierarchical features. Nine residual blocks at the bottleneck learn style-specific transformations, and the decoder upsamples features back to the original resolution using two transposed convolutional layers.
 
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[
-    node distance=0.6cm,
-    block/.style={rectangle, draw, fill=blue!20, minimum width=3.5cm, minimum height=0.8cm, align=center, font=\small},
-    resblock/.style={rectangle, draw, fill=green!30, minimum width=3.5cm, minimum height=0.6cm, align=center, font=\small},
+    scale=0.9,
+    transform shape,
+    node distance=0.5cm,
+    block/.style={rectangle, draw, fill=blue!20, minimum width=3cm, minimum height=0.7cm, align=center, font=\small},
+    resblock/.style={rectangle, draw, fill=green!30, minimum width=3cm, minimum height=0.5cm, align=center, font=\small},
     arrow/.style={-latex', thick}
 ]
     % Input
@@ -710,6 +732,8 @@ The generator network processes input images using a well-structured encoder–t
 
 \section{Residual Block Internal Structure}
 
+The residual block is a fundamental building component of the generator network, designed to facilitate deep network training by allowing gradients to flow more easily during backpropagation. Figure \ref{fig:resblock_lld} demonstrates the internal architecture of a single residual block. The input passes through two convolution-normalization-activation sequences in the main pathway, while a skip connection (shown as a dashed red line) directly adds the original input to the processed output. This identity mapping helps preserve information from earlier layers and prevents the vanishing gradient problem, enabling the network to learn both low-level and high-level style features effectively.
+
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[
@@ -751,6 +775,8 @@ The generator network processes input images using a well-structured encoder–t
 
 \section{PatchGAN Discriminator Architecture}
 
+The discriminator network employs a PatchGAN architecture that classifies whether overlapping image patches are real or generated, rather than classifying the entire image as a whole. As shown in Figure \ref{fig:discriminator_lld}, the discriminator progressively downsamples the input through four convolutional layers with increasing filter depths (64, 128, 256, 512). Each layer reduces the spatial dimensions while capturing increasingly complex features. The final output is a 30×30 feature map where each value represents the authenticity score for a corresponding 70×70 patch in the input image. This patch-level discrimination approach encourages the generator to produce high-frequency details and reduces artifacts, while also being computationally more efficient than full-image classification.
+
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[
@@ -785,6 +811,8 @@ The generator network processes input images using a well-structured encoder–t
 \end{figure}
 
 \section{Training Process Flowchart}
+
+The CycleGAN training process follows an alternating optimization strategy where generators and discriminators are updated in sequence to achieve a Nash equilibrium. Figure \ref{fig:training_flowchart} illustrates the complete training loop starting from initialization through multiple epochs. For each training batch, the system first generates fake images in both directions ($X \rightarrow Y$ and $Y \rightarrow X$), then computes cycle reconstructions to ensure consistency. Generator losses are calculated using adversarial, cycle-consistency, and identity components, followed by backpropagation to update the generator weights. Subsequently, discriminator losses are computed to distinguish real from fake images, and discriminators are updated accordingly. After the halfway point of training, learning rate decay is applied to facilitate convergence. The process continues until all epochs are completed, with checkpoints saved periodically.
 
 \begin{figure}[H]
 \centering
@@ -838,6 +866,9 @@ The generator network processes input images using a well-structured encoder–t
 \end{figure}
 
 \section{Inference Pipeline Flowchart}
+
+The inference pipeline transforms user-provided images into stylized outputs through a streamlined sequence of preprocessing, model execution, and postprocessing steps. As depicted in Figure \ref{fig:inference_flowchart}, the process begins with input validation to ensure the image format is supported. Upon successful validation, the user selects their desired artistic style, which determines which pre-trained generator model to load. The input image is then resized to 256×256 pixels and normalized to the [-1, 1] range required by the network. The generator performs a forward pass without gradient computation (inference mode) to produce the stylized output tensor. Finally, the output is denormalized back to the [0, 1] range, clamped to prevent overflow, and converted to a standard image format for display or download.
+
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[
@@ -882,6 +913,8 @@ The generator network processes input images using a well-structured encoder–t
 
 \vspace{-0.5cm}
 \section{Loss Computation Diagram}
+
+The loss computation in CycleGAN involves multiple interconnected components that enforce different constraints on the learned mappings between domains. Figure \ref{fig:loss_computation} visualizes the complete loss calculation flow for both generators and discriminators. Real images from Domain X are transformed to Domain Y by Generator G, producing fake images that are evaluated by Discriminator $D_Y$ for adversarial loss. Similarly, Domain Y images are mapped back to Domain X through Generator F and assessed by Discriminator $D_X$. The cycle-consistency loss ensures that forward-backward transformations ($X \rightarrow Y \rightarrow X$ and $Y \rightarrow X \rightarrow Y$) reconstruct the original images, enforcing bijective mappings. Identity loss components (shown at the top) encourage generators to preserve images that already belong to the target domain. These loss signals combine to guide the training process toward producing high-quality, content-preserving style transfers.
 
 \begin{figure}[H]
 \centering
@@ -1259,7 +1292,6 @@ The inference process follows: Start $\rightarrow$ Input Image $\rightarrow$ Val
 \section{Data Flow}
 
 The system data flow follows: User $\rightarrow$ Upload $\rightarrow$ Preprocess $\rightarrow$ Transform (using model weights) $\rightarrow$ Output. During training, Domain X and Y images are loaded via DataLoader, passed through generators G and F to produce fake images, which are then evaluated by discriminators $D_Y$ and $D_X$ for loss computation.
-\newpage
 \section{Hardware and Software Specifications}
 
 \textbf{Hardware (Training):} NVIDIA RTX 2080+ GPU with 8GB+ VRAM, 16GB+ RAM, 100GB+ SSD, Intel i7/AMD Ryzen 7.

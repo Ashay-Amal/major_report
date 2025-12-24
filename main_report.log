@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.1.6)  22 DEC 2025 11:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.1.6)  24 DEC 2025 15:40
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1024,10 +1024,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 87--123
-
- []
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1036,7 +1032,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 179--184
+Underfull \hbox (badness 10000) in paragraph at lines 180--185
 
  []
 
@@ -1113,8 +1109,18 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [15]
-Overfull \hbox (4.13885pt too wide) in paragraph at lines 95--95
+Overfull \hbox (15.88873pt too wide) in paragraph at lines 97--97
  []\OT1/cmr/m/n/12 (Episode/Movie) 
+ []
+
+
+Overfull \hbox (9.29991pt too wide) in paragraph at lines 99--99
+ [][]\OT1/cmr/m/n/12 Face/Character 
+ []
+
+
+Overfull \hbox (3.26385pt too wide) in paragraph at lines 100--100
+ [][]\OT1/cmr/m/n/12 Confidence 
  []
 
 
@@ -1129,9 +1135,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [16]
-Underfull \vbox (badness 3679) has occurred while \output is active []
-
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1140,18 +1143,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [17]
-Overfull \hbox (41.04587pt too wide) in paragraph at lines 251--252
+Overfull \hbox (41.04587pt too wide) in paragraph at lines 255--256
  [][] 
  []
 
 
-Overfull \hbox (52.16116pt too wide) in paragraph at lines 295--296
+Overfull \hbox (52.16116pt too wide) in paragraph at lines 303--304
  [][] 
  []
-
-
-Underfull \vbox (badness 1286) has occurred while \output is active []
-
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1209,6 +1208,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [24]
+Chapter 4.
+[25
+
+]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1216,11 +1219,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[25]
-Chapter 4.
-[26
-
-]
+[26]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1237,6 +1236,21 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [28]
+Chapter 5.
+
+Overfull \hbox (17.29684pt too wide) in paragraph at lines 672--673
+\OT1/cmr/m/n/12 This chap-ter of-fers de-tailed ex-pla-na-tions of the al-go-rithms, along with pseu-docode, flowcharts,
+ []
+
+
+Underfull \vbox (badness 5050) has occurred while \output is active []
+
+ [29
+
+]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1244,22 +1258,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[29]
-Chapter 5.
-
-Overfull \hbox (17.29684pt too wide) in paragraph at lines 651--652
-\OT1/cmr/m/n/12 This chap-ter of-fers de-tailed ex-pla-na-tions of the al-go-rithms, along with pseu-docode, flowcharts,
- []
-
-
-Overfull \hbox (46.54099pt too wide) in paragraph at lines 655--656
-[]\OT1/cmr/m/n/12 The gen-er-a-tor net-work pro-cesses in-put im-ages us-ing a well-structured en-coder{transformer{decoder
- []
-
-[30
-
-]
-Underfull \vbox (badness 2698) has occurred while \output is active []
+[30]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
@@ -1281,9 +1281,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [32]
-Underfull \vbox (badness 4940) has occurred while \output is active []
-
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1292,9 +1289,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [33]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1303,6 +1297,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [34]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1330,9 +1327,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [37]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1369,35 +1363,33 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [41]
 Chapter 6.
+[42
 
-Underfull \hbox (badness 10000) in paragraph at lines 81--81
+]
+Underfull \hbox (badness 10000) in paragraph at lines 84--84
 []|\OT1/cmr/m/n/10.95 Properly down-scaled
  []
 
 
-Underfull \hbox (badness 2027) in paragraph at lines 84--84
+Underfull \hbox (badness 2027) in paragraph at lines 87--87
 []|\OT1/cmr/m/n/10.95 Landscape pho-to-graph
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 84--84
+Underfull \hbox (badness 10000) in paragraph at lines 87--87
 []|\OT1/cmr/m/n/10.95 Painterly trans-for-ma-
  []
 
-[42
-
-]
-<images/sample1.png, id=198, 225.84375pt x 225.84375pt>
+<images/sample1.png, id=199, 225.84375pt x 225.84375pt>
 File: images/sample1.png Graphic file (type png)
 <use images/sample1.png>
-Package pdftex.def Info: images/sample1.png  used on input line 109.
-(pdftex.def)             Requested size: 204.85844pt x 204.87025pt.
-<images/disney1.png, id=199, 1027.84pt x 1027.84pt>
+Package pdftex.def Info: images/sample1.png  used on input line 112.
+(pdftex.def)             Requested size: 172.99496pt x 173.00423pt.
+<images/disney1.png, id=200, 1027.84pt x 1027.84pt>
 File: images/disney1.png Graphic file (type png)
 <use images/disney1.png>
-Package pdftex.def Info: images/disney1.png  used on input line 110.
-(pdftex.def)             Requested size: 204.85844pt x 204.8586pt.
-
+Package pdftex.def Info: images/disney1.png  used on input line 113.
+(pdftex.def)             Requested size: 172.99496pt x 172.98961pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1406,25 +1398,25 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [43]
-<images/sample2.png, id=203, 256.96pt x 256.96pt>
+<images/sample2.png, id=204, 256.96pt x 256.96pt>
 File: images/sample2.png Graphic file (type png)
 <use images/sample2.png>
-Package pdftex.def Info: images/sample2.png  used on input line 117.
-(pdftex.def)             Requested size: 204.85844pt x 204.8625pt.
-<images/disney2.png, id=204, 1027.84pt x 1027.84pt>
+Package pdftex.def Info: images/sample2.png  used on input line 120.
+(pdftex.def)             Requested size: 172.99496pt x 172.99745pt.
+<images/disney2.png, id=205, 1027.84pt x 1027.84pt>
 File: images/disney2.png Graphic file (type png)
 <use images/disney2.png>
-Package pdftex.def Info: images/disney2.png  used on input line 118.
-(pdftex.def)             Requested size: 204.85844pt x 204.8586pt.
+Package pdftex.def Info: images/disney2.png  used on input line 121.
+(pdftex.def)             Requested size: 172.99496pt x 172.98961pt.
 File: images/sample1.png Graphic file (type png)
 <use images/sample1.png>
-Package pdftex.def Info: images/sample1.png  used on input line 138.
-(pdftex.def)             Requested size: 204.85844pt x 204.87025pt.
-<images/ghibli1.png, id=205, 256.96pt x 256.96pt>
+Package pdftex.def Info: images/sample1.png  used on input line 132.
+(pdftex.def)             Requested size: 172.99496pt x 173.00423pt.
+<images/ghibli1.png, id=206, 256.96pt x 256.96pt>
 File: images/ghibli1.png Graphic file (type png)
 <use images/ghibli1.png>
-Package pdftex.def Info: images/ghibli1.png  used on input line 139.
-(pdftex.def)             Requested size: 204.85844pt x 204.8625pt.
+Package pdftex.def Info: images/ghibli1.png  used on input line 133.
+(pdftex.def)             Requested size: 172.99496pt x 172.99745pt.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1436,23 +1428,26 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [44 <./images/sample1.png> <./images/disney1.png> <./images/sample2.png> <./images/disney2.png>]
 File: images/sample2.png Graphic file (type png)
 <use images/sample2.png>
-Package pdftex.def Info: images/sample2.png  used on input line 146.
-(pdftex.def)             Requested size: 204.85844pt x 204.8625pt.
-<images/ghibli2.png, id=210, 256.96pt x 256.96pt>
+Package pdftex.def Info: images/sample2.png  used on input line 140.
+(pdftex.def)             Requested size: 172.99496pt x 172.99745pt.
+<images/ghibli2.png, id=211, 256.96pt x 256.96pt>
 File: images/ghibli2.png Graphic file (type png)
 <use images/ghibli2.png>
-Package pdftex.def Info: images/ghibli2.png  used on input line 147.
-(pdftex.def)             Requested size: 204.85844pt x 204.8625pt.
-<images/sample_land1.png, id=211, 256.96pt x 256.96pt>
+Package pdftex.def Info: images/ghibli2.png  used on input line 141.
+(pdftex.def)             Requested size: 172.99496pt x 172.99745pt.
+<images/sample_land1.png, id=212, 256.96pt x 256.96pt>
 File: images/sample_land1.png Graphic file (type png)
 <use images/sample_land1.png>
-Package pdftex.def Info: images/sample_land1.png  used on input line 164.
-(pdftex.def)             Requested size: 204.85844pt x 204.8625pt.
-<images/van_gogh1.png, id=212, 256.96pt x 256.96pt>
+Package pdftex.def Info: images/sample_land1.png  used on input line 152.
+(pdftex.def)             Requested size: 172.99496pt x 172.99745pt.
+<images/van_gogh1.png, id=213, 256.96pt x 256.96pt>
 File: images/van_gogh1.png Graphic file (type png)
 <use images/van_gogh1.png>
-Package pdftex.def Info: images/van_gogh1.png  used on input line 165.
-(pdftex.def)             Requested size: 204.85844pt x 204.8625pt.
+Package pdftex.def Info: images/van_gogh1.png  used on input line 153.
+(pdftex.def)             Requested size: 172.99496pt x 172.99745pt.
+
+Underfull \vbox (badness 1708) has occurred while \output is active []
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1462,25 +1457,28 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [45 <./images/ghibli1.png> <./images/ghibli2.png>]
-<images/sample_land2.png, id=218, 256.96pt x 256.96pt>
+<images/sample_land2.png, id=219, 256.96pt x 256.96pt>
 File: images/sample_land2.png Graphic file (type png)
 <use images/sample_land2.png>
-Package pdftex.def Info: images/sample_land2.png  used on input line 172.
-(pdftex.def)             Requested size: 204.85844pt x 204.8625pt.
-<images/van_gogh2.png, id=219, 256.96pt x 256.96pt>
+Package pdftex.def Info: images/sample_land2.png  used on input line 160.
+(pdftex.def)             Requested size: 172.99496pt x 172.99745pt.
+<images/van_gogh2.png, id=220, 256.96pt x 256.96pt>
 File: images/van_gogh2.png Graphic file (type png)
 <use images/van_gogh2.png>
-Package pdftex.def Info: images/van_gogh2.png  used on input line 173.
-(pdftex.def)             Requested size: 204.85844pt x 204.8625pt.
+Package pdftex.def Info: images/van_gogh2.png  used on input line 161.
+(pdftex.def)             Requested size: 172.99496pt x 172.99745pt.
 File: images/sample2.png Graphic file (type png)
 <use images/sample2.png>
-Package pdftex.def Info: images/sample2.png  used on input line 191.
-(pdftex.def)             Requested size: 204.85844pt x 204.8625pt.
-<images/onepiece2.png, id=220, 256.96pt x 256.96pt>
+Package pdftex.def Info: images/sample2.png  used on input line 173.
+(pdftex.def)             Requested size: 172.99496pt x 172.99745pt.
+<images/onepiece2.png, id=221, 256.96pt x 256.96pt>
 File: images/onepiece2.png Graphic file (type png)
 <use images/onepiece2.png>
-Package pdftex.def Info: images/onepiece2.png  used on input line 192.
-(pdftex.def)             Requested size: 204.85844pt x 204.8625pt.
+Package pdftex.def Info: images/onepiece2.png  used on input line 174.
+(pdftex.def)             Requested size: 172.99496pt x 172.99745pt.
+
+Underfull \vbox (badness 5563) has occurred while \output is active []
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1498,21 +1496,19 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [47 <./images/onepiece2.png>]
-<images/user_interface.png, id=232, 1685.54718pt x 865.73438pt>
+<images/user_interface.png, id=233, 1685.54718pt x 865.73438pt>
 File: images/user_interface.png Graphic file (type png)
 <use images/user_interface.png>
-Package pdftex.def Info: images/user_interface.png  used on input line 213.
-(pdftex.def)             Requested size: 409.71689pt x 210.43571pt.
-<images/style_selector.png, id=233, 1671.99657pt x 784.43062pt>
+Package pdftex.def Info: images/user_interface.png  used on input line 191.
+(pdftex.def)             Requested size: 341.43306pt x 175.36308pt.
+<images/style_selector.png, id=234, 1671.99657pt x 784.43062pt>
 File: images/style_selector.png Graphic file (type png)
 <use images/style_selector.png>
-Package pdftex.def Info: images/style_selector.png  used on input line 222.
-(pdftex.def)             Requested size: 409.71689pt x 192.2171pt.
-<images/result.png, id=234, 1671.24374pt x 870.25125pt>
-File: images/result.png Graphic file (type png)
-<use images/result.png>
-Package pdftex.def Info: images/result.png  used on input line 231.
-(pdftex.def)             Requested size: 409.71689pt x 213.33957pt.
+Package pdftex.def Info: images/style_selector.png  used on input line 202.
+(pdftex.def)             Requested size: 341.43306pt x 160.1869pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1521,8 +1517,22 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[48 <./images/user_interface.png> <./images/style_selector.png>]
-Overfull \hbox (1.7609pt too wide) in paragraph at lines 267--268
+[48 <./images/user_interface.png>]
+<images/result.png, id=240, 1671.24374pt x 870.25125pt>
+File: images/result.png Graphic file (type png)
+<use images/result.png>
+Package pdftex.def Info: images/result.png  used on input line 213.
+(pdftex.def)             Requested size: 341.43306pt x 177.79182pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[49 <./images/style_selector.png> <./images/result.png>]
+Overfull \hbox (1.7609pt too wide) in paragraph at lines 255--256
 []\OT1/cmr/m/n/12 This sec-tion pro-vides de-tailed anal-y-sis of the ex-per-i-men-tal re-sults, dis-cussing the strengths,
  []
 
@@ -1533,7 +1543,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[49 <./images/result.png>]
+[50]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1541,7 +1551,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[50]) (conclusion.tex
+[51]) (conclusion.tex
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1549,12 +1559,20 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[51]
+[52]
 Chapter 7.
-[52
+[53
 
 ]
-Underfull \hbox (badness 1496) in paragraph at lines 78--78
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[54]
+Underfull \hbox (badness 1496) in paragraph at lines 81--81
 []|\OT1/cmr/m/n/12 Implement and op-ti-mize core al-go-rithms
  []
 
@@ -1565,7 +1583,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[53]
+[55]) (bibliography.tex
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1573,15 +1591,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[54]) (bibliography.tex
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[55] [56
+[56] [57
 
 ]) (appendix.tex
 
@@ -1591,17 +1601,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[57] [58
+[58] [59
 
 
 ]
 Appendix A.
-<timeline.png, id=274, 2569.6pt x 1670.24pt>
+<timeline.png, id=278, 2569.6pt x 1670.24pt>
 File: timeline.png Graphic file (type png)
 <use timeline.png>
 Package pdftex.def Info: timeline.png  used on input line 6.
 (pdftex.def)             Requested size: 490.22873pt x 318.66946pt.
-[59
+[60
 
  <./timeline.png (PNG copy)>]
 
@@ -1611,14 +1621,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[60]
+[61]
 Appendix B.
 
 Overfull \hbox (23.37059pt too wide) in paragraph at lines 45--45
 |\OT1/cmr/bx/n/24.88 Sustainable De-vel-op-ment Goals (SDGs)
  []
 
-[61
+[62
 
 ]
 Appendix C.
@@ -1752,7 +1762,7 @@ Overfull \hbox (7.32082pt too wide) in alignment at lines 73--105
  [] [] [] [] 
  []
 
-[62
+[63
 
 ]
 
@@ -1762,13 +1772,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[63]
+[64]
 Appendix D.
-[64
+[65
 
 ]
 Appendix E.
-[65
+[66
 
 ] (C:\Users\ashay\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
@@ -1784,24 +1794,24 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[66] (main_report.aux)
+[67] (main_report.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 35902 strings out of 474486
- 849874 string characters out of 5743756
+ 35915 strings out of 474486
+ 850088 string characters out of 5743756
  2004542 words of memory out of 5000000
- 57556 multiletter control sequences out of 15000+600000
- 568466 words of font info for 76 fonts, out of 8000000 for 9000
+ 57569 multiletter control sequences out of 15000+600000
+ 569828 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,13n,117p,944b,1559s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\ashay\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main_report.pdf (79 pages, 8228150 bytes).
+ 84i,13n,117p,1086b,1559s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\ashay\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Users/ashay/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main_report.pdf (80 pages, 8251328 bytes).
 PDF statistics:
- 385 PDF objects out of 1000 (max. 8388607)
+ 393 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  93 words of extra memory for PDF output out of 10000 (max. 10000000)
 

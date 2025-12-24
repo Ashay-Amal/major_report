@@ -84,7 +84,8 @@ The scope of this project encompasses the following:\\
 \end{itemize}
 \newpage
 \section{Methodology Overview}
-The methodology employed in this project follows a systematic approach as illustrated in Figure \ref{fig:methodology}.\\
+The methodology employed in this project follows a systematic six-phase approach, as illustrated in Figure \ref{fig:methodology}. The pipeline begins with dataset collection and frame extraction from animation sources and public datasets, followed by data preprocessing and augmentation to prepare images for training. The CycleGAN model design phase implements the generator and discriminator architectures, which are then trained using multiple loss functions. Finally, evaluation and optimization assess model performance before deploying the inference system for real-world use.
+
 \usetikzlibrary{positioning}
 \begin{figure}[H]
 \centering
@@ -121,6 +122,7 @@ The methodology employed in this project follows a systematic approach as illust
 \caption{Project Methodology Overview}
 \label{fig:methodology}
 \end{figure}
+\newpage
 \textbf{Phase 1: Dataset Collection and Preparation}
 \vspace{-0.2cm}
 \begin{itemize}
@@ -130,7 +132,6 @@ The methodology employed in this project follows a systematic approach as illust
     \vspace{-0.2cm}
     \item Collect human face photographs from Kaggle datasets
 \end{itemize}
-\newpage
 \textbf{Phase 2: Data Preprocessing}
 \vspace{-0.5cm}
 \begin{itemize}

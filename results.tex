@@ -1,30 +1,33 @@
 \chapter{Results}
-
 This chapter presents the experimental setup, test procedures, and results obtained from training and evaluating the four style transfer models: One Piece, Disney, Studio Ghibli, and Van Gogh. We discuss the evaluation metrics, provide sample outputs, and analyze the performance of each model.
-
 \section{Test Setup Environment}
-
-\subsection{Hardware Configuration}
-
-\vspace{-0.7cm}
-\begin{table}[H]
-\caption{Test Environment Hardware}
-\centering
-\begin{tabular}{|l|l|}
-\hline
-\textbf{Component} & \textbf{Specification} \\ \hline
-GPU & NVIDIA GTX 1650 (8GB VRAM) \\ \hline
-CPU & Intel Core i5-1240p \\ \hline
-RAM & 16GB DDR5 \\ \hline
-Storage & 512GB NVMe SSD \\ \hline
-Operating System & Windows 11 \\ \hline
-\end{tabular}
-\end{table}
-
+% \subsection{Hardware Configuration}
+% The hardware specifications used for testing and training the style transfer models are detailed in Table \ref{tab:hardware}. This configuration provides sufficient GPU memory and processing power for efficient model inference and training
+% \vspace{-0.9cm}
+% \begin{table}[H]
+% \caption{Test Environment Hardware}
+% \label{tab:hardware}
+% \centering
+% \footnotesize
+% \begin{tabular}{|l|l|}
+% \hline
+% \textbf{Component} & \textbf{Specification} \\ \hline
+% GPU & NVIDIA GTX 1650 (8GB VRAM) \\ \hline
+% CPU & Intel Core i5-1240p \\ \hline
+% RAM & 16GB DDR5 \\ \hline
+% Storage & 512GB NVMe SSD \\ \hline
+% Operating System & Windows 11 \\ \hline
+% \end{tabular}
+% \end{table}
 \subsection{Software Environment}
+
+Table \ref{tab:software} presents the complete software stack and library versions utilized in this project, ensuring compatibility and optimal performance across all system components.
+
 \vspace{-0.7cm}
 \begin{table}[H]
 \caption{Software Configuration}
+\label{tab:software}
+\footnotesize
 \centering
 \begin{tabular}{|l|l|}
 \hline
@@ -64,7 +67,7 @@ OpenCV & 4.7.0 \\ \hline
 
 \subsection{Test Case Design}
 
-We designed test cases to evaluate the style transfer models across various input conditions:
+We designed test cases to evaluate the style transfer models across various input conditions. Table \ref{tab:test_cases} outlines eight comprehensive test cases covering diverse scenarios including different poses, resolutions, lighting conditions, and image compositions to thoroughly assess model performance and robustness. Each test case was carefully crafted to evaluate specific aspects of the model's capabilities, including its ability to handle edge cases and challenging inputs. The test cases are designed to verify both functional requirements (successful style transformation) and non-functional requirements (robustness, consistency, and fairness). For the face-based styles (One Piece, Disney, Ghibli), we focused on evaluating facial feature preservation and style consistency across diverse demographics. The Van Gogh landscape model was tested separately with natural scene photographs to assess its ability to apply painterly effects while maintaining compositional integrity.
 
 \begin{table}[H]
 \caption{Test Cases for Style Transfer Evaluation}
@@ -106,101 +109,74 @@ TC08 & Landscape photograph (Van Gogh) & Painterly transformation & Brush stroke
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.45\textwidth]{images/sample1.png}
-\includegraphics[width=0.45\textwidth]{images/disney1.png}
+\includegraphics[width=0.38\textwidth]{images/sample1.png}
+\includegraphics[width=0.38\textwidth]{images/disney1.png}
 \caption{Disney Style Transfer Results - Sample 1}
 \label{fig:results_disney_1}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.45\textwidth]{images/sample2.png}
-\includegraphics[width=0.45\textwidth]{images/disney2.png}
+\includegraphics[width=0.38\textwidth]{images/sample2.png}
+\includegraphics[width=0.38\textwidth]{images/disney2.png}
 \caption{Disney Style Transfer Results - Sample 2}
 \label{fig:results_disney_2}
 \end{figure}
 
-\textbf{Observations:}
-\begin{itemize}
-    \item Smooth gradients achieved in skin and hair
-    \vspace{-0.3cm}
-    \item Eye enlargement and expressiveness enhanced
-    \vspace{-0.3cm}
-    \item Soft color palette transformation applied
-    \vspace{-0.3cm}
-    \item Clean, polished appearance characteristic of Disney
-\end{itemize}
+The Disney style transfer model produces highly polished results that capture classic Disney animation aesthetics, as shown in Figures \ref{fig:results_disney_1} and \ref{fig:results_disney_2}. The transformed images exhibit smooth color gradients across skin and hair, creating the signature soft Disney aesthetic. The model successfully enlarges eyes and adds reflective highlights characteristic of Disney character designs. The color palette shifts toward softer, pastel tones while maintaining natural balance, achieving a clean appearance with minimal artifacts.
 
 \subsection{Studio Ghibli Style Results}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.45\textwidth]{images/sample1.png}
-\includegraphics[width=0.45\textwidth]{images/ghibli1.png}
+\includegraphics[width=0.38\textwidth]{images/sample1.png}
+\includegraphics[width=0.38\textwidth]{images/ghibli1.png}
 \caption{Studio Ghibli Style Transfer Results - Sample 1}
 \label{fig:results_ghibli_1}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.45\textwidth]{images/sample2.png}
-\includegraphics[width=0.45\textwidth]{images/ghibli2.png}
+\includegraphics[width=0.38\textwidth]{images/sample2.png}
+\includegraphics[width=0.38\textwidth]{images/ghibli2.png}
 \caption{Studio Ghibli Style Transfer Results - Sample 2}
 \label{fig:results_ghibli_2}
 \end{figure}
 
-\textbf{Observations:}
-\begin{itemize}
-    \item Soft, watercolor-like texture applied
-    \item Naturalistic expressions maintained
-    \item Warm, earthy color tones achieved
-    \item Hand-drawn aesthetic successfully captured
-\end{itemize}
+The Studio Ghibli style transfer captures the subtle artistic qualities of hand-drawn animation, as shown in Figures \ref{fig:results_ghibli_1} and \ref{fig:results_ghibli_2}. The outputs exhibit soft, watercolor-like textures that evoke traditional Ghibli artwork. The transformation maintains naturalistic facial expressions while applying artistic stylization, with colors shifting toward warm, earthy tones. The model successfully replicates the hand-drawn aesthetic through subtle brush-like textures and gentle transitions, embracing the organic quality that defines the Ghibli style.
 
 \subsection{Van Gogh Style Results}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.45\textwidth]{images/sample_land1.png}
-\includegraphics[width=0.45\textwidth]{images/van_gogh1.png}
+\includegraphics[width=0.38\textwidth]{images/sample_land1.png}
+\includegraphics[width=0.38\textwidth]{images/van_gogh1.png}
 \caption{Van Gogh Style Transfer Results - Sample 1}
 \label{fig:results_vangogh_1}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.45\textwidth]{images/sample_land2.png}
-\includegraphics[width=0.45\textwidth]{images/van_gogh2.png}
+\includegraphics[width=0.38\textwidth]{images/sample_land2.png}
+\includegraphics[width=0.38\textwidth]{images/van_gogh2.png}
 \caption{Van Gogh Style Transfer Results - Sample 2}
 \label{fig:results_vangogh_2}
 \end{figure}
 
-\textbf{Observations:}
-\begin{itemize}
-    \item Distinctive swirling brushstrokes visible
-    \item Vibrant color transformation achieved
-    \item Post-impressionist texture applied
-    \item Original scene composition preserved
-\end{itemize}
+The Van Gogh style transfer successfully transforms landscapes into post-impressionist paintings, as illustrated in Figures \ref{fig:results_vangogh_1} and \ref{fig:results_vangogh_2}. The transformation applies distinctive swirling brushstrokes that create dynamic movement and texture, particularly in sky and foliage regions. The color palette shifts toward vibrant blues and yellows with enhanced saturation and bold contrasts. The model applies thick, impasto-like textures while maintaining the fundamental composition and structural elements of the original landscape.
 
 \subsection{One Piece Style Results}
 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.45\textwidth]{images/sample2.png}
-\includegraphics[width=0.45\textwidth]{images/onepiece2.png}
+\includegraphics[width=0.38\textwidth]{images/sample2.png}
+\includegraphics[width=0.38\textwidth]{images/onepiece2.png}
 \caption{One Piece Style Transfer Results - Sample}
 \label{fig:results_onepiece_2}
 \end{figure}
 
-\textbf{Observations:}
-\begin{itemize}
-    \item Bold outlines successfully applied to facial features
-    \item Eye style transformation captures One Piece aesthetic
-    \item Hair and skin colors appropriately stylized
-    \item Facial structure preserved while achieving anime look
-\end{itemize}
+The One Piece style transfer effectively captures the bold visual style of the anime series, as demonstrated in Figure \ref{fig:results_onepiece_2}. The transformation applies thick, bold black outlines to facial features, creating sharp definition characteristic of anime art. The eye transformation adopts the large, expressive anime style with distinct highlights and simplified shading. Color application includes vibrant, saturated tones for hair and skin while maintaining natural relationships. The model preserves underlying facial structure while applying dramatic anime-style transformations, retaining the subject's identity while achieving the distinctive One Piece aesthetic.
 \newpage
 \section{Website User Interface}
 
@@ -208,27 +184,33 @@ The style transfer system is deployed through a user-friendly web interface that
 
 \subsection{Home Page}
 
+The home page serves as the entry point for users to interact with the style transfer system, as shown in Figure \ref{fig:ui_home}. The interface features a clean, intuitive design with clear navigation options and a prominent upload button for selecting input images. The page includes visual previews of the four available artistic styles, allowing users to understand the transformation capabilities before uploading their content.
+
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{images/user_interface.png}
+\includegraphics[width=0.75\textwidth]{images/user_interface.png}
 \caption{Website Home Page - Style Selection Interface}
 \label{fig:ui_home}
 \end{figure}
 
 \subsection{Style Selection}
 
+Figure \ref{fig:ui_style_select} illustrates the style selection interface where users choose their desired artistic transformation. Each style option is presented with representative sample images demonstrating the characteristic visual elements of that particular style. The interface provides thumbnail previews and brief descriptions to help users make informed decisions about which artistic style best suits their creative vision.
+
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{images/style_selector.png}
+\includegraphics[width=0.75\textwidth]{images/style_selector.png}
 \caption{Style Selection Menu - Choose from One Piece, Disney, Ghibli, or Van Gogh}
 \label{fig:ui_style_select}
 \end{figure}
 
 \subsection{Results Display}
 
+The results page presents the transformed output alongside the original input image for direct comparison, as depicted in Figure \ref{fig:ui_results}. This side-by-side layout enables users to clearly observe the style transfer effects and evaluate the quality of the transformation. The interface includes download functionality allowing users to save their stylized images in high-quality PNG format for further use.
+
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{images/result.png}
+\includegraphics[width=0.75\textwidth]{images/result.png}
 \caption{Results Page - Side-by-Side Comparison of Original and Stylized Image}
 \label{fig:ui_results}
 \end{figure}
@@ -237,8 +219,11 @@ The style transfer system is deployed through a user-friendly web interface that
 
 \subsection{Speed Benchmarks}
 
+The inference speed varies significantly across different hardware configurations and input resolutions. Table \ref{tab:speed_benchmarks} compares processing times across GPU and CPU platforms, demonstrating the substantial performance advantage of GPU acceleration for neural style transfer.
+
 \begin{table}[H]
 \caption{Inference Speed Benchmarks}
+\label{tab:speed_benchmarks}
 \centering
 \begin{tabular}{|l|c|c|c|}
 \hline
@@ -250,8 +235,11 @@ The style transfer system is deployed through a user-friendly web interface that
 
 \subsection{Memory Usage}
 
+GPU memory requirements are critical for deployment considerations. Table \ref{tab:memory_usage} shows the VRAM consumption at different stages of the inference pipeline, helping determine minimum hardware requirements for production deployment.
+
 \begin{table}[H]
 \caption{GPU Memory Usage During Inference}
+\label{tab:memory_usage}
 \centering
 \begin{tabular}{|l|c|}
 \hline
@@ -278,10 +266,11 @@ This section provides detailed analysis of the experimental results, discussing 
 
 \textbf{Visual Quality Assessment:}
 
-We conducted qualitative evaluation with the following criteria:
+We conducted qualitative evaluation with the following criteria. Table \ref{tab:qualitative_scores} presents subjective quality ratings across multiple dimensions for each style model, with scores ranging from 1 (poor) to 5 (excellent), providing insight into the relative strengths of different style transfer approaches.
 
 \begin{table}[H]
 \caption{Qualitative Evaluation Criteria and Scores (1-5 scale)}
+\label{tab:qualitative_scores}
 \centering
 \begin{tabular}{|l|c|c|c|c|}
 \hline
